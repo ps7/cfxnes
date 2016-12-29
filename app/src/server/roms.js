@@ -1,29 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import {Router} from 'express';
 
-const romDir = path.join(__dirname, 'roms');
+let romDir;
 let romList = [];
 let romMap = {};
 let fileMap = {};
 let scanTimer;
 
-//=========================================================
-// API
-//=========================================================
+export const router = new Router;
 
-export function start() {
-  if (!fs.existsSync(romDir)) {
-    fs.mkdirSync(romDir);
-  }
-  fs.watch(romDir, refresh);
-  refresh();
-}
-
-export function list(req, res) {
+router.get('/roms', (req, res) => {
   res.json(romList);
-}
+});
 
-export function get(req, res) {
+router.get('/roms/:id', (req, res) => {
   const id = req.params.id;
   if (id == null) {
     res.status(400).send('Missing ROM ID.');
@@ -37,9 +28,9 @@ export function get(req, res) {
   }
 
   res.json(rom);
-}
+});
 
-export function download(req, res) {
+router.get('/roms/files/:name', (req, res) => {
   const name = req.params.name;
   if (name == null) {
     res.status(400).send('Missing filename.');
@@ -53,13 +44,18 @@ export function download(req, res) {
   }
 
   res.download(file, name);
+});
+
+export function watch(dir) {
+  romDir = dir;
+  if (!fs.existsSync(romDir)) {
+    fs.mkdirSync(romDir);
+  }
+  fs.watch(romDir, scheduleScan);
+  scheduleScan();
 }
 
-//=========================================================
-// Scanning
-//=========================================================
-
-function refresh() {
+function scheduleScan() {
   clearTimeout(scanTimer);
   scanTimer = setTimeout(scan, 1000);
 }
@@ -82,7 +78,7 @@ function scan() {
     const rom = {
       id: makeId(romFile),
       name: getBasename(romFile),
-      file: `/files/${romName}`,
+      file: `/roms/files/${romName}`,
     };
 
     romList.push(rom);
@@ -92,7 +88,7 @@ function scan() {
     if (imageFile) {
       const imageName = sanitizeName(imageFile);
       fileMap[imageName] = path.join(romDir, imageFile);
-      rom.thumbnail = `/files/${imageName}`;
+      rom.thumbnail = `/roms/files/${imageName}`;
     }
   }
 
