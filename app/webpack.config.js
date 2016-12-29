@@ -29,4 +29,9 @@ module.exports = {
   performance: {
     hints: false,
   },
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:5000',
+    },
+  },
 };
