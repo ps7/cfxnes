@@ -1,14 +1,24 @@
 module.exports = {
-  entry: './src/client/index.js',
+  entry: [
+    './src/client/index.html',
+    './src/client/index.js',
+  ],
   output: {
     path: './dist/static',
-    filename: 'app.js',
+    filename: 'js/app.js',
   },
   module: {
     rules: [
       {
+        test: /\.html$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      },
+      {
         test: /\.js$/,
-        use: 'babel-loader',
+        loader: 'babel-loader',
       },
     ],
   },
