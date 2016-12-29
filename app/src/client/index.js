@@ -1,2 +1,5 @@
 const obj = {a: 1, b: 2};
-console.log({...obj, c: 3});
+
+window.test = function test() {
+  console.log({...obj, c: 3}, 'x');
+}

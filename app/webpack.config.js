@@ -1,11 +1,14 @@
+const path = require('path');
+
 module.exports = {
+  context: path.join(__dirname, 'src/client'),
   entry: [
-    './src/client/index.html',
-    './src/client/index.js',
+    './index.html',
+    './index.js',
   ],
   output: {
-    path: './dist/static',
-    filename: 'js/app.js',
+    path: path.join(__dirname, 'dist/static'),
+    filename: 'app.js',
   },
   module: {
     rules: [
@@ -18,8 +21,12 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
       },
     ],
+  },
+  performance: {
+    hints: false,
   },
 };
