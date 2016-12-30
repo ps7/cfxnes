@@ -3,7 +3,7 @@ import express from 'express';
 import * as roms from './roms';
 
 const app = express();
-const dev = app.get('env') === 'dev';
+const dev = app.get('env') === 'development';
 
 if (dev) {
   app.use(require('morgan')('dev'));

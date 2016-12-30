@@ -1,5 +1,16 @@
-const obj = {a: 1, b: 2};
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {AppContainer} from 'react-hot-loader';
+import App from './App';
 
-window.test = function test() {
-  console.log({...obj, c: 3}, 'x');
+function renderApp() {
+  const reactElement = <AppContainer><App/></AppContainer>;
+  const domElement = document.getElementById('root');
+  ReactDOM.render(reactElement, domElement);
 }
+
+if (module.hot) {
+  module.hot.accept('./App', renderApp);
+}
+
+renderApp();

@@ -1,14 +1,25 @@
+const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const dev = process.env.NODE_ENV === 'development';
+const ifDev = dev ? x => x : () => null;
+const omitNulls = array => array.filter(x => x);
+const dir = name => path.join(__dirname, name);
 
 module.exports = {
-  context: path.join(__dirname, 'src/client'),
-  entry: [
-    './index.html',
-    './index.js',
-  ],
+  context: dir('src/client'),
+  entry: {
+    bundle: './index.js',
+    vendor: [
+      'react-hot-loader/patch',
+      'react',
+      'react-dom',
+    ],
+  },
   output: {
-    path: path.join(__dirname, 'dist/static'),
-    filename: 'app.js',
+    path: dir('dist/static'),
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -20,14 +31,22 @@ module.exports = {
         },
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  plugins: omitNulls([
+    new webpack.optimize.CommonsChunkPlugin('vendor'),
+    new CopyWebpackPlugin([{from: 'index.html'}]),
+    ifDev(new webpack.NamedModulesPlugin()),
+  ]),
   performance: {
-    hints: false,
+    hints: dev ? false : 'warning',
   },
   devServer: {
     proxy: {
