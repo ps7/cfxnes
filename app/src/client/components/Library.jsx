@@ -3,8 +3,7 @@ import React from 'react';
 export default function() {
   return (
     <div>
-      <header>Header</header>
-      <main>Main</main>
+      <h1>Library</h1>
     </div>
   );
 }
