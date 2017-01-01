@@ -9,27 +9,13 @@ const dir = name => path.join(__dirname, name);
 
 module.exports = {
   context: dir('src/client'),
-  entry: {
-    bundle: './index.js',
-    vendor: [
-      'react-hot-loader/patch',
-      'react',
-      'react-dom',
-    ],
-  },
+  entry: './index.js',
   output: {
     path: dir('dist/static'),
-    filename: '[name].js',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-        },
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -41,7 +27,6 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: omitNulls([
-    new webpack.optimize.CommonsChunkPlugin('vendor'),
     new CopyWebpackPlugin([{from: 'index.html'}]),
     ifDev(new webpack.NamedModulesPlugin()),
   ]),
