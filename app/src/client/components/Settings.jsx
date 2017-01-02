@@ -22,9 +22,9 @@ export default function({params, router}) {
   })
 
   return (
-    <div>
+    <main className="settings">
       <h1>Settings</h1>
       {panels}
-    </div>
+    </main>
   );
 }

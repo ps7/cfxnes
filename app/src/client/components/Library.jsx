@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function() {
   return (
-    <div>
+    <main className="library">
       <h1>Library</h1>
-    </div>
+    </main>
   );
 }

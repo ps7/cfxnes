@@ -21,13 +21,23 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader',
+        query: {
+          name: '[name].[ext]',
+        },
+      },
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   plugins: omitNulls([
-    new CopyWebpackPlugin([{from: 'index.html'}]),
+    new CopyWebpackPlugin([
+      {from: 'index.html'},
+      {from: 'images/favicon.png'},
+    ]),
     ifDev(new webpack.NamedModulesPlugin()),
   ]),
   performance: {
