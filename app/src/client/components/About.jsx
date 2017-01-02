@@ -10,7 +10,7 @@ export default class About extends React.Component {
     this.state = {changelogVisible: false};
   }
 
-  showChangelog = () => {
+  showChangelog() {
     this.setState({changelogVisible: true});
   }
 
@@ -27,7 +27,7 @@ export default class About extends React.Component {
           <p>Copyright © 2014-2017 Jan Pikl</p>
           {this.state.changelogVisible 
             ? <Changelog/>
-            : <a href="javascript:void(0)" onClick={this.showChangelog}>Show change log</a>
+            : <a href="javascript:void(0)" onClick={::this.showChangelog}>Show change log</a>
           }
         </div>
       </main>
