@@ -25,7 +25,11 @@
     "build:client": "NODE_ENV=production webpack -p --progress",
     "dev:server": "NODE_ENV=development nodemon -w 'src/server' -x 'babel-node src/server'",
     "dev:client": "NODE_ENV=development webpack-dev-server -d --progress --inline --hot --open",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prebuild": "node tools/check-lib",
+    "prebuild:client": "node tools/check-lib",
+    "predev": "node tools/check-lib --include-debug",
+    "predev:client": "node tools/check-lib --include-debug"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

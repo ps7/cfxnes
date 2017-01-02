@@ -35,9 +35,7 @@
     "pretest:lib:debug": "npm run build:debug",
     "pretest": "npm run build",
     "pretest:win": "npm run build",
-    "pretest:osx": "npm run build",
-    "postbuild": "mkdir -p ../app/dist/static && cp dist/cfxnes.js ../app/dist/static/cfxnes.js",
-    "postbuild:debug": "mkdir -p ../app/dist/static && cp dist/cfxnes.debug.js ../app/dist/static/cfxnes.js"
+    "pretest:osx": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
