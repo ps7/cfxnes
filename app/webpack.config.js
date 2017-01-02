@@ -9,7 +9,10 @@ const dir = name => path.join(__dirname, name);
 
 module.exports = {
   context: dir('src/client'),
-  entry: './index.js',
+  entry: [
+    'react-hot-loader/patch',
+    './index.js',
+  ],
   output: {
     path: dir('dist/static'),
     filename: 'bundle.js',

@@ -16,10 +16,10 @@ export default class About extends React.Component {
   render() {
     return (
       <main className="about">
-        <div class="about-logo">
+        <div className="about-logo">
           <img src={logo} alt="cfxnes logo"/>
         </div>
-        <div class="about-text">
+        <div className="about-text">
           <h1>cfxnes (TODO version)</h1>
           <p>JavaScript NES emulator and emulation library.</p>
           <p>The source code is available at <a href="https://github.com/jpikl/cfxnes">github</a> and licensed under the MIT License.</p>
