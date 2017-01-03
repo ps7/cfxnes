@@ -2,4 +2,8 @@ import cfxnes from 'cfxnes';
 
 cfxnes.logLevel = 'info';
 
-export default cfxnes();
+const nes = cfxnes();
+const defaultConfig = nes.config.get();
+
+export {defaultConfig};
+export default nes;

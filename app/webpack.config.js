@@ -12,6 +12,7 @@ module.exports = {
   context: resolvePath('src/client'),
   entry: [
     'react-hot-loader/patch',
+    'whatwg-fetch',
     './index.js',
   ],
   output: {
