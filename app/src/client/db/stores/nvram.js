@@ -1,4 +1,4 @@
-import {log} from '../../utils';
+import log from '../../log';
 import {use} from '../db';
 
 const STORE = 'nvram';

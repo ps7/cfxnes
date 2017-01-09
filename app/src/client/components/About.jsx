@@ -1,7 +1,7 @@
 import React from 'react';
-import cfxnes from 'cfxnes';
 import logo from '../images/logo.svg';
 import Changelog from './Changelog';
+import cfxnes from 'cfxnes';
 
 export default class About extends React.Component {
 
@@ -25,7 +25,7 @@ export default class About extends React.Component {
           <p>JavaScript NES emulator and emulation library.</p>
           <p>The source code is available at <a href="https://github.com/jpikl/cfxnes">github</a> and licensed under the MIT License.</p>
           <p>Copyright © 2014-2017 Jan Pikl</p>
-          {this.state.changelogVisible 
+          {this.state.changelogVisible
             ? <Changelog/>
             : <a href="javascript:void(0)" onClick={::this.showChangelog}>Show change log</a>
           }
@@ -33,5 +33,5 @@ export default class About extends React.Component {
       </main>
     );
   }
-  
+
 }

@@ -11,7 +11,7 @@ const initialState = {
 //   library: {},
 //   settings: {
 //     emulation: {},
-//     video: {}, 
+//     video: {},
 //     audio: {},
 //     controls: {},
 //   }

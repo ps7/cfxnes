@@ -14,12 +14,12 @@ export default function({params, router}) {
     return (
       <div>
         <Link to={`/settings/${panelId}`}>{panelId}</Link>
-        {panelId === activePanelId &&
-          <div>{panelId} content</div>
+        {panelId === activePanelId
+          && <div>{panelId} content</div>
         }
       </div>
     );
-  })
+  });
 
   return (
     <main className="settings">

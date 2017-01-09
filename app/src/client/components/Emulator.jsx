@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect, bindActionCreators} from 'react-redux';
+import {connect} from 'react-redux';
 import nes from '../nes';
 import {startEmulator, stopEmulator} from '../actions';
 
@@ -22,7 +22,7 @@ class Emulator extends React.Component {
         <div>ROM ID: {romId || '?'}</div>
         <div><canvas ref="canvas"></canvas></div>
         <div>
-          {running 
+          {running
             ? <button onClick={() => dispatch(stopEmulator())}>Stop</button>
             : <button onClick={() => dispatch(startEmulator())}>Start</button>
           }

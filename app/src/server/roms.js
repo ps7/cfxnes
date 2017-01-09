@@ -99,7 +99,7 @@ function scan() {
 
 function makeId(file) {
   return path.basename(file, path.extname(file))
-         .replace(/[ _\-]+/g, ' ').trim()
+         .replace(/[ _-]+/g, ' ').trim()
          .replace(/[^a-zA-Z0-9 ]+/g, '')
          .replace(/ +/g, '-')
          .toLowerCase();
@@ -108,7 +108,7 @@ function makeId(file) {
 function sanitizeName(file) {
   const ext = path.extname(file);
   return path.basename(file, ext)
-         .replace(/[ _\-]+/g, ' ').trim()
+         .replace(/[ _-]+/g, ' ').trim()
          .replace(/[^a-zA-Z0-9 ]+/g, '')
          .replace(/ +/g, '_') + ext;
 }

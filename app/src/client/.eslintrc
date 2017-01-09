@@ -1,5 +1,23 @@
 {
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "ecmaVersion": 7,
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    }
+  },
   "env": {
     "browser": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   }
 }
