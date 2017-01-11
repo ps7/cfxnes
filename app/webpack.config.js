@@ -2,12 +2,11 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const lib = require('./tools/lib');
 
-const dev = process.env.NODE_ENV === 'development';
-const ifDev = dev ? x => x : () => null;
-const omitNulls = array => array.filter(x => x);
+const development = process.env.NODE_ENV === 'development';
 const resolvePath = (...args) => path.resolve(__dirname, ...args);
 
 module.exports = {
@@ -16,6 +15,7 @@ module.exports = {
     'react-hot-loader/patch',
     'whatwg-fetch',
     './index.js',
+    './styles/index.css',
   ],
   output: {
     path: resolvePath('dist/static'),
@@ -29,27 +29,42 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.svg$/,
-        loader: 'file-loader',
-        query: {
-          name: '[name].[ext]',
-        },
+        test: /\.css$/,
+        use: development ? [
+          'style-loader',
+          'css-loader?importLoaders=1',
+          'postcss-loader',
+        ] : undefined,
+        loader: !development ? ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [
+            'css-loader?importLoaders=1',
+            'postcss-loader',
+          ],
+        }) : undefined,
+      },
+      {
+        test: /\.(svg|woff|woff2|eot|ttf)(\?\S*)?$/,
+        loader: 'file-loader?name=[name].[ext]',
       },
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      cfxnes: lib.getFiles({includeDebug: dev}).main,
+      cfxnes: lib.getFiles({includeDebug: development}).main,
     },
   },
-  plugins: omitNulls([
+  plugins: [
     new webpack.IgnorePlugin(/^fs$/), // cfxnes.debug.js contains unused required('fs') call
-    new CopyWebpackPlugin([
+    new CopyPlugin([
       {from: 'index.html'},
       {from: 'images/favicon.png'},
     ]),
-    ifDev(new webpack.NamedModulesPlugin()),
+  ].concat(development ? [
+    new webpack.NamedModulesPlugin(),
+  ] : [
+    new ExtractTextPlugin({filename: 'bundle.css'}),
   ]),
   performance: {
     hints: false,
