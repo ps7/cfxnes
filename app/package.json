@@ -28,13 +28,7 @@
     "lint": "parallelshell 'npm run lint:js' 'npm run lint:css'",
     "lint:js": "eslint --ext=.js,.jsx src || true",
     "lint:css": "stylelint 'src/client/**/*.css' || true",
-    "clean": "rm -rf dist",
-    "prelint": "node tools/check-lib --include-debug",
-    "prelint:js": "node tools/check-lib --include-debug",
-    "prebuild": "node tools/check-lib",
-    "prebuild:client": "node tools/check-lib",
-    "predev": "node tools/check-lib --include-debug",
-    "predev:client": "node tools/check-lib --include-debug"
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

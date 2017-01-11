@@ -1,12 +1,13 @@
 /* eslint-env node */
 
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const lib = require('./tools/lib');
 
-const development = process.env.NODE_ENV === 'development';
+const {stdout, env} = process;
+const development = env.NODE_ENV === 'development';
 const resolvePath = (...args) => path.resolve(__dirname, ...args);
 
 module.exports = {
@@ -52,7 +53,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      cfxnes: lib.getFiles({includeDebug: development}).main,
+      cfxnes: findCfxnes(),
     },
   },
   plugins: [
@@ -75,3 +76,28 @@ module.exports = {
     },
   },
 };
+
+function findCfxnes() {
+  stdout.write('\n********************************************************************************\n');
+  stdout.write('Looking for cfxnes library files...\n\n');
+
+  const cfxnes = [
+    {name: 'cfxnes.debug.js', debug: true},
+    {name: 'cfxnes.js', debug: false},
+  ]
+  .filter(({debug}) => development || !debug)
+  .map(({name}) => {
+    const file = resolvePath('../lib/dist', name);
+    const exists = fs.existsSync(file);
+    stdout.write(`[${(exists ? '\u2713' : '\u2717')}] ${file}\n`);
+    return {file, exists};
+  })
+  .filter(({exists}) => exists)
+  .map(({file}) => file)[0];
+
+  stdout.write('\n');
+  stdout.write(cfxnes ? `Using ${path.basename(cfxnes)}` : 'Found none :(');
+  stdout.write('\n********************************************************************************\n\n');
+
+  return cfxnes;
+}
