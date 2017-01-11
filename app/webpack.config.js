@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const {stdout, env} = process;
-const development = env.NODE_ENV === 'development';
+const devEnv = env.NODE_ENV === 'development';
 const resolvePath = (...args) => path.resolve(__dirname, ...args);
 
 module.exports = {
@@ -29,21 +29,24 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
-      {
-        test: /\.css$/,
-        use: development ? [
-          'style-loader',
-          'css-loader?importLoaders=1',
-          'postcss-loader',
-        ] : undefined,
-        loader: !development ? ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
+      merge({
+        common: {
+          test: /\.css$/,
+        },
+        production: {
+          loader: ExtractTextPlugin.extract([
+            'css-loader?importLoaders=1',
+            'postcss-loader',
+          ]),
+        },
+        development: {
+          use: [
+            'style-loader',
             'css-loader?importLoaders=1',
             'postcss-loader',
           ],
-        }) : undefined,
-      },
+        },
+      }),
       {
         test: /\.(svg|woff|woff2|eot|ttf)(\?\S*)?$/,
         loader: 'file-loader?name=[name].[ext]',
@@ -56,17 +59,21 @@ module.exports = {
       cfxnes: findCfxnes(),
     },
   },
-  plugins: [
-    new webpack.IgnorePlugin(/^fs$/), // cfxnes.debug.js contains unused required('fs') call
-    new CopyPlugin([
-      {from: 'index.html'},
-      {from: 'images/favicon.png'},
-    ]),
-  ].concat(development ? [
-    new webpack.NamedModulesPlugin(),
-  ] : [
-    new ExtractTextPlugin({filename: 'bundle.css'}),
-  ]),
+  plugins: merge({
+    common: [
+      new webpack.IgnorePlugin(/^fs$/), // cfxnes.debug.js contains unused required('fs') call
+      new CopyPlugin([
+        {from: 'index.html'},
+        {from: 'images/favicon.png'},
+      ]),
+    ],
+    production: [
+      new ExtractTextPlugin({filename: 'bundle.css'}),
+    ],
+    development: [
+      new webpack.NamedModulesPlugin(),
+    ],
+  }),
   performance: {
     hints: false,
   },
@@ -77,6 +84,15 @@ module.exports = {
   },
 };
 
+function merge({common, production, development}) {
+  const extra = devEnv ? development : production;
+  const any = common || production || development;
+  if (Array.isArray(any)) {
+    return (common || []).concat(extra || []);
+  }
+  return Object.assign({}, common || {}, extra || {});
+}
+
 function findCfxnes() {
   stdout.write('\n********************************************************************************\n');
   stdout.write('Looking for cfxnes library files...\n\n');
@@ -85,7 +101,7 @@ function findCfxnes() {
     {name: 'cfxnes.debug.js', debug: true},
     {name: 'cfxnes.js', debug: false},
   ]
-  .filter(({debug}) => development || !debug)
+  .filter(({debug}) => devEnv || !debug)
   .map(({name}) => {
     const file = resolvePath('../lib/dist', name);
     const exists = fs.existsSync(file);
