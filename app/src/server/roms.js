@@ -15,7 +15,7 @@ router.get('/roms', (req, res) => {
 });
 
 router.get('/roms/:id', (req, res) => {
-  const id = req.params.id;
+  const {id} = req.params;
   if (id == null) {
     res.status(400).send('Missing ROM ID.');
     return;
@@ -31,7 +31,7 @@ router.get('/roms/:id', (req, res) => {
 });
 
 router.get('/roms/files/:name', (req, res) => {
-  const name = req.params.name;
+  const {name} = req.params;
   if (name == null) {
     res.status(400).send('Missing filename.');
     return;

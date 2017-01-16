@@ -10,7 +10,7 @@ export function get(sha1) {
     const store = transaction.objectStore(STORE);
     const request = store.get(sha1);
     request.onsuccess = () => {
-      const result = request.result;
+      const {result} = request;
       resolve((result && result.data) || null);
     };
     request.onerror = () => reject(request.error);
