@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const {stdout, env} = process;
-const devEnv = env.NODE_ENV === 'development';
+const DEVELOPMENT = env.NODE_ENV === 'development';
 const resolvePath = (...args) => path.resolve(__dirname, ...args);
 
 module.exports = {
@@ -61,6 +61,10 @@ module.exports = {
   },
   plugins: merge({
     common: [
+      new webpack.DefinePlugin({
+        __DEVELOPMENT__: JSON.stringify(DEVELOPMENT),
+        __LOG_LEVEL__: JSON.stringify(merge({production: 'warn', development: 'info'})),
+      }),
       new webpack.IgnorePlugin(/^fs$/), // cfxnes.debug.js contains unused required('fs') call
       new CopyPlugin([
         {from: 'index.html'},
@@ -84,13 +88,17 @@ module.exports = {
   },
 };
 
-function merge({common, production, development}) {
-  const extra = devEnv ? development : production;
-  const any = common || production || development;
+function merge(params) {
+  const {common} = params;
+  const enviromental = params[env.NODE_ENV];
+  const any = Object.values(params).filter(p => p)[0];
   if (Array.isArray(any)) {
-    return (common || []).concat(extra || []);
+    return (common || []).concat(enviromental || []);
   }
-  return Object.assign({}, common || {}, extra || {});
+  if (typeof any === 'object') {
+    return Object.assign({}, common || {}, enviromental || {});
+  }
+  return enviromental || common;
 }
 
 function findCfxnes() {
@@ -101,7 +109,7 @@ function findCfxnes() {
     {name: 'cfxnes.debug.js', debug: true},
     {name: 'cfxnes.js', debug: false},
   ]
-  .filter(({debug}) => devEnv || !debug)
+  .filter(({debug}) => DEVELOPMENT || !debug)
   .map(({name}) => {
     const file = resolvePath('../lib/dist', name);
     const exists = fs.existsSync(file);

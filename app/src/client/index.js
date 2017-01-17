@@ -12,6 +12,6 @@ function renderApp() {
 renderApp();
 
 /* eslint-env node */
-if (module.hot) {
+if (__DEVELOPMENT__ && module.hot) {
   module.hot.accept('./components/App', renderApp);
 }

@@ -19,5 +19,9 @@
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__LOG_LEVEL__": true
   }
 }
