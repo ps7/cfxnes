@@ -5,14 +5,15 @@ import cfxnes from 'cfxnes';
 
 export default class About extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {changelogVisible: false};
+  state = {changelogVisible: false};
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state !== nextState;
   }
 
-  showChangelog() {
+  handleShowChangelog = () => {
     this.setState({changelogVisible: true});
-  }
+  };
 
   render() {
     return (
@@ -27,7 +28,7 @@ export default class About extends React.Component {
           <p>Copyright © 2014-2017 Jan Pikl</p>
           {this.state.changelogVisible
             ? <Changelog/>
-            : <a href="javascript:void(0)" onClick={::this.showChangelog}>Show change log</a>
+            : <a href="javascript:void(0)" onClick={this.handleShowChangelog}>Show change log</a>
           }
         </div>
       </main>

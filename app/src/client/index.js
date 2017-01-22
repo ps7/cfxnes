@@ -1,3 +1,6 @@
+/* eslint-env node */
+/* eslint-disable react/jsx-filename-extension */
+
 import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
@@ -11,7 +14,6 @@ function renderApp() {
 
 renderApp();
 
-/* eslint-env node */
 if (__DEVELOPMENT__ && module.hot) {
   module.hot.accept('./components/App', renderApp);
 }

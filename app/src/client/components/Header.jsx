@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import HeaderMenu from './HeaderMenu';
 import HeaderMenuItem from './HeaderMenuItem';
 
-export default ({toolbar}) => (
+const Header = ({toolbar}) => (
   <header>
     <Link to="/">cfxnes</Link>
     <HeaderMenu>
@@ -17,3 +17,13 @@ export default ({toolbar}) => (
     </HeaderMenu>
   </header>
 );
+
+Header.propTypes = {
+  toolbar: React.PropTypes.element,
+};
+
+Header.defaultProps = {
+  toolbar: null,
+};
+
+export default Header;

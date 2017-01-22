@@ -1,30 +1,43 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default function({params, router}) {
-  const {activePanelId} = params;
-  const panelIds = ['emulation', 'video', 'audio', 'controls', 'reset'];
+const panelIds = ['emulation', 'video', 'audio', 'controls', 'reset'];
 
-  if (panelIds.indexOf(activePanelId) < 0) {
-    router.replace('/settings/' + panelIds[0]);
-    return null;
+export default class Settings extends React.Component {
+
+  static propTypes = {
+    params: React.PropTypes.shape({
+      activePanelId: React.PropTypes.string,
+    }).isRequired,
+    router: React.PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  };
+
+  componentWillMount() {
+    const {params, router} = this.props;
+    const {activePanelId} = params;
+
+    if (panelIds.indexOf(activePanelId) < 0) {
+      router.replace('/settings/' + panelIds[0]);
+    }
   }
 
-  const panels = panelIds.map(panelId => {
-    return (
-      <div>
-        <Link to={`/settings/${panelId}`}>{panelId}</Link>
-        {panelId === activePanelId
-          && <div>{panelId} content</div>
-        }
-      </div>
-    );
-  });
+  render() {
+    const {activePanelId} = this.props.params;
 
-  return (
-    <main className="settings">
-      <h1>Settings</h1>
-      {panels}
-    </main>
-  );
+    const panels = panelIds.map(panelId => {
+      return (
+        <div key={panelId}>
+          <Link to={`/settings/${panelId}`}>{panelId}</Link>
+          {panelId === activePanelId && <div>{panelId} content</div>}
+        </div>
+      );
+    });
+
+    return (
+      <main className="settings">
+        <h1>Settings</h1>
+        {panels}
+      </main>
+    );
+  }
 }

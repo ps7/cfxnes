@@ -5,26 +5,47 @@ import {startEmulator, stopEmulator} from '../actions';
 
 class Emulator extends React.Component {
 
+  static propTypes = {
+    params: React.PropTypes.shape({
+      romId: React.PropTypes.string,
+    }).isRequired,
+    running: React.PropTypes.bool.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
-    nes.video.output = this.refs.canvas;
+    nes.video.output = this.canvas;
   }
 
   componentWillUnmount() {
+    nes.stop();
     nes.video.output = null;
   }
 
+  setCanvas = canvas => {
+    this.canvas = canvas;
+  }
+
+  handleStart = () => {
+    this.props.dispatch(startEmulator());
+  };
+
+  handleStop = () => {
+    this.props.dispatch(stopEmulator());
+  };
+
   render() {
-    const {params, running, dispatch} = this.props;
+    const {params, running} = this.props;
     const {romId} = params;
     return (
       <main className="emulator">
         <h1>Emulator</h1>
         <div>ROM ID: {romId || '?'}</div>
-        <div><canvas ref="canvas"></canvas></div>
+        <div><canvas ref={this.setCanvas}/></div>
         <div>
           {running
-            ? <button onClick={() => dispatch(stopEmulator())}>Stop</button>
-            : <button onClick={() => dispatch(startEmulator())}>Start</button>
+            ? <button onClick={this.handleStop}>Stop</button>
+            : <button onClick={this.handleStart}>Start</button>
           }
         </div>
       </main>
@@ -33,10 +54,8 @@ class Emulator extends React.Component {
 
 }
 
-function mapStateToProps(state) {
-  return {
-    running: state.running,
-  };
-}
+const mapStateToProps = state => ({
+  running: state.running,
+});
 
 export default connect(mapStateToProps)(Emulator);
