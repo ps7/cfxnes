@@ -64,6 +64,7 @@
     "karma-opera-launcher": "^1.0.0",
     "karma-webdriver-launcher": "^1.0.5",
     "mocha": "^3.0.2",
+    "source-map-loader": "^0.1.6",
     "watch": "^1.0.1"
   }
 }

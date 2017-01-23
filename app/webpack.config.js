@@ -23,35 +23,43 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      merge({
-        common: {
-          test: /\.css$/,
+    rules: merge({
+      common: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
         },
-        production: {
+        {
+          test: /\.(svg|woff|woff2|eot|ttf)(\?\S*)?$/,
+          loader: 'file-loader?name=[name].[ext]',
+        },
+      ],
+      production: [
+        {
+          test: /\.css$/,
           loader: ExtractTextPlugin.extract([
             'css-loader?importLoaders=1',
             'postcss-loader',
           ]),
         },
-        development: {
+      ],
+      development: [
+        {
+          test: /\.(js|jsx)$/,
+          loader: 'source-map-loader',
+          enforce: 'pre',
+        },
+        {
+          test: /\.css$/,
           use: [
             'style-loader',
             'css-loader?importLoaders=1',
             'postcss-loader',
           ],
         },
-      }),
-      {
-        test: /\.(svg|woff|woff2|eot|ttf)(\?\S*)?$/,
-        loader: 'file-loader?name=[name].[ext]',
-      },
-    ],
+      ],
+    }),
   },
   resolve: {
     extensions: ['.js', '.jsx'],
