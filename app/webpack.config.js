@@ -114,12 +114,13 @@ function findCfxnes() {
   stdout.write('Looking for cfxnes library files...\n\n');
 
   const cfxnes = [
-    {name: 'cfxnes.debug.js', debug: true},
-    {name: 'cfxnes.js', debug: false},
+    {name: 'dist/cfxnes.js', debug: false},
+    {name: 'dist/cfxnes.debug.js', debug: true},
+    {name: 'src/cfxnes.js', debug: true},
   ]
   .filter(({debug}) => DEVELOPMENT || !debug)
   .map(({name}) => {
-    const file = resolvePath('../lib/dist', name);
+    const file = resolvePath('../lib', name);
     const exists = fs.existsSync(file);
     stdout.write(`[${(exists ? '\u2713' : '\u2717')}] ${file}\n`);
     return {file, exists};
@@ -128,7 +129,7 @@ function findCfxnes() {
   .map(({file}) => file)[0];
 
   stdout.write('\n');
-  stdout.write(cfxnes ? `Using ${path.basename(cfxnes)}` : 'Found none :(');
+  stdout.write(cfxnes ? `Using ${cfxnes}` : 'Found none :(');
   stdout.write('\n********************************************************************************\n\n');
 
   return cfxnes;
