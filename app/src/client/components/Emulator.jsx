@@ -18,7 +18,7 @@ class Emulator extends React.Component {
   }
 
   componentWillUnmount() {
-    nes.stop();
+    this.handleStop();
     nes.video.output = null;
   }
 
