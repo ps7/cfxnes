@@ -1,3 +1,4 @@
 export * from './emulator';
-export * from './library';
-export * from './settings';
+export * from './video';
+export * from './fullscreen';
+export * from './reset';

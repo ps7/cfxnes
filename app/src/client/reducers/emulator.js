@@ -2,8 +2,8 @@ import {handleActions} from 'redux-actions';
 import nes from '../nes';
 
 const initialState = {
-  suspended: false,
   running: nes.running,
+  suspended: false,
   loading: false,
 };
 
@@ -53,10 +53,5 @@ export default handleActions({
   stopEmulator(state) {
     nes.stop();
     return {...state, running: nes.running};
-  },
-
-  enterFullscreen(state) {
-    nes.fullscreen.enter();
-    return state;
   },
 }, initialState);

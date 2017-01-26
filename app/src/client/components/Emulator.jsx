@@ -27,9 +27,12 @@ class Emulator extends React.Component {
   }
 
   render() {
+    const {loading} = this.props;
+
     return (
       <main className="emulator">
         <canvas ref={this.setCanvas}/>
+        {loading && <div>Loading...</div>}
       </main>
     );
   }

@@ -3,7 +3,8 @@ import cfxnes from 'cfxnes';
 cfxnes.logLevel = __LOG_LEVEL__;
 
 const nes = cfxnes();
-const defaultConfig = nes.config.get();
+const {video, fullscreen, audio, devices, inputs, config} = nes;
+const defaults = config.get();
 
-export {defaultConfig};
 export default nes;
+export {video, fullscreen, audio, devices, inputs, config, defaults};

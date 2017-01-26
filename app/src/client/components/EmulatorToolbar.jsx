@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ButtonGroup from './ButtonGroup';
-import Button from './Button';
-import FpsCounter from './FpsCounter';
+
 import {
   resetEmulator, powerEmulator,
   startEmulator, stopEmulator,
@@ -10,7 +8,19 @@ import {
   enterFullscreen,
 } from '../actions';
 
+import ButtonGroup from './ButtonGroup';
+import Button from './Button';
+import FpsCounter from './FpsCounter';
+
 class EmulatorToolbar extends React.Component {
+
+  static propTypes = {
+    running: React.PropTypes.bool.isRequired,
+    scale: React.PropTypes.number.isRequired,
+    minScale: React.PropTypes.number.isRequired,
+    maxScale: React.PropTypes.number.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+  };
 
   handlePower = () => {
     this.props.dispatch(resetEmulator());
@@ -48,13 +58,13 @@ class EmulatorToolbar extends React.Component {
         <ButtonGroup>
           <Button icon="folder-open" tooltip="Open ROM"/>
         </ButtonGroup>
+        <ButtonGroup>
           <Button icon="power-off" tooltip="Power" onClick={this.handlePower}/>
           <Button icon="repeat" tooltip="Reset" onClick={this.handleReset}/>
           {running
             ? <Button icon="pause" tooltip="Pause" onClick={this.handleStop}/>
             : <Button icon="play" tooltip="Run" onClick={this.handleStart}/>
           }
-        <ButtonGroup>
         </ButtonGroup>
         <ButtonGroup>
           <Button icon="search-minus" tooltip="Increase scale" enabled={scale > minScale} onClick={this.handleDecreaseScale}/>
@@ -73,7 +83,7 @@ class EmulatorToolbar extends React.Component {
 
 const mapStateToProps = state => {
   const {running} = state.emulator;
-  const {scale, minScale, maxScale} = state.settings.video;
+  const {scale, minScale, maxScale} = state.video;
   return {running, scale, minScale, maxScale};
 };
 
