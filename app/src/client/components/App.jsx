@@ -13,7 +13,7 @@ export default () => (
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={AppLayout}>
-        <Route path="emulator(/:romId)" components={{main: Emulator, toolbar: EmulatorToolbar}}/>
+        <Route path="emulator(/:newRomId)" components={{main: Emulator, toolbar: EmulatorToolbar}}/>
         <Route path="library" components={{main: Library}}/>
         <Route path="settings(/:activePanelId)" components={{main: Settings}}/>
         <Route path="about" components={{main: About}}/>

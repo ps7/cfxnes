@@ -1,23 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import nes from '../nes';
+import {resumeEmulator, suspendEmulator} from '../actions';
 
 class Emulator extends React.Component {
 
   static propTypes = {
     params: React.PropTypes.shape({
-      romId: React.PropTypes.string,
+      newRomId: React.PropTypes.string,
     }).isRequired,
+    loading: React.PropTypes.bool.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    nes.video.output = this.canvas;
+    const {canvas} = this;
+    const {newRomId} = this.props.params;
+    this.props.dispatch(resumeEmulator({canvas, newRomId}));
   }
 
   componentWillUnmount() {
-    this.handleStop();
-    nes.video.output = null;
+    this.props.dispatch(suspendEmulator());
   }
 
   setCanvas = canvas => {
@@ -25,8 +27,6 @@ class Emulator extends React.Component {
   }
 
   render() {
-    const {params, running} = this.props;
-    const {romId} = params;
     return (
       <main className="emulator">
         <canvas ref={this.setCanvas}/>
@@ -37,6 +37,7 @@ class Emulator extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.emulator.loading,
 });
 
 export default connect(mapStateToProps)(Emulator);
