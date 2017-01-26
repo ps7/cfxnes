@@ -1,29 +1,6 @@
-import {handleActions} from 'redux-actions';
-import nes from '../nes';
+import {combineReducers} from 'redux';
+import emulator from './emulator';
+import library from './library';
+import settings from './settings';
 
-const initialState = {
-  running: nes.running,
-};
-
-// TODO structure state + reducers
-// {
-//   emulator: {},
-//   library: {},
-//   settings: {
-//     emulation: {},
-//     video: {},
-//     audio: {},
-//     controls: {},
-//   }
-// }
-
-export default handleActions({
-  startEmulator(state) {
-    nes.start();
-    return {...state, running: nes.running};
-  },
-  stopEmulator(state) {
-    nes.stop();
-    return {...state, running: nes.running};
-  },
-}, initialState);
+export default combineReducers({emulator, library, settings});
