@@ -29,8 +29,8 @@
     "dev:server": "NODE_ENV=development nodemon -w 'src/server' -x 'babel-node src/server'",
     "dev:client": "NODE_ENV=development webpack-dev-server -d --devtool=eval-source-map --progress --inline --hot --open",
     "lint": "parallelshell 'npm run lint:js' 'npm run lint:css'",
-    "lint:js": "NODE_ENV=development eslint --ext=.js,.jsx src || true",
-    "lint:css": "stylelint 'src/client/**/*.css' || true",
+    "lint:js": "NODE_ENV=development eslint --ext=.js,.jsx src",
+    "lint:css": "stylelint 'src/client/**/*.css'",
     "clean": "rm -rf dist"
   },
   "devDependencies": {
