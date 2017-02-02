@@ -2,7 +2,9 @@ import {handleActions} from 'redux-actions';
 import nes from '../nes';
 
 const initialState = {
-  running: nes.running,
+  region: nes.region,
+  speed: nes.speed,
+  running: false,
   suspended: false,
   loading: false,
 };
@@ -10,28 +12,30 @@ const initialState = {
 export default handleActions({
   resumeEmulator(state, action) {
     const {canvas, newRomId} = action.payload;
-    const {suspended} = state;
-    let {romId, loading} = state;
+    const {suspended, romId} = state;
+    let {loading} = state;
 
     nes.video.output = canvas;
 
     if (newRomId && newRomId !== romId) {
-      romId = newRomId;
       loading = true;
       // TODO load ROM and then start
     } else if (suspended) {
       nes.start();
     }
 
-    return {...state, suspended: false, romId, loading};
+    return {
+      ...state,
+      suspended: false,
+      romId: newRomId,
+      loading,
+    };
   },
 
   suspendEmulator(state) {
     const suspended = nes.running;
-
     nes.stop();
     nes.video.output = null;
-
     return {...state, suspended};
   },
 
@@ -53,5 +57,10 @@ export default handleActions({
   stopEmulator(state) {
     nes.stop();
     return {...state, running: nes.running};
+  },
+
+  enterFullscreen(state) {
+    nes.fullscreen.enter();
+    return state;
   },
 }, initialState);

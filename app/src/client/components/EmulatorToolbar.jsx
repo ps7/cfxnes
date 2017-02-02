@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
 
 import {
   resetEmulator, powerEmulator,
@@ -16,9 +17,7 @@ class EmulatorToolbar extends React.Component {
 
   static propTypes = {
     running: React.PropTypes.bool.isRequired,
-    scale: React.PropTypes.number.isRequired,
-    minScale: React.PropTypes.number.isRequired,
-    maxScale: React.PropTypes.number.isRequired,
+    videoScale: React.PropTypes.number.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
 
@@ -51,7 +50,7 @@ class EmulatorToolbar extends React.Component {
   };
 
   render() {
-    const {running, scale, minScale, maxScale} = this.props;
+    const {running, videoScale} = this.props;
 
     return (
       <div className="emulator-toolbar">
@@ -67,8 +66,8 @@ class EmulatorToolbar extends React.Component {
           }
         </ButtonGroup>
         <ButtonGroup>
-          <Button icon="search-minus" tooltip="Increase scale" enabled={scale > minScale} onClick={this.handleDecreaseScale}/>
-          <Button icon="search-plus" tooltip="Decrease scale" enabled={scale < maxScale} onClick={this.handleIncreaseScale}/>
+          <Button icon="search-minus" tooltip="Increase scale" enabled={videoScale > MIN_VIDEO_SCALE} onClick={this.handleDecreaseScale}/>
+          <Button icon="search-plus" tooltip="Decrease scale" enabled={videoScale < MAX_VIDEO_SCALE} onClick={this.handleIncreaseScale}/>
           <Button icon="arrows-alt" tooltip="Fullscreen" onClick={this.handleFullscren}/>
         </ButtonGroup>
         <ButtonGroup>
@@ -83,8 +82,8 @@ class EmulatorToolbar extends React.Component {
 
 const mapStateToProps = state => {
   const {running} = state.emulator;
-  const {scale, minScale, maxScale} = state.video;
-  return {running, scale, minScale, maxScale};
+  const {videoScale} = state.settings;
+  return {running, videoScale};
 };
 
 export default connect(mapStateToProps)(EmulatorToolbar);
