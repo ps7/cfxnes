@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable import/unambiguous */
 
 const fs = require('fs');
 const path = require('path');
@@ -6,8 +7,14 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+// Fix for visual studio code eslint plugin to be able to process this file
+const RUNNING_IN_VSCODE = path.basename(process.argv[0]) === 'code';
+if (RUNNING_IN_VSCODE) {
+  require('core-js/fn/object/values'); // eslint-disable-line
+}
+
 const {stdout, env} = process;
-const DEVELOPMENT = env.NODE_ENV === 'development';
+const DEVELOPMENT = env.NODE_ENV === 'development' || RUNNING_IN_VSCODE;
 const resolvePath = (...args) => path.resolve(__dirname, ...args);
 
 module.exports = {
