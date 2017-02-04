@@ -1,7 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router';
+import SettingsSystem from './SettingsSystem';
+import SettingsVideo from './SettingsVideo';
+import SettingsAudio from './SettingsAudio';
+import SettingsControls from './SettingsControls';
+import SettingsReset from './SettingsReset';
 
-const panelIds = ['emulation', 'video', 'audio', 'controls', 'reset'];
+const panelComponents = {
+  system: SettingsSystem,
+  video: SettingsVideo,
+  audio: SettingsAudio,
+  controls: SettingsControls,
+  reset: SettingsReset,
+};
 
 export default class Settings extends React.Component {
 
@@ -13,31 +23,30 @@ export default class Settings extends React.Component {
   };
 
   componentWillMount() {
-    const {params, router} = this.props;
-    const {activePanelId} = params;
-
-    if (panelIds.indexOf(activePanelId) < 0) {
-      router.replace('/settings/' + panelIds[0]);
+    const {activePanelId} = this.props.params;
+    if (!(activePanelId in panelComponents)) {
+      this.openPanel(Object.keys(panelComponents)[0]);
     }
   }
 
+  openPanel(id) {
+    this.props.router.push(`/settings/${id}`);
+  }
+
+  renderPanel(id) {
+    const open = id === this.props.params.activePanelId;
+    const onHeaderClick = () => this.openPanel(id);
+    const Component = panelComponents[id];
+    return <Component key={id} open={open} onHeaderClick={onHeaderClick}/>;
+  }
+
   render() {
-    const {activePanelId} = this.props.params;
-
-    const panels = panelIds.map(panelId => {
-      return (
-        <div key={panelId}>
-          <Link to={`/settings/${panelId}`}>{panelId}</Link>
-          {panelId === activePanelId && <div>{panelId} content</div>}
-        </div>
-      );
-    });
-
     return (
       <main className="settings">
         <h1>Settings</h1>
-        {panels}
+        {Object.keys(panelComponents).map(id => this.renderPanel(id))}
       </main>
     );
   }
+
 }

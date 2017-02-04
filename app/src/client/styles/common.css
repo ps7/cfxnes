@@ -1,0 +1,11 @@
+.clickable {
+  cursor: pointer;
+}
+
+.panel-header.clickable:hover {
+  text-decoration: underline;
+}
+
+.panel.collapsed .panel-body {
+  display: none;
+}
