@@ -2,10 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
-const Panel = ({icon, caption, open, children, onHeaderClick}) => (
-  <div className={classNames('panel', {collapsed: !open})}>
+const Panel = ({icon, caption, collapsed, children, onHeaderClick}) => (
+  <div className={classNames('panel', {collapsed})}>
     <div className={classNames('panel-header', {clickable: onHeaderClick != null})} onClick={onHeaderClick}>
-      <Icon name={icon}/> {caption}
+      {icon && <Icon name={icon}/>} {caption}
     </div>
     <div className="panel-body">
       {children}
@@ -14,15 +14,16 @@ const Panel = ({icon, caption, open, children, onHeaderClick}) => (
 );
 
 Panel.propTypes = {
-  icon: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.string,
   caption: React.PropTypes.string.isRequired,
-  open: React.PropTypes.bool,
+  collapsed: React.PropTypes.bool,
   children: React.PropTypes.node,
   onHeaderClick: React.PropTypes.func,
 };
 
 Panel.defaultProps = {
-  open: true,
+  icon: null,
+  collapsed: false,
   children: null,
   onHeaderClick: null,
 };

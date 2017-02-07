@@ -22,4 +22,3 @@ export default class FpsCounter extends React.Component {
   }
 
 }
-

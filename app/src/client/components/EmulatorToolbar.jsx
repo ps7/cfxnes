@@ -66,8 +66,8 @@ class EmulatorToolbar extends React.Component {
           }
         </ButtonGroup>
         <ButtonGroup>
-          <Button icon="search-minus" tooltip="Increase scale" enabled={videoScale > MIN_VIDEO_SCALE} onClick={this.handleDecreaseScale}/>
-          <Button icon="search-plus" tooltip="Decrease scale" enabled={videoScale < MAX_VIDEO_SCALE} onClick={this.handleIncreaseScale}/>
+          <Button icon="search-minus" tooltip="Increase scale" disabled={videoScale <= MIN_VIDEO_SCALE} onClick={this.handleDecreaseScale}/>
+          <Button icon="search-plus" tooltip="Decrease scale" disabled={videoScale >= MAX_VIDEO_SCALE} onClick={this.handleIncreaseScale}/>
           <Button icon="arrows-alt" tooltip="Fullscreen" onClick={this.handleFullscren}/>
         </ButtonGroup>
         <ButtonGroup>

@@ -27,9 +27,9 @@ class SettingsSystem extends React.Component {
   };
 
   render() {
-    const {region, speed, ...others} = this.props;
+    const {region, speed, ...panelAttrs} = this.props;
     return (
-      <Panel icon="server" caption="Emulation" {...others}>
+      <Panel icon="server" caption="Emulation" {...panelAttrs}>
         <Field id="region" caption="Region" type="select" items={regions} value={region} onChange={this.handleRegionChange}/>
         <Field id="speed" caption="Emulation speed" type="range" min="0.25" max="2" step="0.25" value={speed} onChange={this.handleSpeedChange}/>
       </Panel>
