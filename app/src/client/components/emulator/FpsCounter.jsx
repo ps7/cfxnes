@@ -1,5 +1,5 @@
 import React from 'react';
-import nes from '../nes';
+import nes from '../../nes';
 
 export default class FpsCounter extends React.Component {
 

@@ -3,11 +3,10 @@ import {Provider} from 'react-redux';
 import {Router, Route, Redirect, IndexRedirect, hashHistory} from 'react-router';
 import store from '../store';
 import AppLayout from './AppLayout';
-import Emulator from './Emulator';
-import EmulatorToolbar from './EmulatorToolbar';
-import Library from './Library';
-import Settings from './Settings';
-import About from './About';
+import {Emulator, EmulatorToolbar} from './emulator';
+import {Library} from './library';
+import {Settings} from './settings';
+import {About} from './about';
 
 export default () => (
   <Provider store={store}>

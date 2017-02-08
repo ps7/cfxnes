@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setRegion, setSpeed} from '../actions';
-import {makeEnumPropType} from '../utils';
-import Panel from './Panel';
-import Field from './Field';
+import {Field, Panel} from '../common';
+import {setRegion, setSpeed} from '../../actions';
+import {makeEnumPropType} from '../../utils';
 
 const regions = [
   {id: 'auto', caption: 'Autodetect'},

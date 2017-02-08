@@ -11,9 +11,23 @@ header {
   }
 }
 
-.header-logo,
-.navigation-main,
-.toolbar {
+.header-logo {
+  display: inline-block;
+  float: left;
+  padding: 0.25em 1em;
+
+  & img {
+    display: inline-block;
+    height: 1.5em;
+    vertical-align: middle;
+  }
+}
+
+.navigation {
+  display: inline-block;
+}
+
+.navigation-main {
   float: left;
 }
 
@@ -24,36 +38,13 @@ header {
 .navigation-item {
   display: inline-block;
   padding: 0.5em 1em;
-}
 
-.header-logo {
-  display: inline-block;
-  padding: 0.25em 1em;
-}
-
-.header-logo img {
-  display: inline-block;
-  height: 1.5em;
-  vertical-align: middle;
-}
-
-.navigation {
-  display: inline-block;
-}
-
-.navigation-item.active {
-  background: darkblue;
-  color: white;
-}
-
-.button-group {
-  display: inline-block;
-
-  & + .button-group {
-    margin-left: 0.5em;
+  &.active {
+    background: darkblue;
+    color: white;
   }
 }
 
-.fps-counter {
-  display: inline-block;
+.toolbar {
+  float: left;
 }

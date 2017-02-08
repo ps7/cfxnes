@@ -1,9 +1,21 @@
-body {
-  margin: 0;
-}
-
 .clickable {
   cursor: pointer;
+}
+
+.button-group {
+  display: inline-block;
+
+  & + .button-group {
+    margin-left: 0.5em;
+  }
+}
+
+.field {
+  & label,
+  & input:not([type='checkbox']),
+  & select {
+    display: block;
+  }
 }
 
 .panel {
@@ -27,12 +39,4 @@ body {
 .panel-body {
   border-top: 1px solid black;
   padding: 1em;
-}
-
-.field {
-  & label,
-  & input:not([type='checkbox']),
-  & select {
-    display: block;
-  }
 }

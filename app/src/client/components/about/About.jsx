@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../images/logo.svg';
+import {logoSvg} from '../../images';
 import Changelog from './Changelog';
 import cfxnes from 'cfxnes';
 
@@ -19,7 +19,7 @@ export default class About extends React.Component {
     return (
       <main className="about">
         <div className="about-logo">
-          <img src={logo} alt="cfxnes logo"/>
+          <img src={logoSvg} alt="cfxnes logo"/>
         </div>
         <div className="about-text">
           <h1>cfxnes ({cfxnes.version})</h1>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {resumeEmulator, suspendEmulator} from '../actions';
+import {resumeEmulator, suspendEmulator} from '../../actions';
 
 class Emulator extends React.Component {
 

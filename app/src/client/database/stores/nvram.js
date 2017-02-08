@@ -1,5 +1,5 @@
 import log from '../../log';
-import {use} from '../db';
+import {use} from '../commands';
 
 const STORE = 'nvram';
 

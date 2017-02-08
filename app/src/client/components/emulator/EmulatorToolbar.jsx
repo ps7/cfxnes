@@ -1,17 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../constants';
 
 import {
   resetEmulator, powerEmulator,
   startEmulator, stopEmulator,
   increaseVideoScale, decreaseVideoScale,
   enterFullscreen,
-} from '../actions';
+} from '../../actions';
 
-import Toolbar from './Toolbar';
-import ButtonGroup from './ButtonGroup';
-import Button from './Button';
+import {Button, ButtonGroup, Toolbar} from '../common';
 import FpsCounter from './FpsCounter';
 
 class EmulatorToolbar extends React.Component {

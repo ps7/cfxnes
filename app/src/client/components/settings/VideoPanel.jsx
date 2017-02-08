@@ -1,17 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {makeEnumPropType} from '../utils';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
+import {makeEnumPropType} from '../../utils';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../constants';
+import {Field, Panel} from '../common';
 
 import {
   setVideoScale, setVideoPalette,
   setVideoFilter, setVideoDebug,
   setVideoRenderer, setFullscreenType,
   setFpsVisible,
-} from '../actions';
-
-import Panel from './Panel';
-import Field from './Field';
+} from '../../actions';
 
 const CANVAS_RENDERER = 'canvas';
 const WEBGL_RENDERER = 'webgl';

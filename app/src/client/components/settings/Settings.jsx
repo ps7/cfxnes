@@ -1,16 +1,16 @@
 import React from 'react';
-import SettingsSystem from './SettingsSystem';
-import SettingsVideo from './SettingsVideo';
-import SettingsAudio from './SettingsAudio';
-import SettingsControls from './SettingsControls';
-import SettingsReset from './SettingsReset';
+import SystemPanel from './SystemPanel';
+import VideoPanel from './VideoPanel';
+import AudioPanel from './AudioPanel';
+import ControlsPanel from './ControlsPanel';
+import ResetPanel from './ResetPanel';
 
 const panelComponents = {
-  system: SettingsSystem,
-  video: SettingsVideo,
-  audio: SettingsAudio,
-  controls: SettingsControls,
-  reset: SettingsReset,
+  system: SystemPanel,
+  video: VideoPanel,
+  audio: AudioPanel,
+  controls: ControlsPanel,
+  reset: ResetPanel,
 };
 
 const panelIds = Object.keys(panelComponents);

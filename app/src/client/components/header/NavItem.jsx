@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Icon from './Icon';
+import {Icon} from '../common';
 
 const NavigationItem = ({path, caption, icon}) => (
   <Link to={path} className="navigation-item" activeClassName="active">
