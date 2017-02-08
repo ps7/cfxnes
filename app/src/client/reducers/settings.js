@@ -16,7 +16,7 @@ export default handleActions({
 
   setVideoRenderer(state, action) {
     nes.video.renderer = action.payload;
-    return {...state, videoRenderer: nes.video.rendere};
+    return {...state, videoRenderer: nes.video.renderer};
   },
 
   setVideoScale(state, action) {

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import Icon from './Icon';
 
 const NavigationItem = ({path, caption, icon}) => (
-  <Link to={path} activeClassName="active">
+  <Link to={path} className="navigation-item" activeClassName="active">
     <Icon name={icon}/> {caption}
   </Link>
 );

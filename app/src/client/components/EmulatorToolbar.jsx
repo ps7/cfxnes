@@ -9,6 +9,7 @@ import {
   enterFullscreen,
 } from '../actions';
 
+import Toolbar from './Toolbar';
 import ButtonGroup from './ButtonGroup';
 import Button from './Button';
 import FpsCounter from './FpsCounter';
@@ -53,7 +54,7 @@ class EmulatorToolbar extends React.Component {
     const {running, videoScale} = this.props;
 
     return (
-      <div className="emulator-toolbar">
+      <Toolbar type="emulator">
         <ButtonGroup>
           <Button icon="folder-open" tooltip="Open ROM"/>
         </ButtonGroup>
@@ -74,7 +75,7 @@ class EmulatorToolbar extends React.Component {
           <Button icon="volume-up" tooltip="Volume"/>
         </ButtonGroup>
         {running && <FpsCounter/>}
-      </div>
+      </Toolbar>
     );
   }
 

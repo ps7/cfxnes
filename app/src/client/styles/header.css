@@ -1,7 +1,59 @@
-:root {
-  --header-color: blue;
+header {
+  border-bottom: 1px solid black;
+
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "";
+    clear: both;
+    height: 0;
+  }
 }
 
-header {
-  border: 1px solid var(--header-color);
+.header-logo,
+.navigation-main,
+.toolbar {
+  float: left;
+}
+
+.navigation-help {
+  float: right;
+}
+
+.navigation-item {
+  display: inline-block;
+  padding: 0.5em 1em;
+}
+
+.header-logo {
+  display: inline-block;
+  padding: 0.25em 1em;
+}
+
+.header-logo img {
+  display: inline-block;
+  height: 1.5em;
+  vertical-align: middle;
+}
+
+.navigation {
+  display: inline-block;
+}
+
+.navigation-item.active {
+  background: darkblue;
+  color: white;
+}
+
+.button-group {
+  display: inline-block;
+
+  & + .button-group {
+    margin-left: 0.5em;
+  }
+}
+
+.fps-counter {
+  display: inline-block;
 }

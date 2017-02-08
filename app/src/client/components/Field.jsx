@@ -1,12 +1,18 @@
 import React from 'react';
 import Select from './Select';
 
-const Field = ({id, caption, type, ...attrs}) => (
-  <div className="field">
-    <label htmlFor={id}>{caption}</label>
-    {type === 'select' ? <Select {...attrs}/> : <input type={type} {...attrs}/>}
-  </div>
-);
+const Field = ({id, caption, type, ...attrs}) => {
+  const input = type === 'select'
+    ? <Select id={id} {...attrs}/>
+    : <input id={id} type={type} {...attrs}/>;
+
+  return (
+    <div className="field">
+      <label htmlFor={id}>{type === 'checkbox' && input}{caption}</label>
+      {type !== 'checkbox' && input}
+    </div>
+  );
+};
 
 Field.propTypes = {
   id: React.PropTypes.string.isRequired,

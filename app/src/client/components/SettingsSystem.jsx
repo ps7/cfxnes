@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setRegion, setSpeed} from '../actions';
+import {makeEnumPropType} from '../utils';
 import Panel from './Panel';
 import Field from './Field';
 
@@ -13,7 +14,7 @@ const regions = [
 class SettingsSystem extends React.Component {
 
   static propTypes = {
-    region: React.PropTypes.string.isRequired,
+    region: makeEnumPropType(regions).isRequired,
     speed: React.PropTypes.number.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
