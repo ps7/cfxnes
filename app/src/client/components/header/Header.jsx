@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-component-props */
+
 import React from 'react';
 import {Link} from 'react-router';
 import {logoSvg} from '../../images';

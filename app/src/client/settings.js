@@ -1,6 +1,8 @@
-import debounce from 'lodash/debounce';
+import {debounce} from 'lodash-es';
 import nes from './nes';
 import log from './log';
+
+export const audioSupported = nes.audio != null;
 
 const STORAGE_KEY = 'settings';
 const SAVE_TIMEOUT = 5000;
@@ -45,6 +47,10 @@ function applySettingsToNes(settings) {
     fullscreen: {
       type: settings.fullscreenType,
     },
+    audio: {
+      enabled: settings.audioEnabled,
+      volume: settings.audioVolume,
+    },
   });
 }
 
@@ -58,6 +64,8 @@ function copySettingsFromNes() {
     videoFilter: nes.video.filter,
     videoDebug: nes.video.debug,
     fullscreenType: nes.fullscreen.type,
+    audioEnabled: audioSupported ? nes.audio.enabled : false,
+    audioVolume: audioSupported ? {...nes.audio.volume} : {},
   };
 }
 

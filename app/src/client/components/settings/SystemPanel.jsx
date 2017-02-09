@@ -10,13 +10,22 @@ const regions = [
   {id: 'pal', caption: 'PAL'},
 ];
 
-class SettingsSystem extends React.Component {
+class SystemPanel extends React.Component {
+
+  static id = 'system';
 
   static propTypes = {
     region: makeEnumPropType(regions).isRequired,
     speed: React.PropTypes.number.isRequired,
+    collapsed: React.PropTypes.bool,
+    onHeaderClick: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
   };
+
+  static defaultProps = {
+    collapsed: false,
+    onHeaderClick: false,
+  }
 
   handleRegionChange = e => {
     this.props.dispatch(setRegion(e.target.value));
@@ -27,9 +36,9 @@ class SettingsSystem extends React.Component {
   };
 
   render() {
-    const {region, speed, ...panelAttrs} = this.props;
+    const {region, speed, collapsed, onHeaderClick} = this.props;
     return (
-      <Panel icon="server" caption="Emulation" {...panelAttrs}>
+      <Panel type={SystemPanel.id} icon="server" caption="Emulation" collapsed={collapsed} onHeaderClick={onHeaderClick}>
         <Field id="region" caption="Region" type="select" items={regions} value={region} onChange={this.handleRegionChange}/>
         <Field id="speed" caption="Emulation speed" type="range" min="0.25" max="2" step="0.25" value={speed} onChange={this.handleSpeedChange}/>
       </Panel>
@@ -43,4 +52,4 @@ const mapStateToProps = state => {
   return {region, speed};
 };
 
-export default connect(mapStateToProps)(SettingsSystem);
+export default connect(mapStateToProps)(SystemPanel);

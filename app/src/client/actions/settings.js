@@ -11,3 +11,5 @@ export const setVideoFilter = createAction('setVideoFilter');
 export const setVideoDebug = createAction('setVideoDebug');
 export const setFullscreenType = createAction('setFullscreenType');
 export const setFpsVisible = createAction('setFpsVisible');
+export const setAudioEnabled = createAction('setAudioEnabled');
+export const setAudioVolume = createAction('setAudioVolume', (channel, volume) => ({channel, volume}));

@@ -37,18 +37,27 @@ const fullscreenTypes = [
   {id: 'stretched', caption: 'Stretch to fill the whole sceen'},
 ];
 
-class SettingsVideo extends React.Component {
+class VideoPanel extends React.Component {
+
+  static id = 'video';
 
   static propTypes = {
+    videoRenderer: React.PropTypes.oneOf([CANVAS_RENDERER, WEBGL_RENDERER]).isRequired,
     videoScale: React.PropTypes.number.isRequired,
     videoPalette: makeEnumPropType(videoPalettes).isRequired,
     videoFilter: makeEnumPropType(videoFilters).isRequired,
     videoDebug: React.PropTypes.bool.isRequired,
-    videoRenderer: React.PropTypes.oneOf([CANVAS_RENDERER, WEBGL_RENDERER]).isRequired,
     fullscreenType: makeEnumPropType(fullscreenTypes).isRequired,
     fpsVisible: React.PropTypes.bool.isRequired,
+    collapsed: React.PropTypes.bool,
+    onHeaderClick: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
   };
+
+  static defaultProps = {
+    collapsed: false,
+    onHeaderClick: false,
+  }
 
   handleVideoScaleChange = e => {
     const scale = parseInt(e.target.value);
@@ -84,11 +93,11 @@ class SettingsVideo extends React.Component {
 
   render() {
     const {
-      videoScale, videoPalette, videoFilter, videoDebug,
-      videoRenderer, fullscreenType, fpsVisible, ...panelAttrs
+      videoRenderer, videoScale, videoPalette, videoFilter, videoDebug,
+      fullscreenType, fpsVisible, collapsed, onHeaderClick,
     } = this.props;
     return (
-      <Panel icon="desktop" caption="Video" {...panelAttrs}>
+      <Panel type={VideoPanel.id} icon="desktop" caption="Video" collapsed={collapsed} onHeaderClick={onHeaderClick}>
         <Field id="video-scale" caption="Output scale" type="number" value={videoScale} onChange={this.handleVideoScaleChange}/>
         <Field id="video-palette" caption="Color palette" type="select" items={videoPalettes} value={videoPalette} onChange={this.handleVideoPaletteChange}/>
         <Field id="fullscreen-type" caption="Fullscreen mode" type="select" items={fullscreenTypes} value={fullscreenType} onChange={this.handleFullscreenTypeChange}/>
@@ -113,4 +122,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(SettingsVideo);
+export default connect(mapStateToProps)(VideoPanel);

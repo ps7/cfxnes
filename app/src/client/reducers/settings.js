@@ -57,4 +57,15 @@ export default handleActions({
     nes.fullscreen.type = action.payload;
     return {...state, fullscreenType: nes.fullscreen.type};
   },
+
+  setAudioEnabled(state, action) {
+    nes.audio.enabled = action.payload;
+    return {...state, audioEnabled: nes.audio.enabled};
+  },
+
+  setAudioVolume(state, action) {
+    const {channel, volume} = action.payload;
+    nes.audio.volume[channel] = volume;
+    return {...state, audioVolume: {...nes.audio.volume}};
+  },
 }, loadSettings());

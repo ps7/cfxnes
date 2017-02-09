@@ -1,0 +1,9 @@
+.field[class*="field-audio-volume-"] {
+  display: inline-block;
+  text-align: center;
+
+  & input {
+    transform: rotate(-90deg);
+    margin: 50% 0%;
+  }
+}

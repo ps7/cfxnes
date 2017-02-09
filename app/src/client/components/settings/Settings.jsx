@@ -5,15 +5,8 @@ import AudioPanel from './AudioPanel';
 import ControlsPanel from './ControlsPanel';
 import ResetPanel from './ResetPanel';
 
-const panelComponents = {
-  system: SystemPanel,
-  video: VideoPanel,
-  audio: AudioPanel,
-  controls: ControlsPanel,
-  reset: ResetPanel,
-};
-
-const panelIds = Object.keys(panelComponents);
+const panelComponents = [SystemPanel, VideoPanel, AudioPanel, ControlsPanel, ResetPanel];
+const panelIds = panelComponents.map(Component => Component.id);
 const defaultPanelId = panelIds[0];
 
 export default class Settings extends React.Component {
@@ -27,24 +20,24 @@ export default class Settings extends React.Component {
 
   componentWillMount() {
     const {router, params} = this.props;
-    if (!(params.activePanelId in panelComponents)) {
+    if (panelIds.indexOf(params.activePanelId) < 0) {
       router.replace(`/settings/${defaultPanelId}`);
     }
   }
 
-  renderPanel(id) {
-    const {router, params} = this.props;
-    const PanelComponent = panelComponents[id];
-    const collapsed = id !== params.activePanelId;
+  renderPanel = Component => {
+    const {id} = Component;
+    const {params, router} = this.props;
     const onHeaderClick = () => router.push(`/settings/${id}`);
-    return <PanelComponent key={id} collapsed={collapsed} onHeaderClick={onHeaderClick}/>;
+    const collapsed = id !== params.activePanelId;
+    return <Component key={id} collapsed={collapsed} onHeaderClick={onHeaderClick}/>;
   }
 
   render() {
     return (
       <main className="settings">
         <h1>Settings</h1>
-        {panelIds.map(id => this.renderPanel(id))}
+        {panelComponents.map(this.renderPanel)}
       </main>
     );
   }

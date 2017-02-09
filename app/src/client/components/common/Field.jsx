@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import Select from './Select';
 
@@ -7,7 +8,7 @@ const Field = ({id, caption, type, ...attrs}) => {
     : <input id={id} type={type} {...attrs}/>;
 
   return (
-    <div className="field">
+    <div className={classNames('field', id && `field-${id}`)}>
       <label htmlFor={id}>{type === 'checkbox' && input}{caption}</label>
       {type !== 'checkbox' && input}
     </div>
