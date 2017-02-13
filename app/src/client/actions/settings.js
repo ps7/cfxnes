@@ -13,3 +13,4 @@ export const setFullscreenType = createAction('setFullscreenType');
 export const setFpsVisible = createAction('setFpsVisible');
 export const setAudioEnabled = createAction('setAudioEnabled');
 export const setAudioVolume = createAction('setAudioVolume', (channel, volume) => ({channel, volume}));
+export const setDevice = createAction('setDevice', (port, device) => ({port, device}));

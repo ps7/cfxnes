@@ -1,4 +1,5 @@
 import {debounce} from 'lodash-es';
+import {PORTS, INPUTS, NO_DEVICE} from './constants';
 import nes from './nes';
 import log from './log';
 
@@ -51,7 +52,30 @@ function applySettingsToNes(settings) {
       enabled: settings.audioEnabled,
       volume: settings.audioVolume,
     },
+    devices: copyDevicesFromControls(settings.controls),
+    inputs: conpyInputsFromControls(settings.controls),
   });
+}
+
+function copyDevicesFromControls(controls) {
+  const devices = {};
+  for (const port of PORTS) {
+    const {device} = controls[port];
+    devices[port] = device !== NO_DEVICE ? device : null;
+  }
+  return devices;
+}
+
+function conpyInputsFromControls(controls) {
+  const mapping = {};
+  for (const port of [1, 2]) {
+    for (const device in INPUTS) {
+      for (const input of INPUTS[device]) {
+        mapping[`${port}.${device}.${input}`] = controls[port][device][input];
+      }
+    }
+  }
+  return mapping;
 }
 
 function copySettingsFromNes() {
@@ -66,7 +90,32 @@ function copySettingsFromNes() {
     fullscreenType: nes.fullscreen.type,
     audioEnabled: audioSupported ? nes.audio.enabled : false,
     audioVolume: audioSupported ? {...nes.audio.volume} : {},
+    controls: copyControlsFromNes(),
   };
+}
+
+function copyControlsFromNes() {
+  const controls = {};
+  for (const port of PORTS) {
+    controls[port] = {
+      device: nes.devices[port] || NO_DEVICE,
+      inputs: copyInputsFromNes(port),
+    };
+  }
+  return controls;
+}
+
+function copyInputsFromNes(port) {
+  const inputs = {};
+  for (const device in INPUTS) {
+    inputs[device] = {};
+    if (device !== NO_DEVICE) {
+      for (const input of INPUTS[device]) {
+        inputs[device][input] = nes.inputs.get(`${port}.${device}.${input}`);
+      }
+    }
+  }
+  return inputs;
 }
 
 export function watchSettings(store) {

@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE, NO_DEVICE} from '../constants';
 import {loadSettings} from '../settings';
 import nes from '../nes';
 
@@ -58,6 +58,10 @@ export default handleActions({
     return {...state, fullscreenType: nes.fullscreen.type};
   },
 
+  setFpsVisible(state, action) {
+    return {...state, fpsVisible: action.payload};
+  },
+
   setAudioEnabled(state, action) {
     nes.audio.enabled = action.payload;
     return {...state, audioEnabled: nes.audio.enabled};
@@ -67,5 +71,11 @@ export default handleActions({
     const {channel, volume} = action.payload;
     nes.audio.volume[channel] = volume;
     return {...state, audioVolume: {...nes.audio.volume}};
+  },
+
+  setDevice(state, action) {
+    const {port, device} = action.payload;
+    nes.devices[port] = device !== NO_DEVICE ? device : null;
+    return {...state, controls: {...state.controls, [port]: {...state.controls[port] || NO_DEVICE, device}}};
   },
 }, loadSettings());

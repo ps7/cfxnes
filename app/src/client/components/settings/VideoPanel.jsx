@@ -88,7 +88,7 @@ class VideoPanel extends React.Component {
   };
 
   handleFpsVisibleChange = e => {
-    this.props.dispatch(setFpsVisible(e.target.value));
+    this.props.dispatch(setFpsVisible(e.target.checked));
   };
 
   render() {
@@ -104,7 +104,7 @@ class VideoPanel extends React.Component {
         <Field id="video-filter" caption="Filter" type="select" items={videoFilters} value={videoFilter} onChange={this.handleVideoFilterChange}/>
         <Field id="video-debug" caption="Enable debug output" type="checkbox" checked={videoDebug} onChange={this.handleVideoDebugChange}/>
         <Field id="video-renderer" caption="Use WebGL for rendering" type="checkbox" checked={videoRenderer === WEBGL_RENDERER} onChange={this.handleVideoRendererChange}/>
-        <Field id="fps-visible" caption="Show FPS" type="checkbox" value={fpsVisible} onChange={this.handleFpsVisibleChange}/>
+        <Field id="fps-visible" caption="Show FPS" type="checkbox" checked={fpsVisible} onChange={this.handleFpsVisibleChange}/>
       </Panel>
     );
   }

@@ -58,7 +58,7 @@ class AudioPanel extends React.Component {
 
     return (
       <Panel {...panelProps}>
-        <Field id="audio-enabled" caption="Enable audio" type="checkbox" value={audioEnabled} onChange={this.handleAudioEnabledChange}/>
+        <Field id="audio-enabled" caption="Enable audio" type="checkbox" checked={audioEnabled} onChange={this.handleAudioEnabledChange}/>
         {channels.map(channel => (
           <Field key={channel} id={`audio-volume-${channel}`} caption={channelCaptions[channel]}
                  type="range" min="0" max="1" step="0.01" value={audioVolume[channel]}

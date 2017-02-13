@@ -17,6 +17,7 @@ class EmulatorToolbar extends React.Component {
   static propTypes = {
     running: React.PropTypes.bool.isRequired,
     videoScale: React.PropTypes.number.isRequired,
+    fpsVisible: React.PropTypes.bool.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
 
@@ -49,7 +50,7 @@ class EmulatorToolbar extends React.Component {
   };
 
   render() {
-    const {running, videoScale} = this.props;
+    const {running, videoScale, fpsVisible} = this.props;
 
     return (
       <Toolbar type="emulator">
@@ -72,7 +73,7 @@ class EmulatorToolbar extends React.Component {
         <ButtonGroup>
           <Button icon="volume-up" tooltip="Volume"/>
         </ButtonGroup>
-        {running && <FpsCounter/>}
+        {fpsVisible && running && <FpsCounter/>}
       </Toolbar>
     );
   }
@@ -81,8 +82,8 @@ class EmulatorToolbar extends React.Component {
 
 const mapStateToProps = state => {
   const {running} = state.emulator;
-  const {videoScale} = state.settings;
-  return {running, videoScale};
+  const {videoScale, fpsVisible} = state.settings;
+  return {running, videoScale, fpsVisible};
 };
 
 export default connect(mapStateToProps)(EmulatorToolbar);
