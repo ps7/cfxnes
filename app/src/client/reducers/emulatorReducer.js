@@ -9,6 +9,8 @@ const initialState = {
   loading: false,
 };
 
+// TODO move business logic to action creators
+
 export default handleActions({
   resumeEmulator(state, action) {
     const {canvas, newRomId} = action.payload;

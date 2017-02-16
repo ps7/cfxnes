@@ -1,2 +1,2 @@
-export * from './emulator';
-export * from './settings';
+export * from './emulatorActions';
+export * from './settingsActions';

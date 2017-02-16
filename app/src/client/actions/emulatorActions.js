@@ -1,5 +1,7 @@
 import {createAction} from 'redux-actions';
 
+// TODO move business logic to action creators
+
 export const resumeEmulator = createAction('resumeEmulator');
 export const suspendEmulator = createAction('suspendEmulator');
 export const powerEmulator = createAction('powerEmulator');

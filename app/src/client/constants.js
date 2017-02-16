@@ -18,4 +18,12 @@ export const INPUTS = {
   [ZAPPER]: ['trigger'],
 };
 
+// TODO split to multiple files; make enums for palettes, renderers etc.
+
 export const DEVICES = Object.keys(INPUTS);
+
+export const OpState = {
+  STARTED: 'STARTED',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+};

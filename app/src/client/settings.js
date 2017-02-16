@@ -1,16 +1,31 @@
-import {debounce} from 'lodash-es';
+import {debounce, defaultTo} from 'lodash-es';
 import {PORTS, INPUTS, NO_DEVICE} from './constants';
 import nes from './nes';
 import log from './log';
 
 export const audioSupported = nes.audio != null;
+const nesDefaults = nes.config.get();
 
 const STORAGE_KEY = 'settings';
 const SAVE_TIMEOUT = 5000;
 
+export function watchSettings(store) {
+  let settings;
+  const saveSettingsLater = debounce(() => saveSettings(settings), SAVE_TIMEOUT);
+
+  store.subscribe(() => {
+    const newSettings = store.getState().settings;
+    if (settings !== newSettings) {
+      settings = newSettings;
+      saveSettingsLater();
+    }
+  });
+}
+
 function saveSettings(settings) {
   log.info('Saving settings');
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+  const {resetState, ...settingsToSave} = settings;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(settingsToSave));
 }
 
 export function loadSettings() {
@@ -26,10 +41,21 @@ export function loadSettings() {
     log.error('Failed to load settings', error);
   }
 
+  return updateSettings(settings || {});
+}
+
+export function resetSettings() {
+  return new Promise(resolve => {
+    nes.config.use(nesDefaults);
+    resolve(updateSettings({}));
+  });
+}
+
+function updateSettings(settings) {
   return {
-    fpsVisible: false,
-    controlsVisible: false,
-    ...(settings || {}),
+    resetState: null,
+    fpsVisible: defaultTo(settings.fpsVisible, true),
+    controlsVisible: defaultTo(settings.controlsVisible, false),
     ...copySettingsFromNes(),
   };
 }
@@ -67,15 +93,15 @@ function copyDevicesFromControls(controls) {
 }
 
 function conpyInputsFromControls(controls) {
-  const mapping = {};
+  const inputs = {};
   for (const port of [1, 2]) {
     for (const device in INPUTS) {
       for (const input of INPUTS[device]) {
-        mapping[`${port}.${device}.${input}`] = controls[port][device][input];
+        inputs[`${port}.${device}.${input}`] = controls[port][device][input];
       }
     }
   }
-  return mapping;
+  return inputs;
 }
 
 function copySettingsFromNes() {
@@ -116,17 +142,4 @@ function copyInputsFromNes(port) {
     }
   }
   return inputs;
-}
-
-export function watchSettings(store) {
-  let settings;
-  const saveSettingsLater = debounce(() => saveSettings(settings), SAVE_TIMEOUT);
-
-  store.subscribe(() => {
-    const state = store.getState();
-    if (settings !== state.settings) {
-      ({settings} = state);
-      saveSettingsLater();
-    }
-  });
 }

@@ -1,7 +1,9 @@
 import {handleActions} from 'redux-actions';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE, NO_DEVICE} from '../constants';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE, NO_DEVICE, OpState} from '../constants';
 import {loadSettings} from '../settings';
 import nes from '../nes';
+
+// TODO move business logic to action creators
 
 export default handleActions({
   setRegion(state, action) {
@@ -77,5 +79,20 @@ export default handleActions({
     const {port, device} = action.payload;
     nes.devices[port] = device !== NO_DEVICE ? device : null;
     return {...state, controls: {...state.controls, [port]: {...state.controls[port] || NO_DEVICE, device}}};
+  },
+
+  startSettingsReset(state) {
+    return {...state, resetState: OpState.STARTED};
+  },
+
+  finishSettingsReset(state, action) {
+    if (action.error) {
+      return {...state, resetState: OpState.ERROR};
+    }
+    return {...action.payload, resetState: OpState.SUCCESS};
+  },
+
+  allowSettingsReset(state) {
+    return {...state, resetState: null};
   },
 }, loadSettings());
