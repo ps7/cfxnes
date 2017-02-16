@@ -1,11 +1,42 @@
 import {createAction} from 'redux-actions';
+import nes from '../nes';
 
-// TODO move business logic to action creators
+export const setEmulatorRunning = createAction('setEmulatorRunning');
+export const setEmulatorSuspended = createAction('setEmulatorSuspended');
 
-export const resumeEmulator = createAction('resumeEmulator');
-export const suspendEmulator = createAction('suspendEmulator');
-export const powerEmulator = createAction('powerEmulator');
-export const resetEmulator = createAction('resetEmulator');
-export const startEmulator = createAction('startEmulator');
-export const stopEmulator = createAction('stopEmulator');
-export const enterFullscreen = createAction('enterFullscreen');
+export const startEmulator = () => {
+  nes.start();
+  return setEmulatorRunning(true);
+};
+
+export const stopEmulator = () => {
+  nes.stop();
+  return setEmulatorRunning(false);
+};
+
+export const suspendEmulator = () => {
+  const {running} = nes;
+  nes.stop();
+  nes.video.output = null;
+  return setEmulatorSuspended(running);
+};
+
+export const resumeEmulator = ({canvas}) => (dispatch, getState) => {
+  nes.video.output = canvas;
+  const state = getState();
+  if (state.emulator.suspended) {
+    dispatch(startEmulator());
+  }
+};
+
+export const powerEmulator = () => () => {
+  nes.power();
+};
+
+export const resetEmulator = () => () => {
+  nes.reset();
+};
+
+export const enterFullscreen = () => () => {
+  nes.fullscreen.enter();
+};

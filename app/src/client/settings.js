@@ -97,7 +97,7 @@ function conpyInputsFromControls(controls) {
   for (const port of [1, 2]) {
     for (const device in INPUTS) {
       for (const input of INPUTS[device]) {
-        inputs[`${port}.${device}.${input}`] = controls[port][device][input];
+        inputs[`${port}.${device}.${input}`] = controls[port].inputs[device][input];
       }
     }
   }

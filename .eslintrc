@@ -149,7 +149,7 @@
     "no-unsafe-negation": "error",
     "no-unused-expressions": "error",
     "no-unused-labels": "error",
-    "no-unused-vars": "error",
+    "no-unused-vars": ["error", {"ignoreRestSiblings": true}],
     "no-use-before-define": ["error", {"functions": false, "classes": false}],
     "no-useless-call": "error",
     "no-useless-computed-key": "warn",

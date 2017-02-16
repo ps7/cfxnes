@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Panel} from '../common';
-import {PORTS, DEVICES} from '../../constants';
+import {PORTS} from '../../constants';
 import {setDevice} from '../../actions';
 import Controls from './Controls';
 
@@ -10,10 +10,7 @@ class ControlsPanel extends React.Component {
   static id = 'controls';
 
   static propTypes = {
-    controls: React.PropTypes.shape({
-      device: React.PropTypes.oneOf(DEVICES).isRequired,
-      inputs: React.PropTypes.object.isRequired,
-    }).isRequired,
+    controls: React.PropTypes.object.isRequired,
     collapsed: React.PropTypes.bool,
     onHeaderClick: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,

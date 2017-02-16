@@ -9,60 +9,12 @@ const initialState = {
   loading: false,
 };
 
-// TODO move business logic to action creators
-
 export default handleActions({
-  resumeEmulator(state, action) {
-    const {canvas, newRomId} = action.payload;
-    const {suspended, romId} = state;
-    let {loading} = state;
-
-    nes.video.output = canvas;
-
-    if (newRomId && newRomId !== romId) {
-      loading = true;
-      // TODO load ROM and then start
-    } else if (suspended) {
-      nes.start();
-    }
-
-    return {
-      ...state,
-      suspended: false,
-      romId: newRomId,
-      loading,
-    };
+  setEmulatorSuspended(state, action) {
+    return {...state, suspended: action.payload};
   },
 
-  suspendEmulator(state) {
-    const suspended = nes.running;
-    nes.stop();
-    nes.video.output = null;
-    return {...state, suspended};
-  },
-
-  powerEmulator(state) {
-    nes.power();
-    return state;
-  },
-
-  resetEmulator(state) {
-    nes.reset();
-    return state;
-  },
-
-  startEmulator(state) {
-    nes.start();
-    return {...state, running: nes.running};
-  },
-
-  stopEmulator(state) {
-    nes.stop();
-    return {...state, running: nes.running};
-  },
-
-  enterFullscreen(state) {
-    nes.fullscreen.enter();
-    return state;
+  setEmulatorRunning(state, action) {
+    return {...state, running: action.payload};
   },
 }, initialState);

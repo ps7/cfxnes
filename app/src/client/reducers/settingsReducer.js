@@ -1,63 +1,38 @@
 import {handleActions} from 'redux-actions';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE, NO_DEVICE, OpState} from '../constants';
+import {OpState} from '../constants';
 import {loadSettings} from '../settings';
-import nes from '../nes';
-
-// TODO move business logic to action creators
 
 export default handleActions({
   setRegion(state, action) {
-    nes.region = action.payload;
-    return {...state, region: nes.region};
+    return {...state, region: action.payload};
   },
 
   setSpeed(state, action) {
-    nes.speed = action.payload;
-    return {...state, speed: nes.speed};
+    return {...state, speed: action.payload};
   },
 
   setVideoRenderer(state, action) {
-    nes.video.renderer = action.payload;
-    return {...state, videoRenderer: nes.video.renderer};
+    return {...state, videoRenderer: action.payload};
   },
 
   setVideoScale(state, action) {
-    nes.video.scale = action.payload;
-    return {...state, videoScale: nes.video.scale};
-  },
-
-  increaseVideoScale(state) {
-    if (nes.video.scale < MAX_VIDEO_SCALE) {
-      nes.video.scale++;
-    }
-    return {...state, videoScale: nes.video.scale};
-  },
-
-  decreaseVideoScale(state) {
-    if (nes.video.scale > MIN_VIDEO_SCALE) {
-      nes.video.scale--;
-    }
-    return {...state, videoScale: nes.video.scale};
+    return {...state, videoScale: action.payload};
   },
 
   setVideoPalette(state, action) {
-    nes.video.palette = action.payload;
-    return {...state, videoPalette: nes.video.palette};
+    return {...state, videoPalette: action.payload};
   },
 
   setVideoFilter(state, action) {
-    nes.video.filter = action.payload;
-    return {...state, videoFilter: nes.video.filter};
+    return {...state, videoFilter: action.payload};
   },
 
   setVideoDebug(state, action) {
-    nes.video.debug = action.payload;
-    return {...state, videoDebug: nes.video.debug};
+    return {...state, videoDebug: action.payload};
   },
 
   setFullscreenType(state, action) {
-    nes.fullscreen.type = action.payload;
-    return {...state, fullscreenType: nes.fullscreen.type};
+    return {...state, fullscreenType: action.payload};
   },
 
   setFpsVisible(state, action) {
@@ -65,20 +40,20 @@ export default handleActions({
   },
 
   setAudioEnabled(state, action) {
-    nes.audio.enabled = action.payload;
-    return {...state, audioEnabled: nes.audio.enabled};
+    return {...state, audioEnabled: action.payload};
   },
 
   setAudioVolume(state, action) {
     const {channel, volume} = action.payload;
-    nes.audio.volume[channel] = volume;
-    return {...state, audioVolume: {...nes.audio.volume}};
+    const {audioVolume} = state;
+    return {...state, audioVolume: {...audioVolume, [channel]: volume}};
   },
 
   setDevice(state, action) {
     const {port, device} = action.payload;
-    nes.devices[port] = device !== NO_DEVICE ? device : null;
-    return {...state, controls: {...state.controls, [port]: {...state.controls[port] || NO_DEVICE, device}}};
+    const {controls} = state;
+    const {inputs} = controls[port];
+    return {...state, controls: {...controls, [port]: {device, inputs}}};
   },
 
   startSettingsReset(state) {
@@ -92,7 +67,7 @@ export default handleActions({
     return {...action.payload, resetState: OpState.SUCCESS};
   },
 
-  allowSettingsReset(state) {
+  unlockSettingsReset(state) {
     return {...state, resetState: null};
   },
 }, loadSettings());

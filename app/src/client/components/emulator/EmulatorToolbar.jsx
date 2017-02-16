@@ -22,11 +22,11 @@ class EmulatorToolbar extends React.Component {
   };
 
   handlePower = () => {
-    this.props.dispatch(resetEmulator());
+    this.props.dispatch(powerEmulator());
   };
 
   handleReset = () => {
-    this.props.dispatch(powerEmulator());
+    this.props.dispatch(resetEmulator());
   };
 
   handleStart = () => {
