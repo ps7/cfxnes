@@ -1,8 +1,9 @@
-import {createAction} from '../utils';
 import {resetSettings as doSettingsReset} from '../settings';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE, NO_DEVICE} from '../constants';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
+import {Device} from '../enums';
 import log from '../log';
 import nes from '../nes';
+import {createAction} from './common';
 
 export const SET_REGION = 'SET_REGION';
 export const SET_SPEED = 'SET_SPEED';
@@ -75,7 +76,7 @@ export function setAudioVolume(channel, volume) {
 }
 
 export function setDevice(port, device) {
-  nes.devices[port] = device !== NO_DEVICE ? device : null;
+  nes.devices[port] = Device.toId(device);
   return createAction(SET_DEVICE, {port, device});
 }
 

@@ -1,5 +1,5 @@
 import {debounce, defaultTo} from 'lodash-es';
-import {PORTS, INPUTS, NO_DEVICE} from './constants';
+import {Port, Device} from './enums';
 import nes from './nes';
 import log from './log';
 
@@ -85,9 +85,9 @@ function applySettingsToNes(settings) {
 
 function copyDevicesFromControls(controls) {
   const devices = {};
-  for (const port of PORTS) {
+  for (const port of Port.values) {
     const {device} = controls[port];
-    devices[port] = device !== NO_DEVICE ? device : null;
+    devices[port] = Device.toId(device);
   }
   return devices;
 }
@@ -95,8 +95,8 @@ function copyDevicesFromControls(controls) {
 function conpyInputsFromControls(controls) {
   const inputs = {};
   for (const port of [1, 2]) {
-    for (const device in INPUTS) {
-      for (const input of INPUTS[device]) {
+    for (const device of Device.values) {
+      for (const input of Device.params[device].inputs) {
         inputs[`${port}.${device}.${input}`] = controls[port].inputs[device][input];
       }
     }
@@ -122,9 +122,9 @@ function copySettingsFromNes() {
 
 function copyControlsFromNes() {
   const controls = {};
-  for (const port of PORTS) {
+  for (const port of Port.values) {
     controls[port] = {
-      device: nes.devices[port] || NO_DEVICE,
+      device: Device.fromId(nes.devices[port]),
       inputs: copyInputsFromNes(port),
     };
   }
@@ -133,10 +133,10 @@ function copyControlsFromNes() {
 
 function copyInputsFromNes(port) {
   const inputs = {};
-  for (const device in INPUTS) {
+  for (const device of Device.values) {
     inputs[device] = {};
-    if (device !== NO_DEVICE) {
-      for (const input of INPUTS[device]) {
+    if (device !== Device.NONE) {
+      for (const input of Device.params[device].inputs) {
         inputs[device][input] = nes.inputs.get(`${port}.${device}.${input}`);
       }
     }

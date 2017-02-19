@@ -1,5 +1,5 @@
-import {createAction} from '../utils';
 import nes from '../nes';
+import {createAction} from './common';
 
 export const SET_EMULATOR_RUNNING = 'SET_EMULATOR_RUNNING';
 export const SET_EMULATOR_SUSPENDED = 'SET_EMULATOR_SUSPENDED';

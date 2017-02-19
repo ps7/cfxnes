@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Button, Icon, Panel} from '../common';
 import {resetSettings} from '../../actions';
-import {OpState} from '../../constants';
+import {ActionState} from '../../enums';
 
 class ResetPanel extends React.Component {
 
@@ -27,14 +27,14 @@ class ResetPanel extends React.Component {
 
   renderResetButton() {
     const {resetState} = this.props;
-    if (resetState === OpState.STARTED) {
+    if (resetState === ActionState.STARTED) {
       const icon = <Icon name="circle-o-notch" spin/>;
       return <Button icon={icon} caption="Resetting settings..." disabled/>;
     }
-    if (resetState === OpState.SUCCESS) {
+    if (resetState === ActionState.SUCCESS) {
       return <Button icon="check" caption="Done" disabled/>;
     }
-    if (resetState === OpState.ERROR) {
+    if (resetState === ActionState.FAILURE) {
       return <Button icon="exclamation-triangle" caption="Reset failed" disabled/>;
     }
     return <Button caption="Reset settings" onClick={this.handleResetSettings}/>;

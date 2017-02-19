@@ -1,5 +1,4 @@
-import {handleActions} from '../utils';
-import {OpState} from '../constants';
+import {ActionState} from '../enums';
 import {loadSettings} from '../settings';
 
 import {
@@ -19,6 +18,8 @@ import {
   FINISH_SETTINGS_RESET,
   UNLOCK_SETTINGS_RESET,
 } from '../actions/settingsActions';
+
+import {handleActions} from './common';
 
 export default handleActions({
   [SET_REGION]: (state, region) => ({...state, region}),
@@ -41,9 +42,9 @@ export default handleActions({
     return {...state, controls: {...controls, [port]: {device, inputs}}};
   },
   [UNLOCK_SETTINGS_RESET]: state => ({...state, resetState: null}),
-  [START_SETTINGS_RESET]: state => ({...state, resetState: OpState.STARTED}),
+  [START_SETTINGS_RESET]: state => ({...state, resetState: ActionState.STARTED}),
   [FINISH_SETTINGS_RESET]: {
-    success: (state, defaultState) => ({...defaultState, resetState: OpState.SUCCESS}),
-    failure: state => ({...state, resetState: OpState.ERROR}),
+    success: (state, defaultState) => ({...defaultState, resetState: ActionState.SUCCESS}),
+    failure: state => ({...state, resetState: ActionState.FAILURE}),
   },
 }, loadSettings);

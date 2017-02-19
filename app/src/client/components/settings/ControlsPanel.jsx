@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Panel} from '../common';
-import {PORTS} from '../../constants';
+import {Port} from '../../enums';
 import {setDevice} from '../../actions';
 import Controls from './Controls';
 
@@ -29,7 +29,7 @@ class ControlsPanel extends React.Component {
     const {controls, collapsed, onHeaderClick} = this.props;
     return (
       <Panel icon="gamepad" caption="Controls" collapsed={collapsed} onHeaderClick={onHeaderClick}>
-        {PORTS.map(port => {
+        {Port.values.map(port => {
           const {device} = controls[port];
           return <Controls key={port} port={port} device={device} onDeviceChange={this.handleDeviceChange}/>;
         })}

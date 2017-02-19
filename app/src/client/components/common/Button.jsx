@@ -2,11 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
-const Button = ({icon, caption, tooltip, active, disabled, onClick}) => (
+const Button = ({icon, caption, tooltip, active, disabled, onClick, children}) => (
   <button type="button" className={classNames('button', {active})}
           title={tooltip} disabled={disabled} onClick={onClick}>
-    {typeof icon === 'string' ? <Icon name={icon}/> : icon}
-    {caption}
+    {children}
+    {!children && (typeof icon === 'string' ? <Icon name={icon}/> : icon)}
+    {!children && caption}
   </button>
 );
 
@@ -20,6 +21,7 @@ Button.propTypes = {
   active: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   onClick: React.PropTypes.func,
+  children: React.PropTypes.node,
 };
 
 Button.defaultProps = {
@@ -29,6 +31,7 @@ Button.defaultProps = {
   active: false,
   disabled: false,
   onClick: null,
+  children: null,
 };
 
 export default Button;

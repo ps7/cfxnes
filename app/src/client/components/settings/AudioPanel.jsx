@@ -62,7 +62,7 @@ class AudioPanel extends React.Component {
         {channels.map(channel => (
           <Field key={channel} id={`audio-volume-${channel}`} caption={channelCaptions[channel]}
                  type="range" min="0" max="1" step="0.01" value={audioVolume[channel]}
-                 onChange={this.handleAudioVolumeChange}/>
+                 disabled={!audioEnabled} onChange={this.handleAudioVolumeChange}/>
         ))}
       </Panel>
     );
