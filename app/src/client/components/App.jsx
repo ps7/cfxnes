@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {Router, Route, Redirect, IndexRedirect, hashHistory} from 'react-router';
+import {Router, Route, Redirect, IndexRedirect, browserHistory} from 'react-router';
 import store from '../store';
 import AppLayout from './AppLayout';
 import {Emulator, EmulatorToolbar} from './emulator';
@@ -10,7 +10,7 @@ import {About} from './about';
 
 export default () => (
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <Route path="/" component={AppLayout}>
         <Route path="emulator(/:newRomId)" components={{main: Emulator, toolbar: EmulatorToolbar}}/>
         <Route path="library" components={{main: Library}}/>

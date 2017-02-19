@@ -97,6 +97,7 @@ module.exports = {
     hints: false,
   },
   devServer: {
+    historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:5000',
     },
