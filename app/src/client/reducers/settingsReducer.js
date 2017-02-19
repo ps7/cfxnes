@@ -1,6 +1,3 @@
-import {ActionState} from '../enums';
-import {loadSettings} from '../settings';
-
 import {
   SET_REGION,
   SET_SPEED,
@@ -19,6 +16,8 @@ import {
   UNLOCK_SETTINGS_RESET,
 } from '../actions/settingsActions';
 
+import {ActionState} from '../enums';
+import {loadSettings} from '../settings';
 import {handleActions} from './common';
 
 export default handleActions({
@@ -41,7 +40,7 @@ export default handleActions({
     const {inputs} = controls[port];
     return {...state, controls: {...controls, [port]: {device, inputs}}};
   },
-  [UNLOCK_SETTINGS_RESET]: state => ({...state, resetState: null}),
+  [UNLOCK_SETTINGS_RESET]: state => ({...state, resetState: ActionState.NONE}),
   [START_SETTINGS_RESET]: state => ({...state, resetState: ActionState.STARTED}),
   [FINISH_SETTINGS_RESET]: {
     success: (state, defaultState) => ({...defaultState, resetState: ActionState.SUCCESS}),

@@ -7,3 +7,12 @@
     margin: 50% 0%;
   }
 }
+
+.reset-row {
+  display: table-row;
+
+  & > * {
+    display: table-cell;
+    padding: 0.5em;
+  }
+}

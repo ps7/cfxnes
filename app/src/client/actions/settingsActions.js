@@ -3,7 +3,7 @@ import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
 import {Device} from '../enums';
 import log from '../log';
 import nes from '../nes';
-import {createAction} from './common';
+import {UNLOCK_TIMEOUT, createAction} from './common';
 
 export const SET_REGION = 'SET_REGION';
 export const SET_SPEED = 'SET_SPEED';
@@ -102,7 +102,7 @@ export function resetSettings() {
     dispatch(createAction(FINISH_SETTINGS_RESET, doSettingsReset()))
       .catch(error => log.error('Failed to reset settings', error))
       .then(() => {
-        setTimeout(() => dispatch(createAction(UNLOCK_SETTINGS_RESET)), 5000);
+        setTimeout(() => dispatch(createAction(UNLOCK_SETTINGS_RESET)), UNLOCK_TIMEOUT);
       });
   };
 }

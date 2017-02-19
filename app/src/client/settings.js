@@ -1,5 +1,5 @@
 import {debounce, defaultTo} from 'lodash-es';
-import {Port, Device} from './enums';
+import {ActionState, Port, Device} from './enums';
 import nes from './nes';
 import log from './log';
 
@@ -53,7 +53,7 @@ export function resetSettings() {
 
 function updateSettings(settings) {
   return {
-    resetState: null,
+    resetState: ActionState.NONE,
     fpsVisible: defaultTo(settings.fpsVisible, true),
     controlsVisible: defaultTo(settings.controlsVisible, false),
     ...copySettingsFromNes(),
