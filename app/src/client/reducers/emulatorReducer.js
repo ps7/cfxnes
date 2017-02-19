@@ -1,5 +1,10 @@
-import {handleActions} from 'redux-actions';
 import nes from '../nes';
+import {handleActions} from '../utils';
+
+import {
+  SET_EMULATOR_RUNNING,
+  SET_EMULATOR_SUSPENDED,
+} from '../actions/emulatorActions';
 
 const initialState = {
   region: nes.region,
@@ -10,11 +15,6 @@ const initialState = {
 };
 
 export default handleActions({
-  setEmulatorSuspended(state, action) {
-    return {...state, suspended: action.payload};
-  },
-
-  setEmulatorRunning(state, action) {
-    return {...state, running: action.payload};
-  },
+  [SET_EMULATOR_RUNNING]: (state, running) => ({...state, running}),
+  [SET_EMULATOR_SUSPENDED]: (state, suspended) => ({...state, suspended}),
 }, initialState);

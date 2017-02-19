@@ -1,73 +1,49 @@
-import {handleActions} from 'redux-actions';
+import {handleActions} from '../utils';
 import {OpState} from '../constants';
 import {loadSettings} from '../settings';
 
+import {
+  SET_REGION,
+  SET_SPEED,
+  SET_VIDEO_RENDERER,
+  SET_VIDEO_SCALE,
+  SET_VIDEO_PALETTE,
+  SET_VIDEO_FILTER,
+  SET_VIDEO_DEBUG,
+  SET_FULLSCREEN_TYPE,
+  SET_FPS_VISIBLE,
+  SET_AUDIO_ENABLED,
+  SET_AUDIO_VOLUME,
+  SET_DEVICE,
+  START_SETTINGS_RESET,
+  FINISH_SETTINGS_RESET,
+  UNLOCK_SETTINGS_RESET,
+} from '../actions/settingsActions';
+
 export default handleActions({
-  setRegion(state, action) {
-    return {...state, region: action.payload};
-  },
-
-  setSpeed(state, action) {
-    return {...state, speed: action.payload};
-  },
-
-  setVideoRenderer(state, action) {
-    return {...state, videoRenderer: action.payload};
-  },
-
-  setVideoScale(state, action) {
-    return {...state, videoScale: action.payload};
-  },
-
-  setVideoPalette(state, action) {
-    return {...state, videoPalette: action.payload};
-  },
-
-  setVideoFilter(state, action) {
-    return {...state, videoFilter: action.payload};
-  },
-
-  setVideoDebug(state, action) {
-    return {...state, videoDebug: action.payload};
-  },
-
-  setFullscreenType(state, action) {
-    return {...state, fullscreenType: action.payload};
-  },
-
-  setFpsVisible(state, action) {
-    return {...state, fpsVisible: action.payload};
-  },
-
-  setAudioEnabled(state, action) {
-    return {...state, audioEnabled: action.payload};
-  },
-
-  setAudioVolume(state, action) {
-    const {channel, volume} = action.payload;
+  [SET_REGION]: (state, region) => ({...state, region}),
+  [SET_SPEED]: (state, speed) => ({...state, speed}),
+  [SET_VIDEO_RENDERER]: (state, videoRenderer) => ({...state, videoRenderer}),
+  [SET_VIDEO_SCALE]: (state, videoScale) => ({...state, videoScale}),
+  [SET_VIDEO_PALETTE]: (state, videoPalette) => ({...state, videoPalette}),
+  [SET_VIDEO_FILTER]: (state, videoFilter) => ({...state, videoFilter}),
+  [SET_VIDEO_DEBUG]: (state, videoDebug) => ({...state, videoDebug}),
+  [SET_FULLSCREEN_TYPE]: (state, fullscreenType) => ({...state, fullscreenType}),
+  [SET_FPS_VISIBLE]: (state, fpsVisible) => ({...state, fpsVisible}),
+  [SET_AUDIO_ENABLED]: (state, audioEnabled) => ({...state, audioEnabled}),
+  [SET_AUDIO_VOLUME]: (state, {channel, volume}) => {
     const {audioVolume} = state;
     return {...state, audioVolume: {...audioVolume, [channel]: volume}};
   },
-
-  setDevice(state, action) {
-    const {port, device} = action.payload;
+  [SET_DEVICE]: (state, {port, device}) => {
     const {controls} = state;
     const {inputs} = controls[port];
     return {...state, controls: {...controls, [port]: {device, inputs}}};
   },
-
-  startSettingsReset(state) {
-    return {...state, resetState: OpState.STARTED};
+  [UNLOCK_SETTINGS_RESET]: state => ({...state, resetState: null}),
+  [START_SETTINGS_RESET]: state => ({...state, resetState: OpState.STARTED}),
+  [FINISH_SETTINGS_RESET]: {
+    success: (state, defaultState) => ({...defaultState, resetState: OpState.SUCCESS}),
+    failure: state => ({...state, resetState: OpState.ERROR}),
   },
-
-  finishSettingsReset(state, action) {
-    if (action.error) {
-      return {...state, resetState: OpState.ERROR};
-    }
-    return {...action.payload, resetState: OpState.SUCCESS};
-  },
-
-  unlockSettingsReset(state) {
-    return {...state, resetState: null};
-  },
-}, loadSettings());
+}, loadSettings);

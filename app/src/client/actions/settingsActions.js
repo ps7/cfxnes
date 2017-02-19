@@ -1,86 +1,107 @@
-import {createAction} from 'redux-actions';
+import {createAction} from '../utils';
 import {resetSettings as doSettingsReset} from '../settings';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE, NO_DEVICE} from '../constants';
 import log from '../log';
 import nes from '../nes';
 
-export const setFpsVisible = createAction('setFpsVisible');
-export const startSettingsReset = createAction('startSettingsReset');
-export const finishSettingsReset = createAction('finishSettingsReset');
-export const unlockSettingsReset = createAction('unlockSettingsReset');
+export const SET_REGION = 'SET_REGION';
+export const SET_SPEED = 'SET_SPEED';
+export const SET_VIDEO_RENDERER = 'SET_VIDEO_RENDERER';
+export const SET_VIDEO_SCALE = 'SET_VIDEO_SCALE';
+export const SET_VIDEO_PALETTE = 'SET_VIDEO_PALETTE';
+export const SET_VIDEO_FILTER = 'SET_VIDEO_FILTER';
+export const SET_VIDEO_DEBUG = 'SET_VIDEO_DEBUG';
+export const SET_FULLSCREEN_TYPE = 'SET_FULLSCREEN_TYPE';
+export const SET_FPS_VISIBLE = 'SET_FPS_VISIBLE';
+export const SET_AUDIO_ENABLED = 'SET_AUDIO_ENABLED';
+export const SET_AUDIO_VOLUME = 'SET_AUDIO_VOLUME';
+export const SET_DEVICE = 'SET_DEVICE';
+export const UNLOCK_SETTINGS_RESET = 'UNLOCK_SETTINGS_RESET';
+export const START_SETTINGS_RESET = 'START_SETTINGS_RESET';
+export const FINISH_SETTINGS_RESET = 'FINISH_SETTINGS_RESET';
 
-export const setRegion = createAction('setRegion', region => {
+export function setRegion(region) {
   nes.region = region;
-  return region;
-});
+  return createAction(SET_REGION, region);
+}
 
-export const setSpeed = createAction('setSpeed', speed => {
+export function setSpeed(speed) {
   nes.speed = speed;
-  return speed;
-});
+  return createAction(SET_SPEED, speed);
+}
 
-export const setVideoRenderer = createAction('setVideoRenderer', renderer => {
+export function setVideoRenderer(renderer) {
   nes.video.renderer = renderer;
-  return renderer;
-});
+  return createAction(SET_VIDEO_RENDERER, renderer);
+}
 
-export const setVideoScale = createAction('setVideoScale', scale => {
+export function setVideoScale(scale) {
   nes.video.scale = scale;
-  return scale;
-});
+  return createAction(SET_VIDEO_SCALE, scale);
+}
 
-export const setVideoPalette = createAction('setVideoPalette', palette => {
+export function setVideoPalette(palette) {
   nes.video.palette = palette;
-  return palette;
-});
+  return createAction(SET_VIDEO_PALETTE, palette);
+}
 
-export const setVideoFilter = createAction('setVideoFilter', filter => {
+export function setVideoFilter(filter) {
   nes.video.filter = filter;
-  return filter;
-});
+  return createAction(SET_VIDEO_FILTER, filter);
+}
 
-export const setVideoDebug = createAction('setVideoDebug', debug => {
+export function setVideoDebug(debug) {
   nes.video.debug = debug;
-  return debug;
-});
+  return createAction(SET_VIDEO_DEBUG, debug);
+}
 
-export const setFullscreenType = createAction('setFullscreenType', type => {
+export function setFullscreenType(type) {
   nes.fullscreen.type = type;
-  return type;
-});
+  return createAction(SET_FULLSCREEN_TYPE, type);
+}
 
-export const setAudioEnabled = createAction('setAudioEnabled', enabled => {
+export function setFpsVisible(visible) {
+  return createAction(SET_FPS_VISIBLE, visible);
+}
+
+export function setAudioEnabled(enabled) {
   nes.audio.enabled = enabled;
-  return enabled;
-});
+  return createAction(SET_AUDIO_ENABLED, enabled);
+}
 
-export const setAudioVolume = createAction('setAudioVolume', (channel, volume) => {
+export function setAudioVolume(channel, volume) {
   nes.audio.volume[channel] = volume;
-  return {channel, volume};
-});
+  return createAction(SET_AUDIO_VOLUME, {channel, volume});
+}
 
-export const setDevice = createAction('setDevice', (port, device) => {
+export function setDevice(port, device) {
   nes.devices[port] = device !== NO_DEVICE ? device : null;
-  return {port, device};
-});
+  return createAction(SET_DEVICE, {port, device});
+}
 
-export const increaseVideoScale = () => dispatch => {
-  if (nes.video.scale < MAX_VIDEO_SCALE) {
-    dispatch(setVideoScale(nes.video.scale + 1));
-  }
-};
+export function increaseVideoScale() {
+  return dispatch => {
+    if (nes.video.scale < MAX_VIDEO_SCALE) {
+      dispatch(setVideoScale(nes.video.scale + 1));
+    }
+  };
+}
 
-export const decreaseVideoScale = () => dispatch => {
-  if (nes.video.scale > MIN_VIDEO_SCALE) {
-    dispatch(setVideoScale(nes.video.scale - 1));
-  }
-};
+export function decreaseVideoScale() {
+  return dispatch => {
+    if (nes.video.scale > MIN_VIDEO_SCALE) {
+      dispatch(setVideoScale(nes.video.scale - 1));
+    }
+  };
+}
 
-export const resetSettings = () => dispatch => {
-  dispatch(startSettingsReset());
-  dispatch(finishSettingsReset(doSettingsReset()))
-    .catch(error => log.error('Failed to reset settings', error))
-    .then(() => {
-      setTimeout(() => dispatch(unlockSettingsReset()), 5000);
-    });
-};
+export function resetSettings() {
+  return dispatch => {
+    dispatch(createAction(START_SETTINGS_RESET));
+    dispatch(createAction(FINISH_SETTINGS_RESET, doSettingsReset()))
+      .catch(error => log.error('Failed to reset settings', error))
+      .then(() => {
+        setTimeout(() => dispatch(createAction(UNLOCK_SETTINGS_RESET)), 5000);
+      });
+  };
+}

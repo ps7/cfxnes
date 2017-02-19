@@ -5,9 +5,12 @@ import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../constants';
 import {Field, Panel} from '../common';
 
 import {
-  setVideoScale, setVideoPalette,
-  setVideoFilter, setVideoDebug,
-  setVideoRenderer, setFullscreenType,
+  setVideoScale,
+  setVideoPalette,
+  setVideoFilter,
+  setVideoDebug,
+  setVideoRenderer,
+  setFullscreenType,
   setFpsVisible,
 } from '../../actions';
 

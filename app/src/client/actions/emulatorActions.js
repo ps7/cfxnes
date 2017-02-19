@@ -1,42 +1,44 @@
-import {createAction} from 'redux-actions';
+import {createAction} from '../utils';
 import nes from '../nes';
 
-export const setEmulatorRunning = createAction('setEmulatorRunning');
-export const setEmulatorSuspended = createAction('setEmulatorSuspended');
+export const SET_EMULATOR_RUNNING = 'SET_EMULATOR_RUNNING';
+export const SET_EMULATOR_SUSPENDED = 'SET_EMULATOR_SUSPENDED';
 
-export const startEmulator = () => {
+export function startEmulator() {
   nes.start();
-  return setEmulatorRunning(true);
-};
+  return createAction(SET_EMULATOR_RUNNING, true);
+}
 
-export const stopEmulator = () => {
+export function stopEmulator() {
   nes.stop();
-  return setEmulatorRunning(false);
-};
+  return createAction(SET_EMULATOR_RUNNING, false);
+}
 
-export const suspendEmulator = () => {
+export function resumeEmulator({canvas}) {
+  return (dispatch, getState) => {
+    nes.video.output = canvas;
+    const state = getState();
+    if (state.emulator.suspended) {
+      dispatch(startEmulator());
+    }
+  };
+}
+
+export function suspendEmulator() {
   const {running} = nes;
   nes.stop();
   nes.video.output = null;
-  return setEmulatorSuspended(running);
-};
+  return createAction(SET_EMULATOR_SUSPENDED, running);
+}
 
-export const resumeEmulator = ({canvas}) => (dispatch, getState) => {
-  nes.video.output = canvas;
-  const state = getState();
-  if (state.emulator.suspended) {
-    dispatch(startEmulator());
-  }
-};
+export function powerEmulator() {
+  return () => nes.power();
+}
 
-export const powerEmulator = () => () => {
-  nes.power();
-};
+export function resetEmulator() {
+  return () => nes.reset();
+}
 
-export const resetEmulator = () => () => {
-  nes.reset();
-};
-
-export const enterFullscreen = () => () => {
-  nes.fullscreen.enter();
-};
+export function enterFullscreen() {
+  return () => nes.fullscreen.enter();
+}
