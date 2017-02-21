@@ -16,3 +16,31 @@
     padding: 0.5em;
   }
 }
+
+.controls {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+
+.controls label {
+  padding-right: 1em;
+}
+
+.controls-inputs {
+  padding: 0.5em;
+}
+
+.controls-inputs-row {
+  display: table-row;
+
+  & > * {
+    display: table-cell;
+    padding: 0.25em 0.5em;
+  }
+}
+
+.device-input {
+  font-weight: bold;
+  text-align: right;
+}

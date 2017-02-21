@@ -3,14 +3,17 @@ import {connect} from 'react-redux';
 import {Panel} from '../common';
 import {Port} from '../../enums';
 import {setDevice} from '../../actions';
-import Controls from './Controls';
+import Controls from './controls/Controls';
 
 class ControlsPanel extends React.Component {
 
   static id = 'controls';
 
   static propTypes = {
-    controls: React.PropTypes.object.isRequired,
+    controls: React.PropTypes.shape({
+      [Port.ONE]: Controls.propTypes.controls,
+      [Port.TWO]: Controls.propTypes.controls,
+    }).isRequired,
     collapsed: React.PropTypes.bool,
     onHeaderClick: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
@@ -23,15 +26,19 @@ class ControlsPanel extends React.Component {
 
   handleDeviceChange = (port, device) => {
     this.props.dispatch(setDevice(port, device));
-  }
+  };
+
+  handleInputChangeRequest = (/* deviceInput, sourceInput */) => {
+  };
 
   render() {
     const {controls, collapsed, onHeaderClick} = this.props;
     return (
-      <Panel icon="gamepad" caption="Controls" collapsed={collapsed} onHeaderClick={onHeaderClick}>
+      <Panel type={ControlsPanel.id} icon="gamepad" caption="Controls" collapsed={collapsed} onHeaderClick={onHeaderClick}>
         {Port.values.map(port => {
-          const {device} = controls[port];
-          return <Controls key={port} port={port} device={device} onDeviceChange={this.handleDeviceChange}/>;
+          return <Controls key={port} port={port} controls={controls[port]}
+                           onDeviceChange={this.handleDeviceChange}
+                           onInputChangeRequest={this.handleInputChangeRequest}/>;
         })}
       </Panel>
     );

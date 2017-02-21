@@ -1,5 +1,5 @@
 import {debounce, defaultTo} from 'lodash-es';
-import {ActionState, Port, Device} from './enums';
+import {ActionState, Port, Device, Source} from './enums';
 import nes from './nes';
 import log from './log';
 
@@ -96,8 +96,10 @@ function conpyInputsFromControls(controls) {
   const inputs = {};
   for (const port of [1, 2]) {
     for (const device of Device.values) {
-      for (const input of Device.params[device].inputs) {
-        inputs[`${port}.${device}.${input}`] = controls[port].inputs[device][input];
+      for (const inputName of Device.getInputNames(device)) {
+        const deviceInputId = Device.getInputId(port, device, inputName);
+        const sourceInputs = controls[port].inputs[device][inputName];
+        inputs[deviceInputId] = sourceInputs.map(Source.getInputId);
       }
     }
   }
@@ -136,8 +138,10 @@ function copyInputsFromNes(port) {
   for (const device of Device.values) {
     inputs[device] = {};
     if (device !== Device.NONE) {
-      for (const input of Device.params[device].inputs) {
-        inputs[device][input] = nes.inputs.get(`${port}.${device}.${input}`);
+      for (const inputName of Device.getInputNames(device)) {
+        const deviceInputId = Device.getInputId(port, device, inputName);
+        const sourceInputIds = nes.inputs.get(deviceInputId);
+        inputs[device][inputName] = sourceInputIds.map(Source.parseInputId);
       }
     }
   }

@@ -6,6 +6,7 @@ import * as VideoFilter from './VideoFilter';
 import * as FullscreenType from './FullscreenType';
 import * as Port from './Port';
 import * as Device from './Device';
+import * as Source from './Source';
 
 export {
   ActionState,
@@ -16,4 +17,5 @@ export {
   FullscreenType,
   Port,
   Device,
+  Source,
 };
