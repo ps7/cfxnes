@@ -24,7 +24,7 @@ export function watchSettings(store) {
 
 function saveSettings(settings) {
   log.info('Saving settings');
-  const {resetState, ...settingsToSave} = settings;
+  const {resetState, activePanelId, ...settingsToSave} = settings;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(settingsToSave));
 }
 
@@ -54,6 +54,7 @@ export function resetSettings() {
 function updateSettings(settings) {
   return {
     resetState: ActionState.NONE,
+    activePanelId: null,
     fpsVisible: defaultTo(settings.fpsVisible, true),
     controlsVisible: defaultTo(settings.controlsVisible, false),
     ...copySettingsFromNes(),

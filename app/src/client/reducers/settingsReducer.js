@@ -1,4 +1,5 @@
 import {
+  SET_ACTIVE_PANEL,
   SET_REGION,
   SET_SPEED,
   SET_VIDEO_RENDERER,
@@ -21,6 +22,7 @@ import {loadSettings} from '../settings';
 import {handleActions} from './common';
 
 export default handleActions({
+  [SET_ACTIVE_PANEL]: (state, activePanelId) => ({...state, activePanelId}),
   [SET_REGION]: (state, region) => ({...state, region}),
   [SET_SPEED]: (state, speed) => ({...state, speed}),
   [SET_VIDEO_RENDERER]: (state, videoRenderer) => ({...state, videoRenderer}),

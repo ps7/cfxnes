@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fromPairs, last} from 'lodash-es';
+import {fromPairs, last, noop} from 'lodash-es';
 import {Icon, Field, Panel} from '../common';
 import {audioSupported} from '../../settings';
 import {setAudioEnabled, setAudioVolume} from '../../actions';
+
+const AUDIO = 'audio';
 
 const channelCaptions = {
   master: 'Master volume',
@@ -19,19 +21,23 @@ const volumePropType = React.PropTypes.number;
 
 class AudioPanel extends React.Component {
 
-  static id = 'audio';
+  static id = AUDIO;
 
   static propTypes = {
     audioEnabled: React.PropTypes.bool.isRequired,
     audioVolume: React.PropTypes.shape(fromPairs(channels.map(channel => [channel, volumePropType]))).isRequired,
-    collapsed: React.PropTypes.bool,
-    onHeaderClick: React.PropTypes.func,
+    active: React.PropTypes.bool,
+    onActivate: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    collapsed: false,
-    onHeaderClick: false,
+    active: false,
+    onActivate: noop,
+  }
+
+  handleHeaderClick = () => {
+    this.props.onActivate(AUDIO);
   }
 
   handleAudioEnabledChange = e => {
@@ -45,8 +51,14 @@ class AudioPanel extends React.Component {
   }
 
   render() {
-    const {audioEnabled, audioVolume, collapsed, onHeaderClick} = this.props;
-    const panelProps = {type: AudioPanel.id, icon: 'music', caption: 'Audio', collapsed, onHeaderClick};
+    const {audioEnabled, audioVolume, active} = this.props;
+    const panelProps = {
+      type: AUDIO,
+      icon: 'music',
+      caption: 'Audio',
+      collapsed: !active,
+      onHeaderClick: this.handleHeaderClick,
+    };
 
     if (!audioSupported) {
       return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {noop} from 'lodash-es';
 import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType} from '../../enums';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../constants';
 import {Field, Panel} from '../common';
@@ -14,9 +15,11 @@ import {
   setFpsVisible,
 } from '../../actions';
 
+const VIDEO = 'video';
+
 class VideoPanel extends React.Component {
 
-  static id = 'video';
+  static id = VIDEO;
 
   static propTypes = {
     videoRenderer: React.PropTypes.oneOf(VideoRenderer.values).isRequired,
@@ -26,14 +29,18 @@ class VideoPanel extends React.Component {
     videoDebug: React.PropTypes.bool.isRequired,
     fullscreenType: React.PropTypes.oneOf(FullscreenType.values).isRequired,
     fpsVisible: React.PropTypes.bool.isRequired,
-    collapsed: React.PropTypes.bool,
-    onHeaderClick: React.PropTypes.func,
+    active: React.PropTypes.bool,
+    onActivate: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    collapsed: false,
-    onHeaderClick: false,
+    active: false,
+    onActivate: noop,
+  }
+
+  handleHeaderClick = () => {
+    this.props.onActivate(VIDEO);
   }
 
   handleVideoScaleChange = e => {
@@ -70,11 +77,11 @@ class VideoPanel extends React.Component {
 
   render() {
     const {
-      videoRenderer, videoScale, videoPalette, videoFilter, videoDebug,
-      fullscreenType, fpsVisible, collapsed, onHeaderClick,
+      videoRenderer, videoScale, videoPalette, videoFilter,
+      videoDebug, fullscreenType, fpsVisible, active,
     } = this.props;
     return (
-      <Panel type={VideoPanel.id} icon="desktop" caption="Video" collapsed={collapsed} onHeaderClick={onHeaderClick}>
+      <Panel type={VIDEO} icon="desktop" caption="Video" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
         <Field id="video-scale" caption="Output scale" type="number" value={videoScale} onChange={this.handleVideoScaleChange}/>
         <Field id="video-palette" caption="Color palette" type="select" items={VideoPalette.items} value={videoPalette} onChange={this.handleVideoPaletteChange}/>
         <Field id="fullscreen-type" caption="Fullscreen mode" type="select" items={FullscreenType.items} value={fullscreenType} onChange={this.handleFullscreenTypeChange}/>

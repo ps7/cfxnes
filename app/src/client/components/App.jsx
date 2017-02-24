@@ -3,19 +3,23 @@ import {Provider} from 'react-redux';
 import {Router, Route, Redirect, IndexRedirect, browserHistory} from 'react-router';
 import store from '../store';
 import AppLayout from './AppLayout';
-import {Emulator, EmulatorToolbar} from './emulator';
-import {Library} from './library';
-import {Settings} from './settings';
-import {About} from './about';
+import * as emulatorComponents from './emulator';
+import * as libraryComponents from './library';
+import * as settingsComponents from './settings';
+import * as aboutComponents from './about';
 
 export default () => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppLayout}>
-        <Route path="emulator(/:newRomId)" components={{main: Emulator, toolbar: EmulatorToolbar}}/>
-        <Route path="library" components={{main: Library}}/>
-        <Route path="settings(/:activePanelId)" components={{main: Settings}}/>
-        <Route path="about" components={{main: About}}/>
+        <Route path="emulator" components={emulatorComponents}>
+          <Route path=":romId" components={emulatorComponents}/>
+        </Route>
+        <Route path="library" components={libraryComponents}/>
+        <Route path="settings" components={settingsComponents}>
+          <Route path=":activePanelId" components={settingsComponents}/>
+        </Route>
+        <Route path="about" components={aboutComponents}/>
         <IndexRedirect to="/emulator"/>
         <Redirect from="*" to="/emulator"/>
       </Route>

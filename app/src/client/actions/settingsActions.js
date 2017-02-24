@@ -5,6 +5,7 @@ import log from '../log';
 import nes from '../nes';
 import {UNLOCK_TIMEOUT, createAction} from './common';
 
+export const SET_ACTIVE_PANEL = 'SET_ACTIVE_PANEL';
 export const SET_REGION = 'SET_REGION';
 export const SET_SPEED = 'SET_SPEED';
 export const SET_VIDEO_RENDERER = 'SET_VIDEO_RENDERER';
@@ -20,6 +21,10 @@ export const SET_DEVICE = 'SET_DEVICE';
 export const UNLOCK_SETTINGS_RESET = 'UNLOCK_SETTINGS_RESET';
 export const START_SETTINGS_RESET = 'START_SETTINGS_RESET';
 export const FINISH_SETTINGS_RESET = 'FINISH_SETTINGS_RESET';
+
+export function setActivePanel(id) {
+  return createAction(SET_ACTIVE_PANEL, id);
+}
 
 export function setRegion(region) {
   nes.region = region;

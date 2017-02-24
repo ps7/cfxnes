@@ -1,27 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {noop} from 'lodash-es';
 import {Panel} from '../common';
 import {Port} from '../../enums';
 import {setDevice} from '../../actions';
 import Controls from './controls/Controls';
 
+const CONTROLS = 'controls';
+
 class ControlsPanel extends React.Component {
 
-  static id = 'controls';
+  static id = CONTROLS;
 
   static propTypes = {
     controls: React.PropTypes.shape({
       [Port.ONE]: Controls.propTypes.controls,
       [Port.TWO]: Controls.propTypes.controls,
     }).isRequired,
-    collapsed: React.PropTypes.bool,
-    onHeaderClick: React.PropTypes.func,
+    active: React.PropTypes.bool,
+    onActivate: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    collapsed: false,
-    onHeaderClick: false,
+    active: false,
+    onActivate: noop,
+  }
+
+  handleHeaderClick = () => {
+    this.props.onActivate(CONTROLS);
   }
 
   handleDeviceChange = (port, device) => {
@@ -32,9 +39,9 @@ class ControlsPanel extends React.Component {
   };
 
   render() {
-    const {controls, collapsed, onHeaderClick} = this.props;
+    const {controls, active} = this.props;
     return (
-      <Panel type={ControlsPanel.id} icon="gamepad" caption="Controls" collapsed={collapsed} onHeaderClick={onHeaderClick}>
+      <Panel type={CONTROLS} icon="gamepad" caption="Controls" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
         {Port.values.map(port => {
           return <Controls key={port} port={port} controls={controls[port]}
                            onDeviceChange={this.handleDeviceChange}

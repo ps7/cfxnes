@@ -1,24 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {noop} from 'lodash-es';
 import {Button, Icon, Panel} from '../common';
 import {resetSettings, deleteNVRAMs} from '../../actions';
 import {ActionState} from '../../enums';
 
+const RESET = 'reset';
+
 class ResetPanel extends React.Component {
 
-  static id = 'reset';
+  static id = RESET;
 
   static propTypes = {
     resetSettingsState: React.PropTypes.oneOf(ActionState.values).isRequired,
     nvramsDeletionState: React.PropTypes.oneOf(ActionState.values).isRequired,
-    collapsed: React.PropTypes.bool,
-    onHeaderClick: React.PropTypes.func,
+    active: React.PropTypes.bool,
+    onActivate: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    collapsed: false,
-    onHeaderClick: false,
+    active: false,
+    onActivate: noop,
+  }
+
+  handleHeaderClick = () => {
+    this.props.onActivate(RESET);
   }
 
   handleResetSettings = () => {
@@ -62,9 +69,9 @@ class ResetPanel extends React.Component {
   }
 
   render() {
-    const {collapsed, onHeaderClick} = this.props;
+    const {active} = this.props;
     return (
-      <Panel type={ResetPanel.id} icon="trash-o" caption="Reset" collapsed={collapsed} onHeaderClick={onHeaderClick}>
+      <Panel type={RESET} icon="trash-o" caption="Reset" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
         <div className="reset-row">
           <div className="reset-button">
             {this.renderResetSettingsButton()}
