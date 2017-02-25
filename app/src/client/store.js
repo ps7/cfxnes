@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import {identity} from 'lodash-es';
 import rootReducer from './reducers';
-import {watchSettings} from './settings';
+import {createSettingsMonitor} from './settings';
 
 const middleware = [thunk, promise];
 const applyDevTools = (__DEVELOPMENT__ && __REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || identity;
@@ -16,6 +16,7 @@ if (__DEVELOPMENT__) {
 const enhancer = applyDevTools(applyMiddleware(...middleware));
 const store = createStore(rootReducer, enhancer);
 
-watchSettings(store);
+const checkSettings = createSettingsMonitor();
+store.subscribe(() => checkSettings(store.getState().settings));
 
 export default store;

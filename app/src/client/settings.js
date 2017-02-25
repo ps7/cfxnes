@@ -9,17 +9,16 @@ const nesDefaults = nes.config.get();
 const STORAGE_KEY = 'settings';
 const SAVE_TIMEOUT = 5000;
 
-export function watchSettings(store) {
+export function createSettingsMonitor() {
   let settings;
   const saveSettingsLater = debounce(() => saveSettings(settings), SAVE_TIMEOUT);
 
-  store.subscribe(() => {
-    const newSettings = store.getState().settings;
+  return newSettings => {
     if (settings !== newSettings) {
       settings = newSettings;
       saveSettingsLater();
     }
-  });
+  };
 }
 
 function saveSettings(settings) {
