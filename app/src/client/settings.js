@@ -7,7 +7,7 @@ export const audioSupported = nes.audio != null;
 const nesDefaults = nes.config.get();
 
 const STORAGE_KEY = 'settings';
-const SAVE_TIMEOUT = 5000;
+const SAVE_TIMEOUT = 1000;
 
 export function createSettingsMonitor() {
   let settings;

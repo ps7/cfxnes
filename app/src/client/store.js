@@ -16,6 +16,10 @@ if (__DEVELOPMENT__) {
 const enhancer = applyDevTools(applyMiddleware(...middleware));
 const store = createStore(rootReducer, enhancer);
 
+if (__DEVELOPMENT__ && module.hot) {
+  module.hot.accept('./reducers', () => store.replaceReducer(rootReducer));
+}
+
 const checkSettings = createSettingsMonitor();
 store.subscribe(() => checkSettings(store.getState().settings));
 
