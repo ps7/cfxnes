@@ -16,9 +16,6 @@ class Settings extends React.Component {
 
   static propTypes = {
     activePanelId: React.PropTypes.string,
-    params: React.PropTypes.shape({
-      activePanelId: React.PropTypes.string,
-    }).isRequired,
     router: React.PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     dispatch: React.PropTypes.func.isRequired,
   };

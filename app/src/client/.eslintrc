@@ -8,7 +8,8 @@
     }
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "commonjs": true
   },
   "plugins": [
     "react"
@@ -67,6 +68,7 @@
   },
   "globals": {
     "__DEVELOPMENT__": true,
-    "__LOG_LEVEL__": true
+    "__LOG_LEVEL__": true,
+    "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__": true,
   }
 }

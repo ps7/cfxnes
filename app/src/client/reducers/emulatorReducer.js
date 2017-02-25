@@ -3,12 +3,9 @@ import {
   SET_EMULATOR_SUSPENDED,
 } from '../actions/emulatorActions';
 
-import nes from '../nes';
 import {handleActions} from './common';
 
 const initialState = {
-  region: nes.region,
-  speed: nes.speed,
   running: false,
   suspended: false,
   loading: false,
