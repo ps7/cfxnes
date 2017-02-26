@@ -49,7 +49,7 @@
     "react/no-direct-mutation-state": "error",
     "react/no-find-dom-node": "error",
     "react/no-is-mounted": "error",
-    "react/no-multi-comp": "error",
+    "react/no-multi-comp": ["error", {"ignoreStateless": true}],
     "react/no-render-return-value": "error",
     "react/no-string-refs": "error",
     "react/no-unescaped-entities": "warn",
@@ -69,6 +69,6 @@
   "globals": {
     "__DEVELOPMENT__": true,
     "__LOG_LEVEL__": true,
-    "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__": true,
+    "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__": true
   }
 }

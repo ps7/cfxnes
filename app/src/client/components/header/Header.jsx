@@ -4,7 +4,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import {logoSvg} from '../../images';
 import Nav from './Nav';
-import NavItem from './NavItem';
 
 const Header = ({toolbar}) => (
   <header>
@@ -12,13 +11,13 @@ const Header = ({toolbar}) => (
       <img src={logoSvg} alt="cfxnes logo"/> cfxnes
     </Link>
     <Nav type="main">
-      <NavItem path="/emulator" caption="Emulator" icon="gamepad"/>
-      <NavItem path="/library" caption="Library" icon="book"/>
-      <NavItem path="/settings" caption="Settings" icon="cog"/>
+      <Nav.Item path="/emulator" caption="Emulator" icon="gamepad"/>
+      <Nav.Item path="/library" caption="Library" icon="book"/>
+      <Nav.Item path="/settings" caption="Settings" icon="cog"/>
     </Nav>
     {toolbar}
     <Nav type="help">
-      <NavItem path="/about" caption="About" icon="question-circle"/>
+      <Nav.Item path="/about" caption="About" icon="question-circle"/>
     </Nav>
   </header>
 );

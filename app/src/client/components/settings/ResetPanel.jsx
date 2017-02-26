@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
-import {Button, Icon, Panel} from '../common';
+import {Button, Icon, Panel, ConfirmDialog} from '../common';
 import {resetSettings, deleteNVRAMs} from '../../actions';
 import {ActionState} from '../../enums';
 
@@ -24,18 +24,42 @@ class ResetPanel extends React.Component {
     onActivate: noop,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      resetSettingsConfirmVisible: false,
+      deleteNVRAMsConfirmVisible: false,
+    };
+  }
+
   handleHeaderClick = () => {
     this.props.onActivate(RESET);
   }
 
   handleResetSettings = () => {
+    this.setState({resetSettingsConfirmVisible: true});
+  }
+
+  handleConfirmResetSettings = () => {
+    this.setState({resetSettingsConfirmVisible: false});
     this.props.dispatch(resetSettings());
   }
 
+  handleCancelResetSettings = () => {
+    this.setState({resetSettingsConfirmVisible: false});
+  }
+
   handleDeleteNVRAMs = () => {
-    if (confirm('Delete stored data of all games?')) {
-      this.props.dispatch(deleteNVRAMs());
-    }
+    this.setState({deleteNVRAMsConfirmVisible: true});
+  }
+
+  handleConfirmDeleteNVRAMs = () => {
+    this.setState({deleteNVRAMsConfirmVisible: false});
+    this.props.dispatch(deleteNVRAMs());
+  }
+
+  handleCancelDeleteNVRAMs = () => {
+    this.setState({deleteNVRAMsConfirmVisible: false});
   }
 
   renderResetSettingsButton() {
@@ -72,12 +96,28 @@ class ResetPanel extends React.Component {
     const {active} = this.props;
     return (
       <Panel type={RESET} icon="trash-o" caption="Reset" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
+        {this.state.resetSettingsConfirmVisible && (
+          <ConfirmDialog title="Reset settings?"
+                         message="All settings will be restored to their default value."
+                         confirmCaption="Reset settings"
+                         cancelCaption="Cancel"
+                         onConfirm={this.handleConfirmResetSettings}
+                         onCancel={this.handleCancelResetSettings}/>
+        )}
+        {this.state.deleteNVRAMsConfirmVisible && (
+          <ConfirmDialog title="Delete game data?"
+                         message="Stored data of all games that support saving will be deleted."
+                         confirmCaption="Delete data"
+                         cancelCaption="Cancel"
+                         onConfirm={this.handleConfirmDeleteNVRAMs}
+                         onCancel={this.handleCancelDeleteNVRAMs}/>
+        )}
         <div className="reset-row">
           <div className="reset-button">
             {this.renderResetSettingsButton()}
           </div>
           <div className="reset-description">
-            Reset cfxnes settings to defaults.
+            Restore all settings to their default value.
           </div>
         </div>
         <div className="reset-row">
@@ -85,7 +125,8 @@ class ResetPanel extends React.Component {
             {this.renderDeleteNVRAMsButton()}
           </div>
           <div className="reset-description">
-            Delete data of games that support saving (for example The Legend of Zelda or Final Fantasy).
+            Delete stored data of all games. This will only affect games that support
+            saving, like <em>The Legend of Zelda</em> or <em>Final Fantasy</em>.
           </div>
         </div>
       </Panel>
