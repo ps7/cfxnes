@@ -15,14 +15,6 @@ export const params = {
 
 export const items = createItems(values, params);
 
-export function fromId(value) {
-  return value || NONE;
-}
-
-export function toId(value) {
-  return value !== NONE ? value : null;
-}
-
 export function getInputNames(device) {
   return params[device].inputNames;
 }

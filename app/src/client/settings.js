@@ -86,8 +86,7 @@ function applySettingsToNes(settings) {
 function copyDevicesFromControls(controls) {
   const devices = {};
   for (const port of Port.values) {
-    const {device} = controls[port];
-    devices[port] = Device.toId(device);
+    devices[port] = controls[port].device;
   }
   return devices;
 }
@@ -126,7 +125,7 @@ function copyControlsFromNes() {
   const controls = {};
   for (const port of Port.values) {
     controls[port] = {
-      device: Device.fromId(nes.devices[port]),
+      device: nes.devices[port],
       inputs: copyInputsFromNes(port),
     };
   }

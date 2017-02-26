@@ -1,6 +1,5 @@
 import {resetSettings as doSettingsReset} from '../settings';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
-import {Device} from '../enums';
 import log from '../log';
 import nes from '../nes';
 import {UNLOCK_TIMEOUT, createAction} from './common';
@@ -81,7 +80,7 @@ export function setAudioVolume(channel, volume) {
 }
 
 export function setDevice(port, device) {
-  nes.devices[port] = Device.toId(device);
+  nes.devices[port] = device;
   return createAction(SET_DEVICE, {port, device});
 }
 
