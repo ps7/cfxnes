@@ -1,5 +1,6 @@
-import {resetSettings as doSettingsReset} from '../settings';
+import {resetSettings as doSettingsReset, copyInputsFromNes} from '../settings';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
+import {Port, Device, Source} from '../enums';
 import log from '../log';
 import nes from '../nes';
 import {UNLOCK_TIMEOUT, createAction} from './common';
@@ -16,7 +17,8 @@ export const SET_FULLSCREEN_TYPE = 'SET_FULLSCREEN_TYPE';
 export const SET_FPS_VISIBLE = 'SET_FPS_VISIBLE';
 export const SET_AUDIO_ENABLED = 'SET_AUDIO_ENABLED';
 export const SET_AUDIO_VOLUME = 'SET_AUDIO_VOLUME';
-export const SET_DEVICE = 'SET_DEVICE';
+export const SET_CONTROLS_DEVICE = 'SET_CONTROLS_DEVICE';
+export const SET_CONTROLS_INPTUS = 'SET_CONTROLS_INPTUS';
 export const UNLOCK_SETTINGS_RESET = 'UNLOCK_SETTINGS_RESET';
 export const START_SETTINGS_RESET = 'START_SETTINGS_RESET';
 export const FINISH_SETTINGS_RESET = 'FINISH_SETTINGS_RESET';
@@ -43,6 +45,22 @@ export function setVideoRenderer(renderer) {
 export function setVideoScale(scale) {
   nes.video.scale = scale;
   return createAction(SET_VIDEO_SCALE, scale);
+}
+
+export function increaseVideoScale() {
+  return dispatch => {
+    if (nes.video.scale < MAX_VIDEO_SCALE) {
+      dispatch(setVideoScale(nes.video.scale + 1));
+    }
+  };
+}
+
+export function decreaseVideoScale() {
+  return dispatch => {
+    if (nes.video.scale > MIN_VIDEO_SCALE) {
+      dispatch(setVideoScale(nes.video.scale - 1));
+    }
+  };
 }
 
 export function setVideoPalette(palette) {
@@ -79,24 +97,27 @@ export function setAudioVolume(channel, volume) {
   return createAction(SET_AUDIO_VOLUME, {channel, volume});
 }
 
-export function setDevice(port, device) {
+export function setControlsDevice(port, device) {
   nes.devices[port] = device;
-  return createAction(SET_DEVICE, {port, device});
+  return createAction(SET_CONTROLS_DEVICE, {port, device});
 }
 
-export function increaseVideoScale() {
+export function rebindControlsInput(deviceInput) {
   return dispatch => {
-    if (nes.video.scale < MAX_VIDEO_SCALE) {
-      dispatch(setVideoScale(nes.video.scale + 1));
-    }
-  };
-}
-
-export function decreaseVideoScale() {
-  return dispatch => {
-    if (nes.video.scale > MIN_VIDEO_SCALE) {
-      dispatch(setVideoScale(nes.video.scale - 1));
-    }
+    return new Promise(resolve => {
+      nes.inputs.record(sourceInputId => {
+        if (sourceInputId !== 'keyboard.escape') {
+          const deviceInputId = Device.getInputId(deviceInput);
+          nes.inputs.delete(deviceInputId, sourceInputId);
+          nes.inputs.set(deviceInputId, sourceInputId);
+          for (const port of Port.values) {
+            const inputs = copyInputsFromNes(port);
+            dispatch(createAction(SET_CONTROLS_INPTUS, {port, inputs}));
+          }
+        }
+        resolve();
+      });
+    });
   };
 }
 

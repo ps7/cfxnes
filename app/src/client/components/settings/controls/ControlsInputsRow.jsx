@@ -18,8 +18,8 @@ export default class ControlsInputsRow extends React.Component {
   };
 
   handleChangeClick = () => {
-    const {deviceInput, sourceInputs, onChangeRequest} = this.props;
-    onChangeRequest(deviceInput, sourceInputs);
+    const {deviceInput, onChangeRequest} = this.props;
+    onChangeRequest(deviceInput);
   }
 
   render() {

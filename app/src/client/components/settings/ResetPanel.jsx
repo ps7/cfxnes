@@ -106,7 +106,7 @@ class ResetPanel extends React.Component {
         )}
         {this.state.deleteNVRAMsConfirmVisible && (
           <ConfirmDialog title="Delete game data?"
-                         message="Stored data of all games that support saving will be deleted."
+                         message="Stored data of all games will be deleted."
                          confirmCaption="Delete data"
                          cancelCaption="Cancel"
                          onConfirm={this.handleConfirmDeleteNVRAMs}

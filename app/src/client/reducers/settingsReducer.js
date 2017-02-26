@@ -11,7 +11,8 @@ import {
   SET_FPS_VISIBLE,
   SET_AUDIO_ENABLED,
   SET_AUDIO_VOLUME,
-  SET_DEVICE,
+  SET_CONTROLS_DEVICE,
+  SET_CONTROLS_INPTUS,
   START_SETTINGS_RESET,
   FINISH_SETTINGS_RESET,
   UNLOCK_SETTINGS_RESET,
@@ -37,9 +38,14 @@ export default handleActions({
     const {audioVolume} = state;
     return {...state, audioVolume: {...audioVolume, [channel]: volume}};
   },
-  [SET_DEVICE]: (state, {port, device}) => {
+  [SET_CONTROLS_DEVICE]: (state, {port, device}) => {
     const {controls} = state;
     const {inputs} = controls[port];
+    return {...state, controls: {...controls, [port]: {device, inputs}}};
+  },
+  [SET_CONTROLS_INPTUS]: (state, {port, inputs}) => {
+    const {controls} = state;
+    const {device} = controls[port];
     return {...state, controls: {...controls, [port]: {device, inputs}}};
   },
   [UNLOCK_SETTINGS_RESET]: state => ({...state, resetState: ActionState.NONE}),

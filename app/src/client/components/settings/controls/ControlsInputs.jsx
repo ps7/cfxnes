@@ -4,12 +4,13 @@ import ControlsInputsRow from './ControlsInputsRow';
 
 const ControlsInputs = ({port, device, inputs, onChangeRequest}) => (
   <div className="controls-inputs">
-    {Device.getInputNames(device).map(name => (
-      <ControlsInputsRow key={Device.getInputId(port, device, name)}
-                         deviceInput={{port, device, name}}
-                         sourceInputs={inputs[device][name]}
-                         onChangeRequest={onChangeRequest}/>
-    ))}
+    {Device.getInputNames(device).map(name => {
+      const deviceInput = {port, device, name};
+      return <ControlsInputsRow key={Device.getInputId(deviceInput)}
+                                deviceInput={deviceInput}
+                                sourceInputs={inputs[device][name]}
+                                onChangeRequest={onChangeRequest}/>;
+    })}
   </div>
 );
 

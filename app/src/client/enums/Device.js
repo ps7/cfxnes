@@ -19,7 +19,7 @@ export function getInputNames(device) {
   return params[device].inputNames;
 }
 
-export function getInputId(port, device, name) {
+export function getInputId({port, device, name}) {
   return `${port}.${device}.${name}`;
 }
 

@@ -95,9 +95,9 @@ function conpyInputsFromControls(controls) {
   const inputs = {};
   for (const port of [1, 2]) {
     for (const device of Device.values) {
-      for (const inputName of Device.getInputNames(device)) {
-        const deviceInputId = Device.getInputId(port, device, inputName);
-        const sourceInputs = controls[port].inputs[device][inputName];
+      for (const name of Device.getInputNames(device)) {
+        const deviceInputId = Device.getInputId({port, device, name});
+        const sourceInputs = controls[port].inputs[device][name];
         inputs[deviceInputId] = sourceInputs.map(Source.getInputId);
       }
     }
@@ -121,7 +121,7 @@ function copySettingsFromNes() {
   };
 }
 
-function copyControlsFromNes() {
+export function copyControlsFromNes() {
   const controls = {};
   for (const port of Port.values) {
     controls[port] = {
@@ -132,15 +132,15 @@ function copyControlsFromNes() {
   return controls;
 }
 
-function copyInputsFromNes(port) {
+export function copyInputsFromNes(port) {
   const inputs = {};
   for (const device of Device.values) {
     inputs[device] = {};
     if (device !== Device.NONE) {
-      for (const inputName of Device.getInputNames(device)) {
-        const deviceInputId = Device.getInputId(port, device, inputName);
+      for (const name of Device.getInputNames(device)) {
+        const deviceInputId = Device.getInputId({port, device, name});
         const sourceInputIds = nes.inputs.get(deviceInputId);
-        inputs[device][inputName] = sourceInputIds.map(Source.parseInputId);
+        inputs[device][name] = sourceInputIds.map(Source.parseInputId);
       }
     }
   }
