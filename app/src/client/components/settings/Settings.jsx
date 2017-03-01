@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setActivePanel} from '../../actions/settingsActions';
+import {setActiveSettingsPanel} from '../../actions';
 import SystemPanel from './SystemPanel';
 import VideoPanel from './VideoPanel';
 import AudioPanel from './AudioPanel';
@@ -52,7 +52,7 @@ class Settings extends React.Component {
   }
 
   setActivePanelInState(id) {
-    this.props.dispatch(setActivePanel(id));
+    this.props.dispatch(setActiveSettingsPanel(id));
   }
 
   setActivePanel(id) {

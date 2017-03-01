@@ -82,7 +82,7 @@ class EmulatorToolbar extends React.Component {
 
 const mapStateToProps = state => {
   const {running} = state.emulator;
-  const {videoScale, fpsVisible} = state.settings;
+  const {videoScale, fpsVisible} = state.settings.values;
   return {running, videoScale, fpsVisible};
 };
 

@@ -7,6 +7,7 @@ import * as FullscreenType from './FullscreenType';
 import * as Port from './Port';
 import * as Device from './Device';
 import * as Source from './Source';
+import * as SettingsGroup from './SettingsGroup';
 
 export {
   ActionState,
@@ -18,4 +19,5 @@ export {
   Port,
   Device,
   Source,
+  SettingsGroup,
 };

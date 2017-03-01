@@ -11,8 +11,8 @@ export default class About extends React.Component {
     return this.state !== nextState;
   }
 
-  handleShowChangelog = e => {
-    e.preventDefault();
+  handleShowChangelog = event => {
+    event.preventDefault();
     this.setState({changelogVisible: true});
   };
 

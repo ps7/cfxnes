@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
 import {Button, Icon, Panel, ConfirmDialog} from '../common';
 import {resetSettings, deleteNVRAMs} from '../../actions';
-import {ActionState} from '../../enums';
+import {ActionState, SettingsGroup} from '../../enums';
 
-const RESET = 'reset';
+const {RESET} = SettingsGroup;
 
 class ResetPanel extends React.Component {
 
   static id = RESET;
 
   static propTypes = {
-    resetSettingsState: React.PropTypes.oneOf(ActionState.values).isRequired,
+    settingsResetLocked: React.PropTypes.bool.isRequired,
     nvramsDeletionState: React.PropTypes.oneOf(ActionState.values).isRequired,
     active: React.PropTypes.bool,
     onActivate: React.PropTypes.func,
@@ -27,8 +27,8 @@ class ResetPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      resetSettingsConfirmVisible: false,
-      deleteNVRAMsConfirmVisible: false,
+      settingsResetConfirmVisible: false,
+      nvramsDeletionConfirmVisible: false,
     };
   }
 
@@ -37,42 +37,34 @@ class ResetPanel extends React.Component {
   }
 
   handleResetSettings = () => {
-    this.setState({resetSettingsConfirmVisible: true});
+    this.setState({settingsResetConfirmVisible: true});
   }
 
   handleConfirmResetSettings = () => {
-    this.setState({resetSettingsConfirmVisible: false});
+    this.setState({settingsResetConfirmVisible: false});
     this.props.dispatch(resetSettings());
   }
 
   handleCancelResetSettings = () => {
-    this.setState({resetSettingsConfirmVisible: false});
+    this.setState({settingsResetConfirmVisible: false});
   }
 
   handleDeleteNVRAMs = () => {
-    this.setState({deleteNVRAMsConfirmVisible: true});
+    this.setState({nvramsDeletionConfirmVisible: true});
   }
 
   handleConfirmDeleteNVRAMs = () => {
-    this.setState({deleteNVRAMsConfirmVisible: false});
+    this.setState({nvramsDeletionConfirmVisible: false});
     this.props.dispatch(deleteNVRAMs());
   }
 
   handleCancelDeleteNVRAMs = () => {
-    this.setState({deleteNVRAMsConfirmVisible: false});
+    this.setState({nvramsDeletionConfirmVisible: false});
   }
 
   renderResetSettingsButton() {
-    const {resetSettingsState} = this.props;
-    if (resetSettingsState === ActionState.STARTED) {
-      const icon = <Icon name="circle-o-notch" spin/>;
-      return <Button icon={icon} caption="Resetting settings..." disabled/>;
-    }
-    if (resetSettingsState === ActionState.SUCCESS) {
+    if (this.props.settingsResetLocked) {
       return <Button icon="check" caption="Done" disabled/>;
-    }
-    if (resetSettingsState === ActionState.FAILURE) {
-      return <Button icon="exclamation-triangle" caption="Reset failed" disabled/>;
     }
     return <Button caption="Reset settings" onClick={this.handleResetSettings}/>;
   }
@@ -96,7 +88,7 @@ class ResetPanel extends React.Component {
     const {active} = this.props;
     return (
       <Panel type={RESET} icon="trash-o" caption="Reset" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
-        {this.state.resetSettingsConfirmVisible && (
+        {this.state.settingsResetConfirmVisible && (
           <ConfirmDialog title="Reset settings?"
                          message="All settings will be restored to their default value."
                          confirmCaption="Reset settings"
@@ -104,7 +96,7 @@ class ResetPanel extends React.Component {
                          onConfirm={this.handleConfirmResetSettings}
                          onCancel={this.handleCancelResetSettings}/>
         )}
-        {this.state.deleteNVRAMsConfirmVisible && (
+        {this.state.nvramsDeletionConfirmVisible && (
           <ConfirmDialog title="Delete game data?"
                          message="Stored data of all games will be deleted."
                          confirmCaption="Delete data"
@@ -135,10 +127,9 @@ class ResetPanel extends React.Component {
 
 }
 
-const mapStateToProps = state => {
-  const resetSettingsState = state.settings.resetState;
-  const {nvramsDeletionState} = state.database;
-  return {resetSettingsState, nvramsDeletionState};
-};
+const mapStateToProps = state => ({
+  settingsResetLocked: state.settings.resetLocked,
+  nvramsDeletionState: state.database.nvramsDeletionState,
+});
 
 export default connect(mapStateToProps)(ResetPanel);

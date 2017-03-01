@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
 import {Field, Panel} from '../common';
 import {setRegion, setSpeed} from '../../actions';
-import {Region} from '../../enums';
+import {Region, SettingsGroup} from '../../enums';
 
-const SYSTEM = 'system';
+const {SYSTEM} = SettingsGroup;
 
 class SystemPanel extends React.Component {
 
@@ -28,12 +28,12 @@ class SystemPanel extends React.Component {
     this.props.onActivate(SYSTEM);
   }
 
-  handleRegionChange = e => {
-    this.props.dispatch(setRegion(e.target.value));
+  handleRegionChange = event => {
+    this.props.dispatch(setRegion(event.target.value));
   };
 
-  handleSpeedChange = e => {
-    this.props.dispatch(setSpeed(parseFloat(e.target.value)));
+  handleSpeedChange = event => {
+    this.props.dispatch(setSpeed(parseFloat(event.target.value)));
   };
 
   render() {
@@ -49,7 +49,7 @@ class SystemPanel extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const {region, speed} = state.settings;
+  const {region, speed} = state.settings.values;
   return {region, speed};
 };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fromPairs, last, noop} from 'lodash-es';
 import {Icon, Field, Panel} from '../common';
-import {audioSupported} from '../../settings';
-import {setAudioEnabled, setAudioVolume} from '../../actions';
+import {SettingsGroup} from '../../enums';
+import {audioSupported, setAudioEnabled, setAudioVolume} from '../../actions';
 
-const AUDIO = 'audio';
+const {AUDIO} = SettingsGroup;
 
 const channelCaptions = {
   master: 'Master volume',
@@ -40,12 +40,12 @@ class AudioPanel extends React.Component {
     this.props.onActivate(AUDIO);
   }
 
-  handleAudioEnabledChange = e => {
-    this.props.dispatch(setAudioEnabled(e.target.checked));
+  handleAudioEnabledChange = event => {
+    this.props.dispatch(setAudioEnabled(event.target.checked));
   };
 
-  handleAudioVolumeChange = e => {
-    const {id, value} = e.target;
+  handleAudioVolumeChange = event => {
+    const {id, value} = event.target;
     const channel = last(id.split('-'));
     this.props.dispatch(setAudioVolume(channel, parseFloat(value)));
   }
@@ -83,7 +83,7 @@ class AudioPanel extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const {audioEnabled, audioVolume} = state.settings;
+  const {audioEnabled, audioVolume} = state.settings.values;
   return {audioEnabled, audioVolume};
 };
 

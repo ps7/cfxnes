@@ -1,16 +1,13 @@
-export function handleActions(handlers, initialState) {
+export function createReducer(handlers, fallback) {
   return (state, action) => {
     const handler = handlers[action.type];
     if (handler) {
       const typedHandler = action.error ? handler.failure : handler.success;
       return (typedHandler || handler)(state, action.payload, action.meta);
     }
-    if (state) {
-      return state;
+    if (typeof fallback === 'function') {
+      return fallback(state, action);
     }
-    if (typeof initialState === 'function') {
-      return initialState();
-    }
-    return initialState;
+    return state || fallback;
   };
 }

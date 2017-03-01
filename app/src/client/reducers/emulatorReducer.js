@@ -1,9 +1,9 @@
 import {
   SET_EMULATOR_RUNNING,
   SET_EMULATOR_SUSPENDED,
-} from '../actions/emulatorActions';
+} from '../actions';
 
-import {handleActions} from './common';
+import {createReducer} from './common';
 
 const initialState = {
   running: false,
@@ -11,7 +11,9 @@ const initialState = {
   loading: false,
 };
 
-export default handleActions({
+const actionHandlers = {
   [SET_EMULATOR_RUNNING]: (state, running) => ({...state, running}),
   [SET_EMULATOR_SUSPENDED]: (state, suspended) => ({...state, suspended}),
-}, initialState);
+};
+
+export default createReducer(actionHandlers, initialState);

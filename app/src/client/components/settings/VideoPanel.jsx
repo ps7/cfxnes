@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
-import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType} from '../../enums';
+import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType, SettingsGroup} from '../../enums';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../constants';
 import {Field, Panel} from '../common';
 
@@ -15,7 +15,7 @@ import {
   setFpsVisible,
 } from '../../actions';
 
-const VIDEO = 'video';
+const {VIDEO} = SettingsGroup;
 
 class VideoPanel extends React.Component {
 
@@ -43,36 +43,36 @@ class VideoPanel extends React.Component {
     this.props.onActivate(VIDEO);
   }
 
-  handleVideoScaleChange = e => {
-    const scale = parseInt(e.target.value);
+  handleVideoScaleChange = event => {
+    const scale = parseInt(event.target.value);
     if (scale && scale >= MIN_VIDEO_SCALE && scale <= MAX_VIDEO_SCALE) {
-      this.props.dispatch(setVideoScale(parseFloat(e.target.value)));
+      this.props.dispatch(setVideoScale(parseFloat(event.target.value)));
     }
   };
 
-  handleVideoPaletteChange = e => {
-    this.props.dispatch(setVideoPalette(e.target.value));
+  handleVideoPaletteChange = event => {
+    this.props.dispatch(setVideoPalette(event.target.value));
   };
 
-  handleVideoFilterChange = e => {
-    this.props.dispatch(setVideoFilter(e.target.value));
+  handleVideoFilterChange = event => {
+    this.props.dispatch(setVideoFilter(event.target.value));
   };
 
-  handleVideoDebugChange = e => {
-    this.props.dispatch(setVideoDebug(e.target.checked));
+  handleVideoDebugChange = event => {
+    this.props.dispatch(setVideoDebug(event.target.checked));
   };
 
-  handleVideoRendererChange = e => {
-    const renderer = e.target.checked ? VideoRenderer.WEBGL : VideoRenderer.CANVAS;
+  handleVideoRendererChange = event => {
+    const renderer = event.target.checked ? VideoRenderer.WEBGL : VideoRenderer.CANVAS;
     this.props.dispatch(setVideoRenderer(renderer));
   };
 
-  handleFullscreenTypeChange = e => {
-    this.props.dispatch(setFullscreenType(e.target.value));
+  handleFullscreenTypeChange = event => {
+    this.props.dispatch(setFullscreenType(event.target.value));
   };
 
-  handleFpsVisibleChange = e => {
-    this.props.dispatch(setFpsVisible(e.target.checked));
+  handleFpsVisibleChange = event => {
+    this.props.dispatch(setFpsVisible(event.target.checked));
   };
 
   render() {
@@ -99,7 +99,7 @@ const mapStateToProps = state => {
   const {
     videoScale, videoPalette, videoFilter, videoDebug,
     videoRenderer, fullscreenType, fpsVisible,
-  } = state.settings;
+  } = state.settings.values;
   return {
     videoScale, videoPalette, videoFilter, videoDebug,
     videoRenderer, fullscreenType, fpsVisible,
