@@ -4,6 +4,7 @@ import * as VideoRenderer from './VideoRenderer';
 import * as VideoPalette from './VideoPalette';
 import * as VideoFilter from './VideoFilter';
 import * as FullscreenType from './FullscreenType';
+import * as AudioChannel from './AudioChannel';
 import * as Port from './Port';
 import * as Device from './Device';
 import * as Source from './Source';
@@ -16,6 +17,7 @@ export {
   VideoPalette,
   VideoFilter,
   FullscreenType,
+  AudioChannel,
   Port,
   Device,
   Source,

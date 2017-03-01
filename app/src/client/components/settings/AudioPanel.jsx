@@ -2,22 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fromPairs, last, noop} from 'lodash-es';
 import {Icon, Field, Panel} from '../common';
-import {SettingsGroup} from '../../enums';
+import {AudioChannel, SettingsGroup} from '../../enums';
 import {audioSupported, setAudioEnabled, setAudioVolume} from '../../actions';
 
 const {AUDIO} = SettingsGroup;
-
-const channelCaptions = {
-  master: 'Master volume',
-  pulse1: 'Pulse channel 1',
-  pulse2: 'Pulse channel 2',
-  triangle: 'Triangle channel',
-  noise: 'Noise channel',
-  dmc: 'DMC channel',
-};
-
-const channels = Object.keys(channelCaptions);
-const volumePropType = React.PropTypes.number;
 
 class AudioPanel extends React.Component {
 
@@ -25,7 +13,9 @@ class AudioPanel extends React.Component {
 
   static propTypes = {
     audioEnabled: React.PropTypes.bool.isRequired,
-    audioVolume: React.PropTypes.shape(fromPairs(channels.map(channel => [channel, volumePropType]))).isRequired,
+    audioVolume: React.PropTypes.shape(
+      fromPairs(AudioChannel.values.map(value => [value, React.PropTypes.number]))
+    ).isRequired,
     active: React.PropTypes.bool,
     onActivate: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
@@ -71,11 +61,12 @@ class AudioPanel extends React.Component {
     return (
       <Panel {...panelProps}>
         <Field id="audio-enabled" caption="Enable audio" type="checkbox" checked={audioEnabled} onChange={this.handleAudioEnabledChange}/>
-        {channels.map(channel => (
-          <Field key={channel} id={`audio-volume-${channel}`} caption={channelCaptions[channel]}
-                 type="range" min="0" max="1" step="0.01" value={audioVolume[channel]}
-                 disabled={!audioEnabled} onChange={this.handleAudioVolumeChange}/>
-        ))}
+        {AudioChannel.items.map(item => {
+          const {value, caption} = item;
+          return <Field key={value} id={`audio-volume-${value}`} caption={caption}
+                        type="range" min="0" max="1" step="0.01" value={audioVolume[value]}
+                        disabled={!audioEnabled} onChange={this.handleAudioVolumeChange}/>;
+        })}
       </Panel>
     );
   }

@@ -69,7 +69,7 @@ class ControlsPanel extends React.Component {
                            onInputChangeRequest={this.handleInputChangeRequest}/>;
         })}
         <p>
-          <Icon icon="gamepad"/>
+          <Icon name="gamepad"/>
           <a href="#" onClick={this.handleResetControls}>Restore default keyboard controls</a>
         </p>
       </Panel>
