@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Library video.smoothing property replaced by video.filter.
 - Library config.set method renamed to config.use.
 - Library uses `'none'` constant for unset device instead of `null`.
+- Library ignores initialization options with `undefined` value.
 
 ## [0.5.0] - 2016-09-29
 ### Fixed
