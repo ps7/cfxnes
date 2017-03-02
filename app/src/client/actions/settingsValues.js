@@ -18,6 +18,7 @@ export const SET_AUDIO_VOLUME = 'SET_AUDIO_VOLUME';
 export const SET_CONTROLS = 'SET_CONTROLS';
 export const SET_CONTROLS_DEVICE = 'SET_CONTROLS_DEVICE';
 export const SET_CONTROLS_INPTUS = 'SET_CONTROLS_INPTUS';
+export const SET_CONTROLS_VISIBLE = 'SET_CONTROLS_VISIBLE';
 
 export const audioSupported = nes.audio != null;
 
@@ -119,4 +120,8 @@ export function rebindControlsInput(deviceInput) {
       });
     });
   };
+}
+
+export function setControlsVisible(visible) {
+  return createAction(SET_CONTROLS_VISIBLE, visible);
 }

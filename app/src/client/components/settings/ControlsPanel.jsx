@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
-import {Panel, Modal, Icon} from '../common';
+import {Panel, Modal, Icon, Field} from '../common';
 import {Port, SettingsGroup} from '../../enums';
-import {setControlsDevice, rebindControlsInput, resetControls} from '../../actions';
+import {setControlsDevice, rebindControlsInput, resetControls, setControlsVisible} from '../../actions';
 import Controls from './controls/Controls';
 
 const {CONTROLS} = SettingsGroup;
@@ -17,6 +17,7 @@ class ControlsPanel extends React.Component {
       [Port.ONE]: Controls.propTypes.controls,
       [Port.TWO]: Controls.propTypes.controls,
     }).isRequired,
+    controlsVisible: React.PropTypes.bool.isRequired,
     active: React.PropTypes.bool,
     onActivate: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
@@ -50,10 +51,14 @@ class ControlsPanel extends React.Component {
   handleResetControls = event => {
     event.preventDefault();
     this.props.dispatch(resetControls());
-  }
+  };
+
+  handleControlsVisibleChange = event => {
+    this.props.dispatch(setControlsVisible(event.target.checked));
+  };
 
   render() {
-    const {controls, active} = this.props;
+    const {controls, controlsVisible, active} = this.props;
     return (
       <Panel type={CONTROLS} icon="gamepad" caption="Controls" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
         {this.state.inputRequestVisible && (
@@ -72,6 +77,10 @@ class ControlsPanel extends React.Component {
           <Icon name="gamepad"/>
           <a href="#" onClick={this.handleResetControls}>Restore default keyboard controls</a>
         </p>
+        <p>
+          <Field id="controls-visible" caption="Show controls on emulator page" type="checkbox"
+                 checked={controlsVisible} onChange={this.handleControlsVisibleChange}/>
+        </p>
       </Panel>
     );
   }
@@ -79,8 +88,8 @@ class ControlsPanel extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const {controls} = state.settings.values;
-  return {controls};
+  const {controls, controlsVisible} = state.settings.values;
+  return {controls, controlsVisible};
 };
 
 export default connect(mapStateToProps)(ControlsPanel);

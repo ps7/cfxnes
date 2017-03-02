@@ -1,4 +1,4 @@
-import {copyControlsFromNes, createDevicesFromControls, createInputsFromControls} from './nesControls';
+import {copyControlsFromNes, createDevicesFromControls, createInputsFromControls} from './controls';
 
 export function applySettingsToNes(nes, settings) {
   nes.config.use({

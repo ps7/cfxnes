@@ -1,5 +1,5 @@
 import nes from '../nes';
-import {copySettingsFromNes} from './nesSettings';
+import {copySettingsFromNes} from './settings';
 
 export default {
   fpsVisible: true,

@@ -13,6 +13,7 @@ import {
   SET_CONTROLS,
   SET_CONTROLS_DEVICE,
   SET_CONTROLS_INPTUS,
+  SET_CONTROLS_VISIBLE,
 } from '../actions';
 
 import {createReducer} from './common';
@@ -43,6 +44,7 @@ const actionHandlers = {
     const {device} = controls[port];
     return {...state, controls: {...controls, [port]: {device, inputs}}};
   },
+  [SET_CONTROLS_VISIBLE]: (state, controlsVisible) => ({...state, controlsVisible}),
 };
 
 export default createReducer(actionHandlers);

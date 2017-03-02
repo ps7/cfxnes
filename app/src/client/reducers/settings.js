@@ -9,7 +9,7 @@ import {
 } from '../actions';
 
 import {createReducer} from './common';
-import valuesReducer from './settingsValuesReducer';
+import valuesReducer from './settingsValues';
 
 const initialState = {
   activePanelId: SettingsGroup.SYSTEM,
