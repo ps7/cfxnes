@@ -1,38 +1,18 @@
 header {
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
   border-bottom: 1px solid black;
-
-  &::after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: "";
-    clear: both;
-    height: 0;
-  }
 }
 
 .header-logo {
-  display: inline-block;
-  float: left;
-  padding: 0.25em 1em;
+  text-decoration: none;
+  padding: 0 1em 0 0.5em;
 
   & img {
-    display: inline-block;
-    height: 1.5em;
+    width: 2em;
     vertical-align: middle;
   }
-}
-
-.navigation {
-  display: inline-block;
-}
-
-.navigation-main {
-  float: left;
-}
-
-.navigation-help {
-  float: right;
 }
 
 .navigation-item {
@@ -45,6 +25,10 @@ header {
   }
 }
 
+.navigation-help {
+  margin-left: auto;
+}
+
 .toolbar {
-  float: left;
+  margin: 0 1em;
 }

@@ -1,3 +1,21 @@
+html, body, #root, .app {
+  height: 100%;
+}
+
 body {
   margin: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+header, main {
+  flex-shrink: 0;
+}
+
+main {
+  flex-grow: 1;
+  margin: 1em;
 }

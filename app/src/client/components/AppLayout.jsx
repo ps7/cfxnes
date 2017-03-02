@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from './header';
 
 const AppLayout = ({main, toolbar}) => (
-  <div>
+  <div className="app">
     <Header toolbar={toolbar}/>
     {main}
   </div>

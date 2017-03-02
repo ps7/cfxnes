@@ -5,3 +5,7 @@
   padding: 1em;
   vertical-align: top;
 }
+
+.about-logo img {
+  max-height: 30em;
+}

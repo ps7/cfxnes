@@ -29,10 +29,13 @@
 
 .panel {
   border: 1px solid black;
-  margin: 1em;
 
   &.collapsed .panel-body {
     display: none;
+  }
+
+  & + .panel {
+    margin-top: 1em;
   }
 }
 
