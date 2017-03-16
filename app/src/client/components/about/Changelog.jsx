@@ -28,7 +28,7 @@ export default () => (
       <li>Added option to delete saved game data.</li>
       <li>Non-volatile RAM is stored in IndexedDB.</li>
       <li>Default audio volume is 50%.</li>
-      <li>Vector graphics is used where possible.</li>
+      <li>Vector graphics used where possible.</li>
       <li><i>Game Library</i> renamed to <i>Library</i>.</li>
     </ul>
     <h3>0.3.0 - 2015-08-09</h3>

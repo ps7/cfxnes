@@ -4,14 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Fixed
-- Library AMD export
+- Library AMD export.
 
 ### Changed
-- Library uses JSZip 3 for unzipping.
-- Library video.smoothing property replaced by video.filter.
-- Library config.set method renamed to config.use.
-- Library uses `'none'` constant for unset device instead of `null`.
-- Library ignores initialization options with `undefined` value.
+- Switched to JSZip 3.
+- *Smothing* configuration option renamed to *Filter*.
+- `video.smoothing` property replaced by `video.filter`.
+- `config.set` method renamed to `config.use`.
+- `devices` property uses `'none'` constant instead of `null`.
+- Configuration options with `undefined` value are ignored.
 
 ## [0.5.0] - 2016-09-29
 ### Fixed
@@ -51,7 +52,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Non-volatile RAM is stored in IndexedDB.
 - API uses Promises for asynchronous operations.
 - Default audio volume is 50%.
-- Vector graphics is used where possible.
+- Vector graphics used where possible.
 - Only single reload when multiple files are changed in library directory.
 - *Game Library* renamed to *Library*.
 
@@ -72,7 +73,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - MMC3 mapper initial state (*SMB3* and *Shadow of the Ninja* are now playable).
 - Compatibility with Babel compiler (v5.4.3).
 - Compatibility with Closure Compiler (v20150505).
-- Emulator initialization in Internet Explorer.
+- Initialization in Internet Explorer.
 
 ## Added
 - Support for loading of zipped `.nes` files.
@@ -81,10 +82,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Favicon.
 
 ### Changed
-- js-md5 and screenfull.js library are optional dependencies.
+- js-md5 and screenfull.js are optional dependencies.
 - UI optimization for small screens.
 
 ## 0.1.0 - 2015-04-26
+- Initial version.
 - Complete rewrite from CoffeeScript to ECMAScript 6.
 
 [unreleased]: https://github.com/jpikl/cfxnes/compare/v0.5.0...HEAD
