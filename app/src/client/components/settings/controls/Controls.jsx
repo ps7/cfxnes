@@ -3,13 +3,14 @@ import {Port, Device} from '../../../enums';
 import ControlsDevice from './ControlsDevice';
 import ControlsInputs from './ControlsInputs';
 
-const Controls = ({port, controls, onDeviceChange, onInputChangeRequest}) => {
+const Controls = ({port, controls, onDeviceChange, onInputAddRequest, onInputRemoveRequest}) => {
   const {device, inputs} = controls;
   return (
     <div className="controls">
       <label>Controller {port}</label>
       <ControlsDevice port={port} device={device} onChange={onDeviceChange}/>
-      <ControlsInputs port={port} device={device} inputs={inputs} onChangeRequest={onInputChangeRequest}/>
+      <ControlsInputs port={port} device={device} inputs={inputs}
+                      onAddRequest={onInputAddRequest} onRemoveRequest={onInputRemoveRequest}/>
     </div>
   );
 };
@@ -21,12 +22,14 @@ Controls.propTypes = {
     inputs: ControlsInputs.propTypes.inputs,
   }).isRequired,
   onDeviceChange: React.PropTypes.func,
-  onInputChangeRequest: React.PropTypes.func,
+  onInputAddRequest: React.PropTypes.func,
+  onInputRemoveRequest: React.PropTypes.func,
 };
 
 Controls.defaultProps = {
   onDeviceChange: null,
-  onInputChangeRequest: null,
+  onInputAddRequest: null,
+  onInputRemoveRequest: null,
 };
 
 export default Controls;

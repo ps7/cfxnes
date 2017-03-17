@@ -1,6 +1,6 @@
 import {copyControlsFromNes, copyInputsFromNes} from '../settings';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
-import {Port, Device} from '../enums';
+import {Port, Device, Source} from '../enums';
 import nes, {defaults} from '../nes';
 import {createAction} from './common';
 
@@ -103,23 +103,34 @@ export function setControlsDevice(port, device) {
   return createAction(SET_CONTROLS_DEVICE, {port, device});
 }
 
-export function rebindControlsInput(deviceInput) {
+export function addControlsInput(deviceInput) {
   return dispatch => {
     return new Promise(resolve => {
       nes.inputs.record(sourceInputId => {
         if (sourceInputId !== 'keyboard.escape') {
           const deviceInputId = Device.getInputId(deviceInput);
-          nes.inputs.delete(deviceInputId, sourceInputId);
+          nes.inputs.delete(sourceInputId);
           nes.inputs.set(deviceInputId, sourceInputId);
-          for (const port of Port.values) {
-            const inputs = copyInputsFromNes(nes, port);
-            dispatch(createAction(SET_CONTROLS_INPTUS, {port, inputs}));
-          }
+          refreshControlsInputs(dispatch);
         }
         resolve();
       });
     });
   };
+}
+
+export function removeControlsInput(sourceInput) {
+  return dispatch => {
+    nes.inputs.delete(Source.getInputId(sourceInput));
+    refreshControlsInputs(dispatch);
+  };
+}
+
+function refreshControlsInputs(dispatch) {
+  for (const port of Port.values) {
+    const inputs = copyInputsFromNes(nes, port);
+    dispatch(createAction(SET_CONTROLS_INPTUS, {port, inputs}));
+  }
 }
 
 export function setControlsVisible(visible) {

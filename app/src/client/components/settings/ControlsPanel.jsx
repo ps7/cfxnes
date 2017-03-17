@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
 import {Panel, Modal, Icon, Field} from '../common';
 import {Port, SettingsGroup} from '../../enums';
-import {setControlsDevice, rebindControlsInput, resetControls, setControlsVisible} from '../../actions';
+import {setControlsDevice, addControlsInput, removeControlsInput, resetControls, setControlsVisible} from '../../actions';
 import Controls from './controls/Controls';
 
 const {CONTROLS} = SettingsGroup;
@@ -41,11 +41,15 @@ class ControlsPanel extends React.Component {
     this.props.dispatch(setControlsDevice(port, device));
   };
 
-  handleInputChangeRequest = deviceInput => {
+  handleInputAddRequest = deviceInput => {
     this.setState({inputRequestVisible: true});
-    this.props.dispatch(rebindControlsInput(deviceInput)).then(() => {
+    this.props.dispatch(addControlsInput(deviceInput)).then(() => {
       this.setState({inputRequestVisible: false});
     });
+  };
+
+  handleInputRemoveRequest = sourceInput => {
+    this.props.dispatch(removeControlsInput(sourceInput));
   };
 
   handleResetControls = event => {
@@ -71,10 +75,11 @@ class ControlsPanel extends React.Component {
         {Port.values.map(port => {
           return <Controls key={port} port={port} controls={controls[port]}
                            onDeviceChange={this.handleDeviceChange}
-                           onInputChangeRequest={this.handleInputChangeRequest}/>;
+                           onInputAddRequest={this.handleInputAddRequest}
+                           onInputRemoveRequest={this.handleInputRemoveRequest}/>;
         })}
         <p>
-          <Icon name="gamepad"/>
+          <Icon name="keyboard-o"/>
           <a href="#" onClick={this.handleResetControls}>Restore default keyboard controls</a>
         </p>
         <p>

@@ -1,34 +1,51 @@
 import React from 'react';
 import {Button} from '../../common';
+import {Source} from '../../../enums';
 import DeviceInput from './DeviceInput';
-import SourceInputs from './SourceInputs';
+import SourceInput from './SourceInput';
 
 export default class ControlsInputsRow extends React.Component {
 
   static propTypes = {
     deviceInput: DeviceInput.propTypes.input,
-    sourceInputs: SourceInputs.propTypes.inputs,
-    onChangeRequest: React.PropTypes.func,
+    sourceInputs: React.PropTypes.arrayOf(SourceInput.propTypes.input),
+    onAddRequest: React.PropTypes.func,
+    onRemoveRequest: React.PropTypes.func,
   };
 
   static defaultProps = {
     deviceInput: {},
     sourceInputs: [],
-    onChangeRequest: null,
+    onAddRequest: null,
+    onRemoveRequest: null,
   };
 
-  handleChangeClick = () => {
-    const {deviceInput, onChangeRequest} = this.props;
-    onChangeRequest(deviceInput);
-  }
+  handleAddClick = () => {
+    const {deviceInput, onAddRequest} = this.props;
+    onAddRequest(deviceInput);
+  };
+
+  handleRemoveClick = (sourceInput) => {
+    const {onRemoveRequest} = this.props;
+    onRemoveRequest(sourceInput);
+  };
 
   render() {
-    const {deviceInput, sourceInputs, onChangeRequest} = this.props;
+    const {deviceInput, sourceInputs, onAddRequest, onRemoveRequest} = this.props;
+    const handleRemoveClick = onRemoveRequest && this.handleRemoveClick;
     return (
       <div className="controls-inputs-row">
         <DeviceInput input={deviceInput}/>
-        <SourceInputs inputs={sourceInputs}/>
-        {onChangeRequest && <Button caption="Change" onClick={this.handleChangeClick}/>}
+        <div className="source-inputs">
+          {sourceInputs.map(input => (
+            <SourceInput key={Source.getInputId(input)} input={input} onRemoveClick={handleRemoveClick}/>
+          ))}
+        </div>
+        {onAddRequest && (
+          <div className="add-input">
+            <Button icon="plus" tooltip="Bind new input" onClick={this.handleAddClick}/>
+          </div>
+        )}
       </div>
     );
   }

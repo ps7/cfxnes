@@ -25,10 +25,18 @@ export function parseInputId(id) {
 
 export function getInputCaption({source, name}) {
   let caption = name.split('-').map(capitalize).join(' ');
-  if (source === MOUSE) {
-    caption += ' Button';
-  } else if (isGamepad(source)) {
+  if (isGamepad(source)) {
     caption = caption.replace('Dpad', 'D-pad').replace(/ $/, '-');
   }
   return caption;
+}
+
+export function getInputIcon({source}) {
+  if (isGamepad(source)) {
+    return 'gamepad';
+  }
+  if (source === MOUSE) {
+    return 'mouse-pointer';
+  }
+  return 'keyboard-o';
 }

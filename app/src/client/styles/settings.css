@@ -28,6 +28,7 @@
 }
 
 .controls-inputs {
+  display: table;
   padding: 0.5em;
 }
 
@@ -43,4 +44,42 @@
 .device-input {
   font-weight: bold;
   text-align: right;
+}
+
+.source-inputs {
+}
+
+.source-input {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
+
+  & > .fa {
+    padding-left: 0.25em;
+  }
+
+  & span {
+    padding: 0 0.25em;
+  }
+
+  & button {
+    border: none;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    opacity: 0.5;
+  }
+
+  &:hover button {
+    background: #ddd;
+    border: 1px solid #888;
+    opacity: 1;
+  }
+
+  & + .source-input {
+    margin-left: 0.25em;
+  }
+}
+
+.add-input {
 }
