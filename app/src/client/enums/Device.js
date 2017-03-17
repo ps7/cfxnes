@@ -15,6 +15,10 @@ export const params = {
 
 export const items = createItems(values, params);
 
+export function getCaption(device) {
+  return params[device].caption;
+}
+
 export function getInputNames(device) {
   return params[device].inputNames;
 }

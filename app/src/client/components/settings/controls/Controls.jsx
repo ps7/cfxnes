@@ -7,7 +7,6 @@ const Controls = ({port, controls, onDeviceChange, onInputAddRequest, onInputRem
   const {device, inputs} = controls;
   return (
     <div className="controls">
-      <label>Controller {port}</label>
       <ControlsDevice port={port} device={device} onChange={onDeviceChange}/>
       <ControlsInputs port={port} device={device} inputs={inputs}
                       onAddRequest={onInputAddRequest} onRemoveRequest={onInputRemoveRequest}/>

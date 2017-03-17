@@ -40,6 +40,7 @@ export default class ControlsInputsRow extends React.Component {
           {sourceInputs.map(input => (
             <SourceInput key={Source.getInputId(input)} input={input} onRemoveClick={handleRemoveClick}/>
           ))}
+          {sourceInputs.length === 0 && <i>Unset</i>}
         </div>
         {onAddRequest && (
           <div className="add-input">

@@ -4,7 +4,7 @@ import {noop} from 'lodash-es';
 import {Panel, Modal, Icon, Field} from '../common';
 import {Port, SettingsGroup} from '../../enums';
 import {setControlsDevice, addControlsInput, removeControlsInput, resetControls, setControlsVisible} from '../../actions';
-import Controls from './controls/Controls';
+import {Controls} from './controls';
 
 const {CONTROLS} = SettingsGroup;
 
