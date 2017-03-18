@@ -3,7 +3,7 @@ import {Port, Device, Source} from '../enums';
 export function createDevicesFromControls(controls) {
   const devices = {};
   for (const port of Port.values) {
-    devices[port] = controls[port].device;
+    devices[port] = Device.toOptional(controls[port].device);
   }
   return devices;
 }
@@ -26,7 +26,7 @@ export function copyControlsFromNes(nes) {
   const controls = {};
   for (const port of Port.values) {
     controls[port] = {
-      device: nes.devices[port],
+      device: Device.fromOptional(nes.devices[port]),
       inputs: copyInputsFromNes(nes, port),
     };
   }

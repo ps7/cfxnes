@@ -15,6 +15,14 @@ export const params = {
 
 export const items = createItems(values, params);
 
+export function fromOptional(device) {
+  return device != null ? device : NONE;
+}
+
+export function toOptional(device) {
+  return device !== NONE ? device : null;
+}
+
 export function getCaption(device) {
   return params[device].caption;
 }

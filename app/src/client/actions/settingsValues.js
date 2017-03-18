@@ -99,7 +99,7 @@ export function resetControls() {
 }
 
 export function setControlsDevice(port, device) {
-  nes.devices[port] = device;
+  nes.devices[port] = Device.toOptional(device);
   return createAction(SET_CONTROLS_DEVICE, {port, device});
 }
 

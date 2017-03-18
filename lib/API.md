@@ -335,7 +335,7 @@ Module that allows to set up input devices.
 NES has 2 input ports, each of them can be assigned a device through numeric property. Allowed values are:
 - `'joypad'` - Standard NES controller.
 - `'zapper'` - Zapper (beam gun).
-- `'none'` - No device.
+- `null` - No device.
 
 #### Properties
 
@@ -349,7 +349,7 @@ const nes = cfxnes();
 const {devices} = nes;
 
 devices[1] = 'zapper'; // Set zapper on port #1
-devices[2] = 'none'; // Make port #2 empty
+devices[2] = null; // Make port #2 empty
 ```
 
 ## nes.inputs

@@ -11,7 +11,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - *Smothing* configuration option renamed to *Filter*.
 - `video.smoothing` property replaced by `video.filter`.
 - `config.set` method renamed to `config.use`.
-- `devices` property uses `'none'` constant instead of `null`.
 - Configuration options with `undefined` value are ignored.
 
 ## [0.5.0] - 2016-09-29
