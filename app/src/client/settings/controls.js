@@ -40,7 +40,7 @@ export function copyInputsFromNes(nes, port) {
     if (device !== Device.NONE) {
       for (const name of Device.getInputNames(device)) {
         const deviceInputId = Device.getInputId({port, device, name});
-        const sourceInputIds = nes.inputs.get(deviceInputId);
+        const sourceInputIds = nes.inputs.map.get(deviceInputId);
         inputs[device][name] = sourceInputIds.map(Source.parseInputId);
       }
     }

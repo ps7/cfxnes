@@ -109,8 +109,8 @@ export function addControlsInput(deviceInput) {
       nes.inputs.record(sourceInputId => {
         if (sourceInputId !== 'keyboard.escape') {
           const deviceInputId = Device.getInputId(deviceInput);
-          nes.inputs.delete(sourceInputId);
-          nes.inputs.set(deviceInputId, sourceInputId);
+          nes.inputs.map.delete(sourceInputId);
+          nes.inputs.map.set(deviceInputId, sourceInputId);
           refreshControlsInputs(dispatch);
         }
         resolve();
@@ -121,7 +121,7 @@ export function addControlsInput(deviceInput) {
 
 export function removeControlsInput(sourceInput) {
   return dispatch => {
-    nes.inputs.delete(Source.getInputId(sourceInput));
+    nes.inputs.map.delete(Source.getInputId(sourceInput));
     refreshControlsInputs(dispatch);
   };
 }
