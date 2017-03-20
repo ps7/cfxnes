@@ -9,12 +9,16 @@ export default class FpsCounter extends React.Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => this.setState({value: nes.fps}), 1000);
+    this.timer = setInterval(this.updateFps, 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+
+  updateFps = () => {
+    this.setState({value: nes.fps});
+  };
 
   render() {
     const value = ~~this.state.value;

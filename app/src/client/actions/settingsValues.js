@@ -126,6 +126,28 @@ export function removeControlsInput(sourceInput) {
   };
 }
 
+export function bindGamepadToJoypad(index, port) {
+  return dispatch => {
+    bindGamepadToJoypadButton(index, 'b', port, 'a');
+    bindGamepadToJoypadButton(index, 'a', port, 'b');
+    bindGamepadToJoypadButton(index, 'start', port, 'start');
+    bindGamepadToJoypadButton(index, 'back', port, 'select');
+    bindGamepadToJoypadButton(index, 'dpad-left', port, 'left');
+    bindGamepadToJoypadButton(index, 'dpad-right', port, 'right');
+    bindGamepadToJoypadButton(index, 'dpad-down', port, 'up');
+    bindGamepadToJoypadButton(index, 'dpad-up', port, 'down');
+    refreshControlsInputs(dispatch);
+  };
+}
+
+function bindGamepadToJoypadButton(gamepadIndex, gamepadButton, joypadPort, joypadButton) {
+  const joypadInput = `${joypadPort}.joypad.${joypadButton}`;
+  const gamepadInput = `gamepad${gamepadIndex}.${gamepadButton}`;
+  nes.inputs.map.delete(joypadInput);
+  nes.inputs.map.delete(gamepadInput);
+  nes.inputs.map.set(joypadInput, gamepadInput);
+}
+
 function refreshControlsInputs(dispatch) {
   for (const port of Port.values) {
     const inputs = copyInputsFromNes(nes, port);

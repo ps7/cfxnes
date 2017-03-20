@@ -53,6 +53,8 @@
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 0.25em;
+  white-space: nowrap;
+  margin-right: 0.25em;
 
   & > .fa {
     padding-left: 0.25em;
@@ -75,11 +77,20 @@
     border: 1px solid #888;
     opacity: 1;
   }
-
-  & + .source-input {
-    margin-left: 0.25em;
-  }
 }
 
 .add-input {
+}
+
+#controls-visible,
+.controls-defaults,
+.gamepad-list {
+  margin-top: 1em;
+}
+
+.gamepad-map-button + .gamepad-map-button:before {
+  content: "/";
+  display: inline-block;
+  text-decoration: none !important;
+  margin: 0 0.25em;
 }

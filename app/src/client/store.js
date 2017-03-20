@@ -7,7 +7,7 @@ import {initSettings} from './actions';
 import {saveSettings} from './settings';
 
 const middleware = [thunk, promise];
-const applyDevTools = (__DEVELOPMENT__ && __REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || identity;
+const applyDevTools = (__DEVELOPMENT__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || identity; // eslint-disable-line no-underscore-dangle
 
 if (__DEVELOPMENT__) {
   const createLogger = require('redux-logger');

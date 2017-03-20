@@ -2,9 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {noop} from 'lodash-es';
 import {Panel, Modal, Icon, Field} from '../common';
-import {Port, SettingsGroup} from '../../enums';
-import {setControlsDevice, addControlsInput, removeControlsInput, resetControls, setControlsVisible} from '../../actions';
-import {Controls} from './controls';
+import {Port, Device, SettingsGroup} from '../../enums';
+
+import {
+  setControlsDevice,
+  addControlsInput,
+  removeControlsInput,
+  resetControls,
+  setControlsVisible,
+  bindGamepadToJoypad,
+} from '../../actions';
+
+import {Controls, GamepadList} from './controls';
 
 const {CONTROLS} = SettingsGroup;
 
@@ -52,6 +61,12 @@ class ControlsPanel extends React.Component {
     this.props.dispatch(removeControlsInput(sourceInput));
   };
 
+  handleGamepadMapRequest = (index, port) => {
+    const {dispatch} = this.props;
+    dispatch(setControlsDevice(port, Device.JOYPAD));
+    dispatch(bindGamepadToJoypad(index, port));
+  };
+
   handleResetControls = event => {
     event.preventDefault();
     this.props.dispatch(resetControls());
@@ -78,14 +93,13 @@ class ControlsPanel extends React.Component {
                            onInputAddRequest={this.handleInputAddRequest}
                            onInputRemoveRequest={this.handleInputRemoveRequest}/>;
         })}
-        <p>
-          <Icon name="keyboard-o"/>
+        <div className="controls-defaults">
+          <Icon name="keyboard-o"/> &nbsp;
           <a href="#" onClick={this.handleResetControls}>Restore default keyboard controls</a>
-        </p>
-        <p>
-          <Field id="controls-visible" caption="Show controls on emulator page" type="checkbox"
-                 checked={controlsVisible} onChange={this.handleControlsVisibleChange}/>
-        </p>
+        </div>
+        <GamepadList onMapRequest={this.handleGamepadMapRequest}/>
+        <Field id="controls-visible" caption="Show controls on emulator page" type="checkbox"
+                checked={controlsVisible} onChange={this.handleControlsVisibleChange}/>
       </Panel>
     );
   }
