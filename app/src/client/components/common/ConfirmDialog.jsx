@@ -45,7 +45,7 @@ export default class ConfirmDialog extends React.Component {
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
           <Button caption={cancelCaption} onClick={onCancel}/>
-          <Button caption={confirmCaption} onClick={onConfirm} focus/>
+          <Button caption={confirmCaption} onClick={onConfirm} autoFocus/>
         </Modal.Footer>
       </Modal>
     );

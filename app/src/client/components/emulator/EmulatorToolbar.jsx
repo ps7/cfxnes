@@ -9,7 +9,7 @@ import {
   enterFullscreen,
 } from '../../actions';
 
-import {Button, ButtonGroup, Toolbar} from '../common';
+import {Button, ButtonGroup, Icon, Toolbar, Tooltip} from '../common';
 import FpsCounter from './FpsCounter';
 
 class EmulatorToolbar extends React.Component {
@@ -55,23 +55,51 @@ class EmulatorToolbar extends React.Component {
     return (
       <Toolbar type="emulator">
         <ButtonGroup>
-          <Button icon="folder-open" tooltip="Open ROM"/>
+          <Button>
+            <Icon name="folder-open"/>
+            <Tooltip position="bottom">Open ROM</Tooltip>
+          </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button icon="power-off" tooltip="Power" onClick={this.handlePower}/>
-          <Button icon="repeat" tooltip="Reset" onClick={this.handleReset}/>
-          {running
-            ? <Button icon="pause" tooltip="Pause" onClick={this.handleStop}/>
-            : <Button icon="play" tooltip="Run" onClick={this.handleStart}/>
-          }
+          <Button onClick={this.handlePower}>
+            <Icon name="power-off"/>
+            <Tooltip position="bottom">Power</Tooltip>
+          </Button>
+          <Button onClick={this.handleReset}>
+            <Icon name="repeat"/>
+            <Tooltip position="bottom">Reset</Tooltip>
+          </Button>
+          {running ? (
+            <Button onClick={this.handleStop}>
+              <Icon name="pause"/>
+              <Tooltip position="bottom">Pause</Tooltip>
+            </Button>
+          ) : (
+            <Button onClick={this.handleStart}>
+              <Icon name="play"/>
+              <Tooltip position="bottom">Run</Tooltip>
+            </Button>
+          )}
         </ButtonGroup>
         <ButtonGroup>
-          <Button icon="search-minus" tooltip="Increase scale" disabled={videoScale <= MIN_VIDEO_SCALE} onClick={this.handleDecreaseScale}/>
-          <Button icon="search-plus" tooltip="Decrease scale" disabled={videoScale >= MAX_VIDEO_SCALE} onClick={this.handleIncreaseScale}/>
-          <Button icon="arrows-alt" tooltip="Fullscreen" onClick={this.handleFullscren}/>
+          <Button disabled={videoScale <= MIN_VIDEO_SCALE} onClick={this.handleDecreaseScale}>
+            <Icon name="search-minus"/>
+            <Tooltip position="bottom">Increase scale</Tooltip>
+          </Button>
+          <Button disabled={videoScale >= MAX_VIDEO_SCALE} onClick={this.handleIncreaseScale}>
+            <Icon name="search-plus"/>
+            <Tooltip position="bottom">Decrease scale</Tooltip>
+          </Button>
+          <Button onClick={this.handleFullscren}>
+            <Icon name="arrows-alt"/>
+            <Tooltip position="bottom">Fullscreen</Tooltip>
+          </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button icon="volume-up" tooltip="Volume"/>
+          <Button>
+            <Icon name="volume-up"/>
+            <Tooltip position="bottom">Volume</Tooltip>
+          </Button>
         </ButtonGroup>
         {fpsVisible && running && <FpsCounter/>}
       </Toolbar>

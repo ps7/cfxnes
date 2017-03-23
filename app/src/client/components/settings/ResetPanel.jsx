@@ -72,8 +72,7 @@ class ResetPanel extends React.Component {
   renderDeleteNVRAMsButton() {
     const {nvramsDeletionState} = this.props;
     if (nvramsDeletionState === ActionState.STARTED) {
-      const icon = <Icon name="circle-o-notch" spin/>;
-      return <Button icon={icon} caption="Deleting data..." disabled/>;
+      return <Button disabled><Icon name="circle-o-notch" spin/> Deleting data...</Button>;
     }
     if (nvramsDeletionState === ActionState.SUCCESS) {
       return <Button icon="check" caption="Done" disabled/>;
