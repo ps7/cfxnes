@@ -141,7 +141,7 @@
   z-index: 100;
   pointer-events: none;
 
-  &:before {
+  &::before {
     content: "";
     position: absolute;
     width: 0;
@@ -150,17 +150,17 @@
   }
 
   &.top,
-  &.top:before,
+  &.top::before,
   &.bottom,
-  &.bottom:before {
+  &.bottom::before {
     left: 50%;
     transform: translate(-50%, 0);
   }
 
   &.left,
-  &.left:before,
+  &.left::before,
   &.right,
-  &.right:before {
+  &.right::before {
     top: 50%;
     transform: translate(0, -50%);
   }
@@ -169,7 +169,7 @@
     bottom: 100%;
     margin-bottom: 0.5em;
 
-    &:before {
+    &::before {
       bottom: -0.4em;
       border-bottom-width: 0;
       border-top-color: black;
@@ -180,7 +180,7 @@
     top: 100%;
     margin-top: 0.5em;
 
-    &:before {
+    &::before {
       top: -0.4em;
       border-top-width: 0;
       border-bottom-color: black;
@@ -191,7 +191,7 @@
     left: 100%;
     margin-left: 0.5em;
 
-    &:before {
+    &::before {
       left: -0.4em;
       border-left-width: 0;
       border-right-color: black;
@@ -202,7 +202,7 @@
     right: 100%;
     margin-right: 0.5em;
 
-    &:before {
+    &::before {
       right: -0.4em;
       border-right-width: 0;
       border-left-color: black;
@@ -210,20 +210,19 @@
   }
 }
 
-
 @keyframes fadeInFromNone {
   0% {
-      display: none;
-      opacity: 0;
+    display: none;
+    opacity: 0;
   }
 
   50% {
-      display: block;
-      opacity: 0;
+    display: block;
+    opacity: 0;
   }
 
   100% {
-      display: block;
-      opacity: 0.8;
+    display: block;
+    opacity: 0.8;
   }
 }

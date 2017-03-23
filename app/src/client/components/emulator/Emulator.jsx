@@ -13,6 +13,10 @@ class Emulator extends React.Component {
       newRomId: React.PropTypes.string,
     }).isRequired,
     loading: React.PropTypes.bool.isRequired,
+    controls: React.PropTypes.shape({
+      [Port.ONE]: Controls.propTypes.controls,
+      [Port.TWO]: Controls.propTypes.controls,
+    }).isRequired,
     controlsVisible: React.PropTypes.bool.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
@@ -42,7 +46,7 @@ class Emulator extends React.Component {
         <h2>Controls <small>
           (<Link to="/settings/controls"><Icon name="wrench"/> Configure</Link>)
         </small></h2>
-        {Port.values.map(port => <Controls port={port} controls={controls[port]}/>)}
+        {Port.values.map(port => <Controls key={port} port={port} controls={controls[port]}/>)}
       </Message>
     );
   }

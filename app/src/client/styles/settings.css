@@ -46,9 +46,6 @@
   text-align: right;
 }
 
-.source-inputs {
-}
-
 .source-input {
   display: inline-block;
   border: 1px solid #ccc;
@@ -65,7 +62,6 @@
   }
 
   & button {
-    border: none;
     background: none;
     border: 1px solid transparent;
     border-radius: 0.25em;
@@ -79,16 +75,13 @@
   }
 }
 
-.add-input {
-}
-
 #controls-visible,
 .controls-defaults,
 .gamepad-list {
   margin-top: 1em;
 }
 
-.gamepad-map-button + .gamepad-map-button:before {
+.gamepad-map-button + .gamepad-map-button::before {
   content: "/";
   display: inline-block;
   text-decoration: none !important;

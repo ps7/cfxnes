@@ -25,7 +25,7 @@ export default class ControlsInputsRow extends React.Component {
     onAddRequest(deviceInput);
   };
 
-  handleRemoveClick = (sourceInput) => {
+  handleRemoveClick = sourceInput => {
     const {onRemoveRequest} = this.props;
     onRemoveRequest(sourceInput);
   };

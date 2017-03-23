@@ -19,8 +19,7 @@
   },
   "rules": {
     "no-invalid-this": "off",
-    "react/forbid-component-props": "error",
-    "react/forbid-prop-types": "warn",
+    "react/forbid-component-props": ["error", {"forbid": ["style"]}],
     "react/jsx-boolean-value": "warn",
     "react/jsx-closing-bracket-location": ["warn", "after-props"],
     "react/jsx-curly-spacing": "warn",
