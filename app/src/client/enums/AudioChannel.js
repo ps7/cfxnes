@@ -1,5 +1,3 @@
-import {createItems} from './common';
-
 export const MASTER = 'master';
 export const PULSE_1 = 'pulse1';
 export const PULSE_2 = 'pulse2';
@@ -18,4 +16,6 @@ const params = {
   [DMC]: {caption: 'DMC channel'},
 };
 
-export const items = createItems(values, params);
+export function getCaption(channel) {
+  return params[channel].caption;
+}

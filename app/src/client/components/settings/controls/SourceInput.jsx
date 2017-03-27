@@ -9,25 +9,25 @@ export default class SourceInput extends React.Component {
       source: Source.isSource,
       inputName: React.PropTypes.string,
     }).isRequired,
-    onRemoveClick: React.PropTypes.func,
+    onRemove: React.PropTypes.func,
   };
 
   static defaultProps = {
-    onRemoveClick: null,
+    onRemove: null,
   };
 
   handleRemoveClick = () => {
-    const {input, onRemoveClick} = this.props;
-    onRemoveClick(input);
+    const {input, onRemove} = this.props;
+    onRemove(input);
   }
 
   render() {
-    const {input, onRemoveClick} = this.props;
+    const {input, onRemove} = this.props;
     return (
       <div className="source-input">
         <Icon name={Source.getInputIcon(input)}/>
         <span>{Source.getInputCaption(input)}</span>
-        {onRemoveClick && <Button icon="trash" tooltip="Remove" onClick={this.handleRemoveClick}/>}
+        {onRemove && <Button icon="trash" tooltip="Remove" onClick={this.handleRemoveClick}/>}
       </div>
     );
   }

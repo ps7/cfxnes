@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fromPairs, last, noop} from 'lodash-es';
-import {Icon, Field, Panel} from '../common';
-import {AudioChannel, SettingsGroup} from '../../enums';
-import {audioSupported, setAudioEnabled, setAudioVolume} from '../../actions';
+import {fromPairs} from 'lodash-es';
+import {Icon, Field, Panel} from '../../common';
+import {AudioChannel, SettingsGroup} from '../../../enums';
+import {audioSupported, setAudioEnabled, setAudioVolume} from '../../../actions';
+import AudioVolumeField from './AudioVolumeField';
 
 const {AUDIO} = SettingsGroup;
 
@@ -16,28 +17,21 @@ class AudioPanel extends React.Component {
     audioVolume: React.PropTypes.shape(
       fromPairs(AudioChannel.values.map(value => [value, React.PropTypes.number]))
     ).isRequired,
-    active: React.PropTypes.bool,
-    onActivate: React.PropTypes.func,
+    active: React.PropTypes.bool.isRequired,
+    onActivate: React.PropTypes.func.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
-
-  static defaultProps = {
-    active: false,
-    onActivate: noop,
-  }
 
   handleHeaderClick = () => {
     this.props.onActivate(AUDIO);
   }
 
-  handleAudioEnabledChange = event => {
-    this.props.dispatch(setAudioEnabled(event.target.checked));
+  handleAudioEnabledChange = enabled => {
+    this.props.dispatch(setAudioEnabled(enabled));
   };
 
-  handleAudioVolumeChange = event => {
-    const {id, value} = event.target;
-    const channel = last(id.split('-'));
-    this.props.dispatch(setAudioVolume(channel, parseFloat(value)));
+  handleAudioVolumeChange = (channel, volume) => {
+    this.props.dispatch(setAudioVolume(channel, volume));
   }
 
   render() {
@@ -60,13 +54,14 @@ class AudioPanel extends React.Component {
 
     return (
       <Panel {...panelProps}>
-        <Field id="audio-enabled" caption="Enable audio" type="checkbox" checked={audioEnabled} onChange={this.handleAudioEnabledChange}/>
-        {AudioChannel.items.map(item => {
-          const {value, caption} = item;
-          return <Field key={value} id={`audio-volume-${value}`} caption={caption}
-                        type="range" min="0" max="1" step="0.01" value={audioVolume[value]}
-                        disabled={!audioEnabled} onChange={this.handleAudioVolumeChange}/>;
-        })}
+        <Field id="audio-enabled" caption="Enable audio" type="checkbox"
+               value={audioEnabled} onChange={this.handleAudioEnabledChange}/>
+        {AudioChannel.values.map(channel => (
+          <AudioVolumeField key={channel} channel={channel}
+                            disabled={!audioEnabled}
+                            value={audioVolume[channel]}
+                            onChange={this.handleAudioVolumeChange}/>
+        ))}
       </Panel>
     );
   }

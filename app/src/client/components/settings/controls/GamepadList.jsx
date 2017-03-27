@@ -4,7 +4,7 @@ import Gamepad from './Gamepad';
 export default class GamepadList extends React.Component {
 
   static propTypes = {
-    onMapRequest: React.PropTypes.func.isRequired,
+    onMap: React.PropTypes.func.isRequired,
   };
 
   state = {gamepads: []};
@@ -27,11 +27,11 @@ export default class GamepadList extends React.Component {
 
   render() {
     const {gamepads} = this.state;
-    const {onMapRequest} = this.props;
+    const {onMap} = this.props;
     return (
       <div className="gamepad-list">
         {!gamepads.length && 'No gamepads seem to be connected. Plug in a gamepad and then press any of its buttons to activate it.'}
-        {gamepads.map(gamepad => <Gamepad key={gamepad.index} gamepad={gamepad} onMapRequest={onMapRequest}/>)}
+        {gamepads.map(gamepad => <Gamepad key={gamepad.index} gamepad={gamepad} onMap={onMap}/>)}
       </div>
     );
   }

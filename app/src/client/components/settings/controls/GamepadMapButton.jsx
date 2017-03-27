@@ -5,13 +5,13 @@ export default class GamepadMapButton extends React.Component {
   static propTypes = {
     index: React.PropTypes.number.isRequired,
     port: React.PropTypes.number.isRequired,
-    onMapRequest: React.PropTypes.func.isRequired,
+    onMap: React.PropTypes.func.isRequired,
   };
 
   handleClick = event => {
     event.preventDefault();
-    const {index, port, onMapRequest} = this.props;
-    onMapRequest(index, port);
+    const {index, port, onMap} = this.props;
+    onMap(index, port);
   };
 
   render() {

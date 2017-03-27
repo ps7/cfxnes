@@ -1,4 +1,4 @@
-import Controls from './Controls';
-import GamepadList from './GamepadList';
+import ControlsPanel from './ControlsPanel';
+import ControlsList from './ControlsList';
 
-export {Controls, GamepadList};
+export {ControlsPanel, ControlsList};

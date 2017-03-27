@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
-import SystemPanel from './SystemPanel';
-import VideoPanel from './VideoPanel';
-import AudioPanel from './AudioPanel';
-import ControlsPanel from './ControlsPanel';
-import ResetPanel from './ResetPanel';
+import {SystemPanel} from './system';
+import {VideoPanel} from './video';
+import {AudioPanel} from './audio';
+import {ControlsPanel} from './controls';
+import {ResetPanel} from './reset';
 
 const panelComponents = [SystemPanel, VideoPanel, AudioPanel, ControlsPanel, ResetPanel];
 const panelIds = panelComponents.map(Component => Component.id);

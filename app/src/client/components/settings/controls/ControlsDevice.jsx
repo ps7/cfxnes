@@ -24,8 +24,10 @@ export default class ControlsDevice extends React.Component {
     return (
       <div className="controls-device">
         <label>Port {port}:</label>
-        {onChange == null && <span>{Device.getCaption(device)}</span>}
-        {onChange != null && <ButtonSelect items={Device.items} value={device} onChange={this.handleChange}/>}
+        {onChange != null
+          ? <ButtonSelect items={Device.items} value={device} onChange={this.handleChange}/>
+          : <span>{Device.getCaption(device)}</span>
+        }
       </div>
     );
   }

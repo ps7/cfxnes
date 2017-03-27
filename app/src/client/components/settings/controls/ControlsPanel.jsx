@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {noop} from 'lodash-es';
-import {Panel, Modal, Icon, Field} from '../common';
-import {Port, Device, SettingsGroup} from '../../enums';
+import {Panel, Modal, Icon, Field} from '../../common';
+import {Device, SettingsGroup} from '../../../enums';
 
 import {
   setControlsDevice,
@@ -11,9 +10,10 @@ import {
   resetControls,
   setControlsVisible,
   bindGamepadToJoypad,
-} from '../../actions';
+} from '../../../actions';
 
-import {Controls, GamepadList} from './controls';
+import ControlsList from './ControlsList';
+import GamepadList from './GamepadList';
 
 const {CONTROLS} = SettingsGroup;
 
@@ -22,20 +22,12 @@ class ControlsPanel extends React.Component {
   static id = CONTROLS;
 
   static propTypes = {
-    controls: React.PropTypes.shape({
-      [Port.ONE]: Controls.propTypes.controls,
-      [Port.TWO]: Controls.propTypes.controls,
-    }).isRequired,
+    controls: ControlsList.propTypes.controls, // eslint-disable-line react/require-default-props
     controlsVisible: React.PropTypes.bool.isRequired,
-    active: React.PropTypes.bool,
-    onActivate: React.PropTypes.func,
+    active: React.PropTypes.bool.isRequired,
+    onActivate: React.PropTypes.func.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
-
-  static defaultProps = {
-    active: false,
-    onActivate: noop,
-  }
 
   constructor(props) {
     super(props);
@@ -50,18 +42,18 @@ class ControlsPanel extends React.Component {
     this.props.dispatch(setControlsDevice(port, device));
   };
 
-  handleInputAddRequest = deviceInput => {
+  handleInputAdd = deviceInput => {
     this.setState({inputRequestVisible: true});
     this.props.dispatch(addControlsInput(deviceInput)).then(() => {
       this.setState({inputRequestVisible: false});
     });
   };
 
-  handleInputRemoveRequest = sourceInput => {
+  handleInputRemove = sourceInput => {
     this.props.dispatch(removeControlsInput(sourceInput));
   };
 
-  handleGamepadMapRequest = (index, port) => {
+  handleGamepadMap = (index, port) => {
     const {dispatch} = this.props;
     dispatch(setControlsDevice(port, Device.JOYPAD));
     dispatch(bindGamepadToJoypad(index, port));
@@ -72,8 +64,8 @@ class ControlsPanel extends React.Component {
     this.props.dispatch(resetControls());
   };
 
-  handleControlsVisibleChange = event => {
-    this.props.dispatch(setControlsVisible(event.target.checked));
+  handleControlsVisibleChange = visible => {
+    this.props.dispatch(setControlsVisible(visible));
   };
 
   render() {
@@ -82,24 +74,20 @@ class ControlsPanel extends React.Component {
       <Panel type={CONTROLS} icon="gamepad" caption="Controls" collapsed={!active} onHeaderClick={this.handleHeaderClick}>
         {this.state.inputRequestVisible && (
           <Modal>
-            <Modal.Body>
-              <div>Press key or button (ESC to cancel).</div>
-            </Modal.Body>
+            <Modal.Body>Press key or button (ESC to cancel).</Modal.Body>
           </Modal>
         )}
-        {Port.values.map(port => {
-          return <Controls key={port} port={port} controls={controls[port]}
-                           onDeviceChange={this.handleDeviceChange}
-                           onInputAddRequest={this.handleInputAddRequest}
-                           onInputRemoveRequest={this.handleInputRemoveRequest}/>;
-        })}
+        <ControlsList controls={controls}
+                      onDeviceChange={this.handleDeviceChange}
+                      onInputAdd={this.handleInputAdd}
+                      onInputRemove={this.handleInputRemove}/>
         <div className="controls-defaults">
-          <Icon name="keyboard-o"/> &nbsp;
+          <Icon name="keyboard-o"/>{' '}
           <a href="#" onClick={this.handleResetControls}>Restore default keyboard controls</a>
         </div>
-        <GamepadList onMapRequest={this.handleGamepadMapRequest}/>
+        <GamepadList onMap={this.handleGamepadMap}/>
         <Field id="controls-visible" caption="Show controls on emulator page" type="checkbox"
-                checked={controlsVisible} onChange={this.handleControlsVisibleChange}/>
+               value={controlsVisible} onChange={this.handleControlsVisibleChange}/>
       </Panel>
     );
   }

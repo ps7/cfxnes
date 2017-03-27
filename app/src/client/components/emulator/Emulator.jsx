@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
-import {Icon, Message} from '../common';
-import {Controls} from '../settings/controls';
 import {resumeEmulator, suspendEmulator, setControlsVisible} from '../../actions';
-import {Port} from '../../enums';
+import EmulatorControls from './EmulatorControls';
+import EmulatorOutput from './EmulatorOutput';
 
 class Emulator extends React.Component {
 
@@ -13,10 +11,7 @@ class Emulator extends React.Component {
       newRomId: React.PropTypes.string,
     }).isRequired,
     loading: React.PropTypes.bool.isRequired,
-    controls: React.PropTypes.shape({
-      [Port.ONE]: Controls.propTypes.controls,
-      [Port.TWO]: Controls.propTypes.controls,
-    }).isRequired,
+    controls: EmulatorControls.propTypes.controls, // eslint-disable-line react/require-default-props
     controlsVisible: React.PropTypes.bool.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   };
@@ -31,36 +26,20 @@ class Emulator extends React.Component {
     this.props.dispatch(suspendEmulator());
   }
 
-  setCanvas = canvas => {
+  handleCanvasChange = canvas => {
     this.canvas = canvas;
   }
 
-  handleCloseControls = () => {
+  handleControlsClose = () => {
     this.props.dispatch(setControlsVisible(false));
   };
 
-  renderControls() {
-    const {controls} = this.props;
-    return (
-      <Message className="emulator-controls" onClose={this.handleCloseControls}>
-        <h2>Controls <small>
-          (<Link to="/settings/controls"><Icon name="wrench"/> Configure</Link>)
-        </small></h2>
-        {Port.values.map(port => <Controls key={port} port={port} controls={controls[port]}/>)}
-      </Message>
-    );
-  }
-
   render() {
-    const {loading, controlsVisible} = this.props;
-
+    const {loading, controlsVisible, controls} = this.props;
     return (
       <main className="emulator">
-        {controlsVisible && this.renderControls()}
-        <div className="emulator-output">
-          <canvas ref={this.setCanvas}/>
-          {loading && <div>Loading...</div>}
-        </div>
+        {controlsVisible && <EmulatorControls controls={controls} onClose={this.handleControlsClose}/>}
+        <EmulatorOutput loading={loading} onCanvasChange={this.handleCanvasChange}/>
       </main>
     );
   }

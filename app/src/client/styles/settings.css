@@ -8,13 +8,17 @@
   }
 }
 
-.reset-row {
-  display: table-row;
+.reset-button {
+  display: inline-block;
+  min-width: 8em;
+  padding: 0.5em 0;
+}
 
-  & > * {
-    display: table-cell;
-    padding: 0.5em;
-  }
+.reset-description {
+  display: inline-block;
+  max-width: 30em;
+  padding: 0.5em 0;
+  vertical-align: middle;
 }
 
 .controls {
