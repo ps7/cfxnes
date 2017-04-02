@@ -1,5 +1,5 @@
 import React from 'react';
-import {fromPairs} from 'lodash-es';
+import {keysValuePropType} from '../../../common';
 import {Port} from '../../../enums';
 import Controls from './Controls';
 
@@ -17,9 +17,7 @@ const ControlsList = ({controls, onDeviceChange, onInputAdd, onInputRemove}) => 
 };
 
 ControlsList.propTypes = {
-  controls: React.PropTypes.shape(
-    fromPairs(Port.values.map(port => [port, Controls.propTypes.controls]))
-  ).isRequired,
+  controls: keysValuePropType(Port.values, Controls.propTypes.controls).isRequired,
   onDeviceChange: React.PropTypes.func,
   onInputAdd: React.PropTypes.func,
   onInputRemove: React.PropTypes.func,

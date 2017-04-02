@@ -20,8 +20,6 @@ export const SET_CONTROLS_DEVICE = 'SET_CONTROLS_DEVICE';
 export const SET_CONTROLS_INPTUS = 'SET_CONTROLS_INPTUS';
 export const SET_CONTROLS_VISIBLE = 'SET_CONTROLS_VISIBLE';
 
-export const audioSupported = nes.audio != null;
-
 export function setRegion(region) {
   nes.region = region;
   return createAction(SET_REGION, region);

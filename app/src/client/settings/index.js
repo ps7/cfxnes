@@ -1,4 +1,4 @@
-export {default as defaultSettings} from './defaults';
-export * from './settings';
+export * from './constants';
 export * from './controls';
 export * from './persistence';
+export * from './settings';

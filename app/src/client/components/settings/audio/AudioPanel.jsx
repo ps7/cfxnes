@@ -1,76 +1,59 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {fromPairs} from 'lodash-es';
-import {Icon, Field, Panel} from '../../common';
-import {AudioChannel, SettingsGroup} from '../../../enums';
-import {audioSupported, setAudioEnabled, setAudioVolume} from '../../../actions';
+import React, {Component, PropTypes} from 'react';
+import {keysValuePropType} from '../../../common';
+import {Icon, Field} from '../../common';
+import {AudioChannel} from '../../../enums';
+import SettingsPanel from '../SettingsPanel';
 import AudioVolumeField from './AudioVolumeField';
 
-const {AUDIO} = SettingsGroup;
+const ID = 'audio';
 
-class AudioPanel extends React.Component {
+export default class AudioPanel extends Component {
 
-  static id = AUDIO;
+  static id = ID;
 
   static propTypes = {
-    audioEnabled: React.PropTypes.bool.isRequired,
-    audioVolume: React.PropTypes.shape(
-      fromPairs(AudioChannel.values.map(value => [value, React.PropTypes.number]))
-    ).isRequired,
-    active: React.PropTypes.bool.isRequired,
-    onActivate: React.PropTypes.func.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
+    audioSupported: PropTypes.bool.isRequired,
+    audioEnabled: PropTypes.bool.isRequired,
+    audioVolume: keysValuePropType(AudioChannel.values, PropTypes.number).isRequired,
+    onAudioEnabledChange: PropTypes.func.isRequired,
+    onAudioVolumeChange: PropTypes.func.isRequired,
   };
-
-  handleHeaderClick = () => {
-    this.props.onActivate(AUDIO);
-  }
-
-  handleAudioEnabledChange = enabled => {
-    this.props.dispatch(setAudioEnabled(enabled));
-  };
-
-  handleAudioVolumeChange = (channel, volume) => {
-    this.props.dispatch(setAudioVolume(channel, volume));
-  }
 
   render() {
-    const {audioEnabled, audioVolume, active} = this.props;
+    const {
+      audioSupported,
+      audioEnabled,
+      audioVolume,
+      onAudioEnabledChange,
+      onAudioVolumeChange,
+      ...defaultPanelProps
+    } = this.props;
+
     const panelProps = {
-      type: AUDIO,
+      ...defaultPanelProps,
+      id: ID,
       icon: 'music',
       caption: 'Audio',
-      collapsed: !active,
-      onHeaderClick: this.handleHeaderClick,
     };
 
     if (!audioSupported) {
       return (
-        <Panel {...panelProps}>
+        <SettingsPanel {...panelProps}>
           <Icon name="exclamation-triangle"/> Your browser does not support Web Audio.
-        </Panel>
+        </SettingsPanel>
       );
     }
 
     return (
-      <Panel {...panelProps}>
+      <SettingsPanel {...panelProps}>
         <Field id="audio-enabled" caption="Enable audio" type="checkbox"
-               value={audioEnabled} onChange={this.handleAudioEnabledChange}/>
+               value={audioEnabled} onChange={onAudioEnabledChange}/>
         {AudioChannel.values.map(channel => (
-          <AudioVolumeField key={channel} channel={channel}
-                            disabled={!audioEnabled}
-                            value={audioVolume[channel]}
-                            onChange={this.handleAudioVolumeChange}/>
+          <AudioVolumeField key={channel} channel={channel} disabled={!audioEnabled}
+                            value={audioVolume[channel]} onChange={onAudioVolumeChange}/>
         ))}
-      </Panel>
+      </SettingsPanel>
     );
   }
 
 }
-
-const mapStateToProps = state => {
-  const {audioEnabled, audioVolume} = state.settings.values;
-  return {audioEnabled, audioVolume};
-};
-
-export default connect(mapStateToProps)(AudioPanel);

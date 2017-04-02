@@ -1,16 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
-import {SystemPanel} from './system';
-import {VideoPanel} from './video';
-import {AudioPanel} from './audio';
-import {ControlsPanel} from './controls';
-import {ResetPanel} from './reset';
-
-const panelComponents = [SystemPanel, VideoPanel, AudioPanel, ControlsPanel, ResetPanel];
-const panelIds = panelComponents.map(Component => Component.id);
-const isValidPanelId = id => panelIds.indexOf(id) >= 0;
-const defaultPanelId = panelIds[0];
+import {panels, isValidPanelId, defaultPanelId} from './panels';
 
 class Settings extends React.Component {
 
@@ -64,18 +55,18 @@ class Settings extends React.Component {
     this.setActivePanel(id);
   };
 
-  renderPanel = Component => {
-    const {id} = Component;
+  renderPanel = Panel => {
+    const {id} = Panel;
     const {activePanelId} = this.props;
     const active = id === activePanelId;
-    return <Component key={id} active={active} onActivate={this.handlePanelActivation}/>;
+    return <Panel key={id} active={active} onActivate={this.handlePanelActivation}/>;
   }
 
   render() {
     return (
       <main className="settings">
         <h1>Settings</h1>
-        {panelComponents.map(this.renderPanel)}
+        {panels.map(this.renderPanel)}
       </main>
     );
   }
