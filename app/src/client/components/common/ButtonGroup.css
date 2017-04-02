@@ -1,0 +1,7 @@
+.button-group {
+  display: inline-block;
+
+  & + .button-group {
+    margin-left: 0.5em;
+  }
+}

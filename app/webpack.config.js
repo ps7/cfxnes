@@ -23,7 +23,6 @@ module.exports = {
     'react-hot-loader/patch',
     'whatwg-fetch',
     './index.js',
-    './styles/index.css',
   ],
   output: {
     path: resolvePath('dist/static'),

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {resumeEmulator, suspendEmulator, setControlsVisible} from '../../actions';
 import EmulatorControls from './EmulatorControls';
 import EmulatorOutput from './EmulatorOutput';
+import './Emulator.css';
 
 class Emulator extends Component {
 

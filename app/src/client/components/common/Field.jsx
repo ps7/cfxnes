@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
 import Select from './Select';
+import './Field.css';
 
 const CHECKBOX = 'checkbox';
 const TEXT = 'text';

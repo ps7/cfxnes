@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
+import './Tooltip.css';
 
 const Tooltip = ({position, children}) => (
   <div className={classNames('tooltip', position)}>{children}</div>

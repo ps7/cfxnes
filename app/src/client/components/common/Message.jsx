@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
+import './Message.css';
 
 const Message = ({children, className, onClose}) => (
   <div className={classNames('message', className)}>

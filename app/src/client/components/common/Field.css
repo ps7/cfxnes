@@ -1,0 +1,7 @@
+.field {
+  & label,
+  & input:not([type='checkbox']),
+  & select {
+    display: block;
+  }
+}

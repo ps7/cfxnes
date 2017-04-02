@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
+import './Panel.css';
 
 const Panel = ({id, icon, caption, collapsed, children, onHeaderClick}) => (
   <div id={id} className={classNames('panel', {collapsed})}>

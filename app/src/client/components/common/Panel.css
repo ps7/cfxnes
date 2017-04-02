@@ -1,0 +1,25 @@
+.panel {
+  border: 1px solid black;
+
+  &.collapsed .panel-body {
+    display: none;
+  }
+
+  & + .panel {
+    margin-top: 1em;
+  }
+}
+
+.panel-header {
+  padding: 1em;
+  background: #ddd;
+
+  &.clickable:hover {
+    text-decoration: underline;
+  }
+}
+
+.panel-body {
+  border-top: 1px solid black;
+  padding: 1em;
+}

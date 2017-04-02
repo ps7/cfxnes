@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {logoSvg} from '../../images';
 import Nav from './Nav';
+import './Header.css';
 
 const Header = ({toolbar}) => (
   <header>

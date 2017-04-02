@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Button from './Button';
+import './Modal.css';
 
 const Modal = ({children}) => (
   <div className="modal-overlay">

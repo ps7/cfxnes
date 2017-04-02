@@ -5,6 +5,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import Root from './Root';
+import './index.css';
 
 function renderRoot() {
   const reactElement = <AppContainer><Root/></AppContainer>;

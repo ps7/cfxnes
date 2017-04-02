@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 import Tooltip from './Tooltip';
+import './Button.css';
 
 export default class Button extends Component {
 

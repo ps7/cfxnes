@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import './ButtonGroup.css';
 
 const ButtonGroup = ({children}) => (
   <div className="button-group">

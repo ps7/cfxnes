@@ -19,6 +19,7 @@
   },
   "rules": {
     "no-invalid-this": "off",
+    "import/no-unassigned-import": "off",
     "react/forbid-component-props": ["error", {"forbid": ["style"]}],
     "react/jsx-boolean-value": "warn",
     "react/jsx-closing-bracket-location": ["warn", "after-props"],

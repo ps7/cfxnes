@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
 import {panels, isValidPanelId, defaultPanelId} from './panels';
+import './Settings.css';
 
 class Settings extends Component {
 

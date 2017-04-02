@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Header} from './header';
+import './App.css';
 
 const App = ({main, toolbar}) => (
   <div className="app">
