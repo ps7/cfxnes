@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {ActionState} from '../../../enums';
 import SettingsPanel from '../SettingsPanel';
 import ResetPanelItem from './ResetPanelItem';
@@ -29,10 +29,10 @@ const ResetPanel = ({settingsResetLocked, nvramsDeletionState, onSettingsReset, 
 ResetPanel.id = ID;
 
 ResetPanel.propTypes = {
-  settingsResetLocked: React.PropTypes.bool.isRequired,
-  nvramsDeletionState: React.PropTypes.oneOf(ActionState.values).isRequired,
-  onSettingsReset: React.PropTypes.func.isRequired,
-  onNVRAMsDelete: React.PropTypes.func.isRequired,
+  settingsResetLocked: PropTypes.bool.isRequired,
+  nvramsDeletionState: PropTypes.oneOf(ActionState.values).isRequired,
+  onSettingsReset: PropTypes.func.isRequired,
+  onNVRAMsDelete: PropTypes.func.isRequired,
 };
 
 export default ResetPanel;

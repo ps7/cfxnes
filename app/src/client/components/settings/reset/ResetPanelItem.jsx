@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Button, Icon, ConfirmDialog} from '../../common';
 import {ActionState} from '../../../enums';
 
-export default class ResetPanelItem extends React.Component {
+export default class ResetPanelItem extends Component {
 
   static propTypes = {
-    caption: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
-    confirmTitle: React.PropTypes.string.isRequired,
-    confirmMessage: React.PropTypes.string.isRequired,
-    progressMessage: React.PropTypes.string,
-    failureMessage: React.PropTypes.string,
-    state: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.oneOf(ActionState.values),
+    caption: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    confirmTitle: PropTypes.string.isRequired,
+    confirmMessage: PropTypes.string.isRequired,
+    progressMessage: PropTypes.string,
+    failureMessage: PropTypes.string,
+    state: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.oneOf(ActionState.values),
     ]).isRequired,
-    onConfirm: React.PropTypes.func.isRequired,
+    onConfirm: PropTypes.func.isRequired,
   }
 
   static defaultProps = {

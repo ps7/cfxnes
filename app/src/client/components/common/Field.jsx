@@ -1,5 +1,5 @@
+import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
-import React from 'react';
 import Select from './Select';
 
 const CHECKBOX = 'checkbox';
@@ -8,14 +8,14 @@ const NUMBER = 'number';
 const RANGE = 'range';
 const SELECT = 'select';
 
-export default class Field extends React.Component {
+export default class Field extends Component {
 
   static propTypes = {
-    id: React.PropTypes.string.isRequired,
-    caption: React.PropTypes.string.isRequired,
-    type: React.PropTypes.oneOf([CHECKBOX, TEXT, NUMBER, RANGE, SELECT]).isRequired,
-    value: React.PropTypes.any,
-    onChange: React.PropTypes.func,
+    id: PropTypes.string.isRequired,
+    caption: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([CHECKBOX, TEXT, NUMBER, RANGE, SELECT]).isRequired,
+    value: PropTypes.any,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {

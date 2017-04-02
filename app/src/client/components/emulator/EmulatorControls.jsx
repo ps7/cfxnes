@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {Icon, Message} from '../common';
 import {ControlsList} from '../settings/controls';
@@ -14,7 +14,7 @@ const EmulatorControls = ({controls, onClose}) => (
 
 EmulatorControls.propTypes = {
   controls: ControlsList.propTypes.controls, // eslint-disable-line react/require-default-props
-  onClose: React.PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default EmulatorControls;

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 
-export default class GamepadMapButton extends React.Component {
+export default class GamepadMapButton extends Component {
 
   static propTypes = {
-    index: React.PropTypes.number.isRequired,
-    port: React.PropTypes.number.isRequired,
-    onMap: React.PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    port: PropTypes.number.isRequired,
+    onMap: PropTypes.func.isRequired,
   };
 
   handleClick = event => {

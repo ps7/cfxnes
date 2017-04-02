@@ -1,5 +1,5 @@
 import {debounce} from 'lodash-es';
-import log from '../log';
+import {log} from '../common';
 
 const STORAGE_KEY = 'settings';
 const SAVE_TIMEOUT = 1000;

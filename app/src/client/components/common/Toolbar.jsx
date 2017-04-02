@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
 const Toolbar = ({type, children}) => {
@@ -7,8 +7,8 @@ const Toolbar = ({type, children}) => {
 };
 
 Toolbar.propTypes = {
-  type: React.PropTypes.string,
-  children: React.PropTypes.node.isRequired,
+  type: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 Toolbar.defaultProps = {

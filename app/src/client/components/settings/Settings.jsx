@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
 import {panels, isValidPanelId, defaultPanelId} from './panels';
 
-class Settings extends React.Component {
+class Settings extends Component {
 
   static propTypes = {
-    activePanelId: React.PropTypes.string,
-    router: React.PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    dispatch: React.PropTypes.func.isRequired,
+    activePanelId: PropTypes.string,
+    router: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    dispatch: PropTypes.func.isRequired,
   };
 
   static defaultProps = {

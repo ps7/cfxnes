@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {resumeEmulator, suspendEmulator, setControlsVisible} from '../../actions';
 import EmulatorControls from './EmulatorControls';
 import EmulatorOutput from './EmulatorOutput';
 
-class Emulator extends React.Component {
+class Emulator extends Component {
 
   static propTypes = {
-    params: React.PropTypes.shape({
-      newRomId: React.PropTypes.string,
+    params: PropTypes.shape({
+      newRomId: PropTypes.string,
     }).isRequired,
-    loading: React.PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
     controls: EmulatorControls.propTypes.controls, // eslint-disable-line react/require-default-props
-    controlsVisible: React.PropTypes.bool.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
+    controlsVisible: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   };
 
   componentDidMount() {

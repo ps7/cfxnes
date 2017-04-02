@@ -1,4 +1,4 @@
-import log from '../log';
+import {log} from '../common';
 import {use} from './commands';
 
 const STORE = 'nvram';

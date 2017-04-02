@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {keysValuePropType} from '../../../common';
 import {Port} from '../../../enums';
 import Controls from './Controls';
@@ -18,9 +18,9 @@ const ControlsList = ({controls, onDeviceChange, onInputAdd, onInputRemove}) => 
 
 ControlsList.propTypes = {
   controls: keysValuePropType(Port.values, Controls.propTypes.controls).isRequired,
-  onDeviceChange: React.PropTypes.func,
-  onInputAdd: React.PropTypes.func,
-  onInputRemove: React.PropTypes.func,
+  onDeviceChange: PropTypes.func,
+  onInputAdd: PropTypes.func,
+  onInputRemove: PropTypes.func,
 };
 
 ControlsList.defaultProps = {

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Field} from '../../common';
 import {AudioChannel} from '../../../enums';
 
-export default class AudioVolumeField extends React.Component {
+export default class AudioVolumeField extends Component {
 
   static propTypes = {
-    channel: React.PropTypes.oneOf(AudioChannel.values).isRequired,
-    disabled: React.PropTypes.bool.isRequired,
-    value: React.PropTypes.number.isRequired,
-    onChange: React.PropTypes.func.isRequired,
+    channel: PropTypes.oneOf(AudioChannel.values).isRequired,
+    disabled: PropTypes.bool.isRequired,
+    value: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired,
   }
 
   handleChange = value => {

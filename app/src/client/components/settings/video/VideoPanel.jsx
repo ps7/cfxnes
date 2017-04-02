@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType} from '../../../enums';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../../constants';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../../common';
 import {Field} from '../../common';
 import SettingsPanel from '../SettingsPanel';
 

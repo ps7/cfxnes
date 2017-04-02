@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Port, Device} from '../../../enums';
 
 const DeviceInput = ({input}) => {
@@ -7,10 +7,10 @@ const DeviceInput = ({input}) => {
 };
 
 DeviceInput.propTypes = {
-  input: React.PropTypes.shape({
-    port: React.PropTypes.oneOf(Port.values).isRequired,
-    device: React.PropTypes.oneOf(Device.values).isRequired,
-    name: React.PropTypes.string.isRequired,
+  input: PropTypes.shape({
+    port: PropTypes.oneOf(Port.values).isRequired,
+    device: PropTypes.oneOf(Device.values).isRequired,
+    name: PropTypes.string.isRequired,
   }).isRequired,
 };
 

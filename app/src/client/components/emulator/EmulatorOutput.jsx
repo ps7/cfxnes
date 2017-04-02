@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 const EmulatorOutput = ({loading, onCanvasChange}) => (
   <div className="emulator-output">
@@ -8,8 +8,8 @@ const EmulatorOutput = ({loading, onCanvasChange}) => (
 );
 
 EmulatorOutput.propTypes = {
-  loading: React.PropTypes.bool.isRequired,
-  onCanvasChange: React.PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  onCanvasChange: PropTypes.func.isRequired,
 };
 
 export default EmulatorOutput;

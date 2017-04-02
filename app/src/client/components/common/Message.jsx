@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
 const Message = ({children, className, onClose}) => (
@@ -11,9 +11,9 @@ const Message = ({children, className, onClose}) => (
 );
 
 Message.propTypes = {
-  children: React.PropTypes.node,
-  className: React.PropTypes.string,
-  onClose: React.PropTypes.func,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  onClose: PropTypes.func,
 };
 
 Message.defaultProps = {

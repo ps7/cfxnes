@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-component-props */
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {logoSvg} from '../../images';
 import Nav from './Nav';
@@ -23,7 +23,7 @@ const Header = ({toolbar}) => (
 );
 
 Header.propTypes = {
-  toolbar: React.PropTypes.element,
+  toolbar: PropTypes.element,
 };
 
 Header.defaultProps = {

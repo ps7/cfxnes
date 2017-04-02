@@ -1,6 +1,5 @@
 import {defaultSettings, loadSettings, applySettingsToNes, copySettingsFromNes} from '../settings';
-import nes from '../nes';
-import log from '../log';
+import {nes, log} from '../common';
 import {createAction, UNLOCK_TIMEOUT} from './common';
 
 export const SET_ACTIVE_SETTINGS_PANEL = 'SET_ACTIVE_SETTINGS_PANEL';

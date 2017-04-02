@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
@@ -14,12 +14,12 @@ const Panel = ({id, icon, caption, collapsed, children, onHeaderClick}) => (
 );
 
 Panel.propTypes = {
-  id: React.PropTypes.string,
-  icon: React.PropTypes.string,
-  caption: React.PropTypes.string.isRequired,
-  collapsed: React.PropTypes.bool,
-  children: React.PropTypes.node,
-  onHeaderClick: React.PropTypes.func,
+  id: PropTypes.string,
+  icon: PropTypes.string,
+  caption: PropTypes.string.isRequired,
+  collapsed: PropTypes.bool,
+  children: PropTypes.node,
+  onHeaderClick: PropTypes.func,
 };
 
 Panel.defaultProps = {

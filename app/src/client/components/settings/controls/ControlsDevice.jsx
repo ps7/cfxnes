@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {ButtonSelect} from '../../common';
 import {Port, Device} from '../../../enums';
 
-export default class ControlsDevice extends React.Component {
+export default class ControlsDevice extends Component {
 
   static propTypes = {
-    port: React.PropTypes.oneOf(Port.values).isRequired,
-    device: React.PropTypes.oneOf(Device.values).isRequired,
-    onChange: React.PropTypes.func,
+    port: PropTypes.oneOf(Port.values).isRequired,
+    device: PropTypes.oneOf(Device.values).isRequired,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {

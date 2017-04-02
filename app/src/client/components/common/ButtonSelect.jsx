@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 
@@ -13,12 +13,12 @@ const ButtonSelect = ({items, value, onChange}) => (
 );
 
 ButtonSelect.propTypes = {
-  items: React.PropTypes.arrayOf(React.PropTypes.shape({
-    value: React.PropTypes.string.isRequired,
-    caption: React.PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    caption: PropTypes.string.isRequired,
   })).isRequired,
-  value: React.PropTypes.string,
-  onChange: React.PropTypes.func,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 ButtonSelect.defaultProps = {

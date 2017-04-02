@@ -1,4 +1,4 @@
-import nes from '../nes';
+import {nes} from '../common';
 import {copySettingsFromNes} from './settings';
 
 export const defaultSettings = {

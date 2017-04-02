@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 const Select = ({items, ...attrs}) => (
   <select {...attrs}>
@@ -7,9 +7,9 @@ const Select = ({items, ...attrs}) => (
 );
 
 Select.propTypes = {
-  items: React.PropTypes.arrayOf(React.PropTypes.shape({
-    value: React.PropTypes.string.isRequired,
-    caption: React.PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    caption: PropTypes.string.isRequired,
   })).isRequired,
 };
 

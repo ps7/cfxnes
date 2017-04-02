@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Port, Device} from '../../../enums';
 import ControlsDevice from './ControlsDevice';
 import ControlsInputs from './ControlsInputs';
@@ -15,14 +15,14 @@ const Controls = ({port, controls, onDeviceChange, onInputAdd, onInputRemove}) =
 };
 
 Controls.propTypes = {
-  port: React.PropTypes.oneOf(Port.values).isRequired,
-  controls: React.PropTypes.shape({
-    device: React.PropTypes.oneOf(Device.values).isRequired,
+  port: PropTypes.oneOf(Port.values).isRequired,
+  controls: PropTypes.shape({
+    device: PropTypes.oneOf(Device.values).isRequired,
     inputs: ControlsInputs.propTypes.inputs,
   }).isRequired,
-  onDeviceChange: React.PropTypes.func,
-  onInputAdd: React.PropTypes.func,
-  onInputRemove: React.PropTypes.func,
+  onDeviceChange: PropTypes.func,
+  onInputAdd: PropTypes.func,
+  onInputRemove: PropTypes.func,
 };
 
 Controls.defaultProps = {

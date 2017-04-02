@@ -10,7 +10,7 @@ export default class SettingsPanel extends Component {
     children: PropTypes.node,
   };
 
-  defaultProps = {
+  static defaultProps = {
     children: null,
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 const ButtonGroup = ({children}) => (
   <div className="button-group">
@@ -7,7 +7,7 @@ const ButtonGroup = ({children}) => (
 );
 
 ButtonGroup.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 ButtonGroup.defaultProps = {

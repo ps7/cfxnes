@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../constants';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../common';
 
 import {
   resetEmulator, powerEmulator,
@@ -12,13 +12,13 @@ import {
 import {Button, ButtonGroup, Icon, Toolbar, Tooltip} from '../common';
 import FpsCounter from './FpsCounter';
 
-class EmulatorToolbar extends React.Component {
+class EmulatorToolbar extends Component {
 
   static propTypes = {
-    running: React.PropTypes.bool.isRequired,
-    videoScale: React.PropTypes.number.isRequired,
-    fpsVisible: React.PropTypes.bool.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
+    running: PropTypes.bool.isRequired,
+    videoScale: PropTypes.number.isRequired,
+    fpsVisible: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   };
 
   handlePower = () => {

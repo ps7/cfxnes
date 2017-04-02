@@ -1,7 +1,6 @@
 import {copyControlsFromNes, copyInputsFromNes} from '../settings';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../constants';
+import {nes, nesDefaults, MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../common';
 import {Port, Device, Source} from '../enums';
-import nes, {defaults} from '../nes';
 import {createAction} from './common';
 
 export const SET_REGION = 'SET_REGION';
@@ -91,7 +90,7 @@ export function setAudioVolume(channel, volume) {
 }
 
 export function resetControls() {
-  const {devices, inputs} = defaults;
+  const {devices, inputs} = nesDefaults;
   nes.use({devices, inputs});
   return createAction(SET_CONTROLS, copyControlsFromNes(nes));
 }

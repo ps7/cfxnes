@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Icon} from '../../common';
 import {Port} from '../../../enums';
 import GamepadMapButton from './GamepadMapButton';
@@ -22,12 +22,12 @@ const Gamepad = ({gamepad: {index, id, mapping}, onMap}) => (
 );
 
 Gamepad.propTypes = {
-  gamepad: React.PropTypes.shape({
-    index: React.PropTypes.number.isRequired,
-    id: React.PropTypes.string.isRequired,
-    mapping: React.PropTypes.string,
+  gamepad: PropTypes.shape({
+    index: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    mapping: PropTypes.string,
   }).isRequired,
-  onMap: React.PropTypes.func.isRequired,
+  onMap: PropTypes.func.isRequired,
 };
 
 export default Gamepad;

@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Button} from '../../common';
 import {Source} from '../../../enums';
 import DeviceInput from './DeviceInput';
 import SourceInput from './SourceInput';
 
-export default class ControlsInputsRow extends React.Component {
+export default class ControlsInputsRow extends Component {
 
   static propTypes = {
     deviceInput: DeviceInput.propTypes.input,
-    sourceInputs: React.PropTypes.arrayOf(SourceInput.propTypes.input),
-    onAdd: React.PropTypes.func,
-    onRemove: React.PropTypes.func,
+    sourceInputs: PropTypes.arrayOf(SourceInput.propTypes.input),
+    onAdd: PropTypes.func,
+    onRemove: PropTypes.func,
   };
 
   static defaultProps = {

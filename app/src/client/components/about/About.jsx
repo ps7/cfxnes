@@ -1,15 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {logoSvg} from '../../images';
 import Changelog from './Changelog';
 import cfxnes from 'cfxnes';
 
-export default class About extends React.Component {
+export default class About extends Component {
 
   state = {changelogVisible: false};
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState;
-  }
 
   handleShowChangelog = event => {
     event.preventDefault();

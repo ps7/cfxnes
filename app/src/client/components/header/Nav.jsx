@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router';
 import {Icon} from '../common';
@@ -9,8 +9,8 @@ const Nav = ({type, children}) => {
 };
 
 Nav.propTypes = {
-  type: React.PropTypes.string,
-  children: React.PropTypes.node.isRequired,
+  type: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 Nav.defaultProps = {
@@ -24,9 +24,9 @@ Nav.Item = ({path, caption, icon}) => (
 );
 
 Nav.Item.propTypes = {
-  path: React.PropTypes.string.isRequired,
-  caption: React.PropTypes.string.isRequired,
-  icon: React.PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  caption: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default Nav;

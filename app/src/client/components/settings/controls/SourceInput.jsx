@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Button, Icon} from '../../common';
 import {Source} from '../../../enums';
 
-export default class SourceInput extends React.Component {
+export default class SourceInput extends Component {
 
   static propTypes = {
-    input: React.PropTypes.shape({
+    input: PropTypes.shape({
       source: Source.isSource,
-      inputName: React.PropTypes.string,
+      inputName: PropTypes.string,
     }).isRequired,
-    onRemove: React.PropTypes.func,
+    onRemove: PropTypes.func,
   };
 
   static defaultProps = {

@@ -1,7 +1,7 @@
-import React from 'react';
-import nes from '../../nes';
+import React, {Component} from 'react';
+import {nes} from '../../common';
 
-export default class FpsCounter extends React.Component {
+export default class FpsCounter extends Component {
 
   constructor(props) {
     super(props);

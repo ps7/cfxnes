@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Button from './Button';
 
 const Modal = ({children}) => (
@@ -10,7 +10,7 @@ const Modal = ({children}) => (
 );
 
 Modal.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 Modal.defaultProps = {
@@ -25,8 +25,8 @@ Modal.Header = ({title, onClose}) => (
 );
 
 Modal.Header.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  onClose: React.PropTypes.func,
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func,
 };
 
 Modal.Header.defaultProps = {
@@ -40,7 +40,7 @@ Modal.Body = ({children}) => (
 );
 
 Modal.Body.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 Modal.Body.defaultProps = {
@@ -54,7 +54,7 @@ Modal.Footer = ({children}) => (
 );
 
 Modal.Footer.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 Modal.Footer.defaultProps = {

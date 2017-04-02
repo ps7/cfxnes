@@ -4,16 +4,16 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
-import App from './components/App';
+import Root from './Root';
 
-function renderApp() {
-  const reactElement = <AppContainer><App/></AppContainer>;
+function renderRoot() {
+  const reactElement = <AppContainer><Root/></AppContainer>;
   const domElement = document.getElementById('root');
   render(reactElement, domElement);
 }
 
-renderApp();
+renderRoot();
 
 if (__DEVELOPMENT__ && module.hot) {
-  module.hot.accept('./components/App', renderApp);
+  module.hot.accept('./Root', renderRoot);
 }

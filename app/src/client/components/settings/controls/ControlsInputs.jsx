@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Port, Device} from '../../../enums';
 import ControlsInputsRow from './ControlsInputsRow';
 
@@ -16,11 +16,11 @@ const ControlsInputs = ({port, device, inputs, onAdd, onRemove}) => (
 );
 
 ControlsInputs.propTypes = {
-  port: React.PropTypes.oneOf(Port.values).isRequired,
-  device: React.PropTypes.oneOf(Device.values).isRequired,
-  inputs: React.PropTypes.object.isRequired,
-  onAdd: React.PropTypes.func,
-  onRemove: React.PropTypes.func,
+  port: PropTypes.oneOf(Port.values).isRequired,
+  device: PropTypes.oneOf(Device.values).isRequired,
+  inputs: PropTypes.object.isRequired,
+  onAdd: PropTypes.func,
+  onRemove: PropTypes.func,
 };
 
 ControlsInputs.defaultProps = {

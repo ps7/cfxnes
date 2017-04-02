@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
 const Tooltip = ({position, children}) => (
@@ -6,8 +6,8 @@ const Tooltip = ({position, children}) => (
 );
 
 Tooltip.propTypes = {
-  position: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  children: React.PropTypes.node,
+  position: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  children: PropTypes.node,
 };
 
 Tooltip.defaultProps = {

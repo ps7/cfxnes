@@ -1,4 +1,4 @@
-import nes from '../nes';
+import {nes} from '../common';
 import {createAction} from './common';
 
 export const SET_EMULATOR_RUNNING = 'SET_EMULATOR_RUNNING';

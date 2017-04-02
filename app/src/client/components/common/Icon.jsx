@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
 const Icon = ({name, spin}) => (
@@ -6,8 +6,8 @@ const Icon = ({name, spin}) => (
 );
 
 Icon.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  spin: React.PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  spin: PropTypes.bool,
 };
 
 Icon.defaultProps = {

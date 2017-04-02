@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import Button from './Button';
 import Modal from './Modal';
 
-export default class ConfirmDialog extends React.Component {
+export default class ConfirmDialog extends Component {
 
   static propTypes = {
-    title: React.PropTypes.string.isRequired,
-    message: React.PropTypes.string.isRequired,
-    confirmCaption: React.PropTypes.string,
-    cancelCaption: React.PropTypes.string,
-    onConfirm: React.PropTypes.func,
-    onCancel: React.PropTypes.func,
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    confirmCaption: PropTypes.string,
+    cancelCaption: PropTypes.string,
+    onConfirm: PropTypes.func,
+    onCancel: PropTypes.func,
   };
 
   static defaultProps = {

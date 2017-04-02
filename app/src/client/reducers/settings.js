@@ -1,4 +1,3 @@
-import {SettingsGroup} from '../enums';
 import {defaultSettings} from '../settings';
 
 import {
@@ -12,7 +11,7 @@ import {createReducer} from './common';
 import valuesReducer from './settingsValues';
 
 const initialState = {
-  activePanelId: SettingsGroup.SYSTEM,
+  activePanelId: 'system',
   resetLocked: false,
   values: defaultSettings,
 };
