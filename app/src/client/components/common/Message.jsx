@@ -2,8 +2,11 @@ import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import './Message.css';
 
-const Message = ({children, className, onClose}) => (
-  <div className={classNames('message', className)}>
+const INFO = 'info';
+const ERROR = 'error';
+
+const Message = ({type, className, onClose, children}) => (
+  <div className={classNames('message', type, className)}>
     <div className="message-body">
       {children}
     </div>
@@ -12,15 +15,17 @@ const Message = ({children, className, onClose}) => (
 );
 
 Message.propTypes = {
-  children: PropTypes.node,
+  type: PropTypes.oneOf([INFO, ERROR]),
   className: PropTypes.string,
   onClose: PropTypes.func,
+  children: PropTypes.node,
 };
 
 Message.defaultProps = {
-  children: null,
+  type: INFO,
   className: null,
   onClose: null,
+  children: null,
 };
 
 export default Message;

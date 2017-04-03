@@ -1,5 +1,5 @@
-import {nvramStore} from '../database';
 import {log} from '../common';
+import {nvramStore} from '../database';
 import {createAction, UNLOCK_TIMEOUT} from './common';
 
 export const UNLOCK_NVRAMS_DELETION = 'UNLOCK_NVRAMS_DELETION';

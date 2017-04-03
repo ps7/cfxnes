@@ -1,0 +1,15 @@
+.library-item {
+  display: inline-block;
+  vertical-align: top;
+  width: 6em;
+  margin: 0.5em;
+}
+
+.library-item-thumbnail {
+  width: 6em;
+}
+
+.library-item-name {
+  white-space: normal;
+  text-align: center;
+}

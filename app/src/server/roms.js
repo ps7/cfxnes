@@ -8,13 +8,16 @@ let romMap = {};
 let fileMap = {};
 let scanTimer;
 
+const BASE_URL = '/api/roms';
+const FILES_URL = `${BASE_URL}/files`;
+
 export const router = new Router;
 
-router.get('/roms', (req, res) => {
+router.get(BASE_URL, (req, res) => {
   res.json(romList);
 });
 
-router.get('/roms/:id', (req, res) => {
+router.get(`${BASE_URL}/:id`, (req, res) => {
   const {id} = req.params;
   if (id == null) {
     res.status(400).send('Missing ROM ID.');
@@ -30,7 +33,7 @@ router.get('/roms/:id', (req, res) => {
   res.json(rom);
 });
 
-router.get('/roms/files/:name', (req, res) => {
+router.get(`${FILES_URL}/:name`, (req, res) => {
   const {name} = req.params;
   if (name == null) {
     res.status(400).send('Missing filename.');
@@ -78,7 +81,7 @@ function scan() {
     const rom = {
       id: makeId(romFile),
       name: getBasename(romFile),
-      file: `/roms/files/${romName}`,
+      file: `${FILES_URL}/${romName}`,
     };
 
     romList.push(rom);
@@ -88,7 +91,7 @@ function scan() {
     if (imageFile) {
       const imageName = sanitizeName(imageFile);
       fileMap[imageName] = path.join(romDir, imageFile);
-      rom.thumbnail = `/roms/files/${imageName}`;
+      rom.thumbnail = `${FILES_URL}/${imageName}`;
     }
   }
 

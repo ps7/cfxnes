@@ -3,9 +3,25 @@
   flex-direction: row;
   align-items: flex-start;
   padding: 0.25em;
-  border: 1px solid cornflowerblue;
-  background-color: lightblue;
   border-radius: 0.25em;
+
+  &.info {
+    border: 1px solid cornflowerblue;
+    background-color: lightblue;
+
+    & .message-close {
+      color: cornflowerblue;
+    }
+  }
+
+  &.error {
+    border: 1px solid #faa;
+    background-color: #fcc;
+
+    & .message-close {
+      color: #f44;
+    }
+  }
 }
 
 .message-body {
@@ -16,7 +32,6 @@
   margin-left: 0.25em;
   border: none;
   background: none;
-  color: cornflowerblue;
   opacity: 0.7;
   font-size: 120%;
   font-weight: bold;

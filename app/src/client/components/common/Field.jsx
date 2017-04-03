@@ -5,6 +5,7 @@ import './Field.css';
 
 const CHECKBOX = 'checkbox';
 const TEXT = 'text';
+const SEARCH = 'search';
 const NUMBER = 'number';
 const RANGE = 'range';
 const SELECT = 'select';
@@ -13,13 +14,14 @@ export default class Field extends Component {
 
   static propTypes = {
     id: PropTypes.string.isRequired,
-    caption: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([CHECKBOX, TEXT, NUMBER, RANGE, SELECT]).isRequired,
+    type: PropTypes.oneOf([CHECKBOX, TEXT, SEARCH, NUMBER, RANGE, SELECT]).isRequired,
+    caption: PropTypes.string,
     value: PropTypes.any,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
+    caption: null,
     value: null,
     onChange: null,
   };
@@ -51,11 +53,10 @@ export default class Field extends Component {
     const {id, caption, type} = this.props;
     return (
       <div className={classNames('field', id && `field-${id}`)}>
-        <label htmlFor={id}>
-          {type === CHECKBOX && this.renderInput()}
-          {type === CHECKBOX && ' '}
-          {caption}
-        </label>
+        {type === CHECKBOX && this.renderInput()}
+        {type === CHECKBOX && caption && ' '}
+        {caption && <label htmlFor={id}>{caption}</label>}
+        {type !== CHECKBOX && caption && ' '}
         {type !== CHECKBOX && this.renderInput()}
       </div>
     );

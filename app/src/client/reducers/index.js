@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import emulator from './emulator';
-import database from './database';
+import library from './library';
 import settings from './settings';
+import database from './database';
 
-export default combineReducers({emulator, database, settings});
+export default combineReducers({emulator, library, database, settings});
