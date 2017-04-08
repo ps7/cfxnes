@@ -12,7 +12,7 @@ class Library extends Component {
     fetchState: PropTypes.oneOf(ActionState.values).isRequired,
     fetchError: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
-    roms: PropTypes.arrayOf(LibraryItem.PropTypes).isRequired,
+    roms: PropTypes.arrayOf(LibraryItem.propTypes).isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 

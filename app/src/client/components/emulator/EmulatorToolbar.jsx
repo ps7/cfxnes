@@ -21,6 +21,10 @@ class EmulatorToolbar extends Component {
     dispatch: PropTypes.func.isRequired,
   };
 
+  handleOpenROM = () => {
+    document.getElementById('emulator-file').click();
+  }
+
   handlePower = () => {
     this.props.dispatch(powerEmulator());
   };
@@ -55,7 +59,7 @@ class EmulatorToolbar extends Component {
     return (
       <Toolbar type="emulator">
         <ButtonGroup>
-          <Button>
+          <Button onClick={this.handleOpenROM}>
             <Icon name="folder-open"/>
             <Tooltip position="bottom">Open ROM</Tooltip>
           </Button>

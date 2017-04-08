@@ -7,8 +7,11 @@ import './Settings.css';
 class Settings extends Component {
 
   static propTypes = {
+    params: PropTypes.shape({ // eslint-disable-line react/no-unused-prop-types
+      activePanelId: PropTypes.string,
+    }).isRequired,
     activePanelId: PropTypes.string,
-    router: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    router: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   };
 

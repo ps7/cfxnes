@@ -1,4 +1,4 @@
-import {fetchJson, fetchArrayBuffer} from './common';
+import {fetchJson} from './common';
 
 const BASE_URL = '/api/roms';
 
@@ -8,8 +8,4 @@ export function getAll() {
 
 export function getOne(romId) {
   return fetchJson(`${BASE_URL}/${romId}`);
-}
-
-export function getData(rom) {
-  return fetchArrayBuffer(rom.file);
 }

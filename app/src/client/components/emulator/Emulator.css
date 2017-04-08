@@ -1,7 +1,15 @@
 .emulator {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   position: relative;
+}
+
+.emulator-error {
+  position: absolute;
+  top: 0;
+  right: 25%;
+  left: 25%;
 }
 
 .emulator-controls {
@@ -12,6 +20,10 @@
 
 .emulator-output {
   align-self: center;
+}
+
+#emulator-file {
+  display: none;
 }
 
 .fps-counter {

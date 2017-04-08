@@ -4,10 +4,6 @@ export function fetchJson(url) {
   return fetchResource(url).then(response => response.json());
 }
 
-export function fetchArrayBuffer(url) {
-  return fetchResource(url).then(response => response.arrayBuffer());
-}
-
 function fetchResource(url) {
   log.info(`Fetching ${url}`);
   return fetch(url)
