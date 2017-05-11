@@ -18,7 +18,6 @@ import EmulatorControls from './EmulatorControls';
 import EmulatorOutput from './EmulatorOutput';
 import './Emulator.css';
 
-
 class Emulator extends Component {
 
   static propTypes = {

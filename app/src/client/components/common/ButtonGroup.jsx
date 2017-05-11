@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import './ButtonGroup.css';
 
-const ButtonGroup = ({children}) => (
-  <div className="button-group">
+const ButtonGroup = ({children, ...attrs}) => (
+  <div {...attrs} className="button-group">
     {children}
   </div>
 );

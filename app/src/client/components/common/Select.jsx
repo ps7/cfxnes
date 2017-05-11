@@ -1,16 +1,41 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 
-const Select = ({items, ...attrs}) => (
-  <select {...attrs}>
-    {items.map(item => <option key={item.value} value={item.value}>{item.caption}</option>)}
-  </select>
+const Option = ({caption, value}) => (
+  <option key={value} value={value}>{caption}</option>
 );
 
-Select.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    caption: PropTypes.string.isRequired,
-  })).isRequired,
+Option.propTypes = {
+  value: PropTypes.string.isRequired,
+  caption: PropTypes.string.isRequired,
 };
 
-export default Select;
+export default class Select extends Component {
+
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape(Option.propTypes)).isRequired,
+    value: PropTypes.any,
+    onChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    value: null,
+    onChange: null,
+  };
+
+  handleChange = event => {
+    const {onChange} = this.props;
+    if (onChange) {
+      onChange(event.target.value);
+    }
+  };
+
+  render() {
+    const {items, ...attrs} = this.props;
+    return (
+      <select {...attrs} onChange={this.handleChange}>
+        {items.map(Option)}
+      </select>
+    );
+  }
+
+}

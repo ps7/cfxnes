@@ -1,0 +1,8 @@
+.popup {
+  position: absolute;
+  padding: 1em;
+  z-index: 50;
+  background: white;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 2px 0px black;
+}

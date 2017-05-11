@@ -1,52 +1,33 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import classNames from 'classnames';
+import Input from './Input';
 import Select from './Select';
+import {CHECKBOX, SELECT, values as fieldTypes} from './FieldType';
 import './Field.css';
 
-const CHECKBOX = 'checkbox';
-const TEXT = 'text';
-const SEARCH = 'search';
-const NUMBER = 'number';
-const RANGE = 'range';
-const SELECT = 'select';
-
-export default class Field extends Component {
+export default class Field extends PureComponent {
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([CHECKBOX, TEXT, SEARCH, NUMBER, RANGE, SELECT]).isRequired,
+    id: PropTypes.string,
+    type: PropTypes.oneOf(fieldTypes).isRequired,
     caption: PropTypes.string,
     value: PropTypes.any,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
+    id: null,
     caption: null,
     value: null,
     onChange: null,
   };
 
-  handleChange = event => {
-    const {type, onChange} = this.props;
-    if (onChange) {
-      const {target} = event;
-      const rawValue = type === CHECKBOX ? target.checked : target.value;
-      const value = type === NUMBER || type === RANGE ? parseFloat(rawValue) : rawValue;
-      onChange(value);
-    }
-  };
-
   renderInput() {
-    const {id, caption, type, value, ...attrs} = this.props;
-
+    const {caption, type, ...attrs} = this.props;
     if (type === SELECT) {
-      return <Select id={id} value={value} {...attrs} onChange={this.handleChange}/>;
+      return <Select {...attrs}/>;
     }
-
-    return <input id={id} type={type} {...attrs}
-                  value={type !== CHECKBOX ? value : undefined}
-                  checked={type === CHECKBOX && value}
-                  onChange={this.handleChange}/>;
+    return <Input {...attrs} type={type}/>;
   }
 
   render() {
