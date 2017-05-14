@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {Button, Icon, ConfirmDialog} from '../../common';
 import {ActionState} from '../../../enums';
 
-export default class ResetPanelItem extends Component {
+export default class ResetPanelItem extends PureComponent {
 
   static propTypes = {
     action: PropTypes.string.isRequired,

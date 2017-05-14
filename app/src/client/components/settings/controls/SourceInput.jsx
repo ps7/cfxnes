@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
 
-export default class SourceInput extends Component {
+export default class SourceInput extends PureComponent {
 
   static propTypes = {
     input: PropTypes.shape({

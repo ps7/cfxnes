@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import Button from './Button';
 import Modal from './Modal';
 
-export default class ConfirmDialog extends Component {
+export default class ConfirmDialog extends PureComponent {
 
   static propTypes = {
     title: PropTypes.string.isRequired,

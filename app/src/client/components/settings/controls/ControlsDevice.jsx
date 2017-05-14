@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {ButtonSelect} from '../../common';
 import {Port, Device} from '../../../enums';
 
-export default class ControlsDevice extends Component {
+export default class ControlsDevice extends PureComponent {
 
   static propTypes = {
     port: PropTypes.oneOf(Port.values).isRequired,

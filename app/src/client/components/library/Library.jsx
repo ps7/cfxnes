@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Icon, Field, Message} from '../common';
 import {fetchROMs, setROMsFilter} from '../../actions';
@@ -6,7 +6,7 @@ import {ActionState} from '../../enums';
 import LibraryItem from './LibraryItem';
 import './Library.css';
 
-class Library extends Component {
+class Library extends PureComponent {
 
   static propTypes = {
     fetchState: PropTypes.oneOf(ActionState.values).isRequired,

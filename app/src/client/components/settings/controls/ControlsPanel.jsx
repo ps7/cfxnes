@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {Modal, Icon, Field} from '../../common';
 import SettingsPanel from '../SettingsPanel';
 import ControlsList from './ControlsList';
@@ -6,7 +6,7 @@ import GamepadList from './GamepadList';
 
 const ID = 'controls';
 
-export default class ControlsPanel extends Component {
+export default class ControlsPanel extends PureComponent {
 
   static id = ID;
 

@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {keysValuePropType} from '../../../common';
 import {Icon, Field} from '../../common';
 import {AudioChannel} from '../../../enums';
@@ -7,7 +7,7 @@ import AudioVolumeField from './AudioVolumeField';
 
 const ID = 'audio';
 
-export default class AudioPanel extends Component {
+export default class AudioPanel extends PureComponent {
 
   static id = ID;
 

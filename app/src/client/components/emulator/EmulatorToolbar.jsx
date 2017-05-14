@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../common';
 import {AudioChannel} from '../../enums';
@@ -14,7 +14,7 @@ import {
 import {Button, ButtonGroup, Icon, IconStack, Input, Popup, Toolbar, Tooltip} from '../common';
 import FpsCounter from './FpsCounter';
 
-class EmulatorToolbar extends Component {
+class EmulatorToolbar extends PureComponent {
 
   static propTypes = {
     running: PropTypes.bool.isRequired,

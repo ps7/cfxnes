@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import {
@@ -18,7 +18,7 @@ import EmulatorControls from './EmulatorControls';
 import EmulatorOutput from './EmulatorOutput';
 import './Emulator.css';
 
-class Emulator extends Component {
+class Emulator extends PureComponent {
 
   static propTypes = {
     params: PropTypes.shape({ // eslint-disable-line react/no-unused-prop-types

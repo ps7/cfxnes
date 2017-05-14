@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {Field} from '../../common';
 import {AudioChannel} from '../../../enums';
 
-export default class AudioVolumeField extends Component {
+export default class AudioVolumeField extends PureComponent {
 
   static propTypes = {
     channel: PropTypes.oneOf(AudioChannel.values).isRequired,

@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
 import {panels, isValidPanelId, defaultPanelId} from './panels';
 import './Settings.css';
 
-class Settings extends Component {
+class Settings extends PureComponent {
 
   static propTypes = {
     params: PropTypes.shape({ // eslint-disable-line react/no-unused-prop-types

@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {Icon, Panel} from '../common';
 import './SettingsPanel.css';
 
-export default class SettingsPanel extends Component {
+export default class SettingsPanel extends PureComponent {
 
   static propTypes = {
     id: PropTypes.string.isRequired,

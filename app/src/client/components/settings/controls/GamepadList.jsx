@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import Gamepad from './Gamepad';
 
-export default class GamepadList extends Component {
+export default class GamepadList extends PureComponent {
 
   static propTypes = {
     onMap: PropTypes.func.isRequired,

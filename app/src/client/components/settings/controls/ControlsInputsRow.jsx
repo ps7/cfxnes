@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
 import DeviceInput from './DeviceInput';
 import SourceInput from './SourceInput';
 
-export default class ControlsInputsRow extends Component {
+export default class ControlsInputsRow extends PureComponent {
 
   static propTypes = {
     deviceInput: DeviceInput.propTypes.input,

@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 
-export default class GamepadMapButton extends Component {
+export default class GamepadMapButton extends PureComponent {
 
   static propTypes = {
     index: PropTypes.number.isRequired,

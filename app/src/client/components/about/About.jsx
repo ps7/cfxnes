@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {logoSvg} from '../../images';
 import Changelog from './Changelog';
 import cfxnes from 'cfxnes';
 import './About.css';
 
-export default class About extends Component {
+export default class About extends PureComponent {
 
   state = {changelogVisible: false};
 
