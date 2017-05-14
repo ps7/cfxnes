@@ -25,8 +25,8 @@ export default class ControlsDevice extends Component {
       <div className="controls-device">
         <label>Port {port}:</label>
         {onChange != null
-          ? <ButtonSelect items={Device.items} value={device} onChange={this.handleChange}/>
-          : <span>{Device.getCaption(device)}</span>
+          ? <ButtonSelect options={Device.items} value={device} onChange={this.handleChange}/>
+          : <span>{Device.getLabel(device)}</span>
         }
       </div>
     );

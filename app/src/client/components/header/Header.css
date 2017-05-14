@@ -3,6 +3,10 @@ header {
   align-items: center;
   flex-flow: wrap;
   border-bottom: 1px solid black;
+
+  & .toolbar {
+    margin: 0 1em;
+  }
 }
 
 .header-logo {
@@ -15,7 +19,7 @@ header {
   }
 }
 
-.navigation-item {
+.navigation-link {
   display: inline-block;
   padding: 0.5em 1em;
 
@@ -27,8 +31,4 @@ header {
 
 .navigation-help {
   margin-left: auto;
-}
-
-.toolbar {
-  margin: 0 1em;
 }

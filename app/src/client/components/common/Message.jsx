@@ -5,8 +5,8 @@ import './Message.css';
 const INFO = 'info';
 const ERROR = 'error';
 
-const Message = ({type, className, onClose, children}) => (
-  <div className={classNames('message', type, className)}>
+const Message = ({className, type, onClose, children, ...attrs}) => (
+  <div className={classNames('message', type, className)} {...attrs}>
     <div className="message-body">
       {children}
     </div>
@@ -15,15 +15,15 @@ const Message = ({type, className, onClose, children}) => (
 );
 
 Message.propTypes = {
-  type: PropTypes.oneOf([INFO, ERROR]),
   className: PropTypes.string,
+  type: PropTypes.oneOf([INFO, ERROR]),
   onClose: PropTypes.func,
   children: PropTypes.node,
 };
 
 Message.defaultProps = {
-  type: INFO,
   className: null,
+  type: INFO,
   onClose: null,
   children: null,
 };

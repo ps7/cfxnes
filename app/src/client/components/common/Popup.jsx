@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import classNames from 'classnames';
 import './Popup.css';
 
-export default class Popup extends Component {
+export default class Popup extends PureComponent {
 
   static propTypes = {
     className: PropTypes.string,
@@ -40,9 +40,9 @@ export default class Popup extends Component {
   };
 
   render() {
-    const {className, children} = this.props;
+    const {className, onBlur, children, ...attrs} = this.props;
     return (
-      <div className={classNames('popup', className)} ref={this.setElement}>
+      <div className={classNames('popup', className)} ref={this.setElement} {...attrs}>
         {children}
       </div>
     );

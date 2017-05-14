@@ -23,12 +23,12 @@ export function parseInputId(id) {
   return {source, name};
 }
 
-export function getInputCaption({source, name}) {
-  let caption = name.split('-').map(capitalize).join(' ');
+export function getInputLabel({source, name}) {
+  let label = name.split('-').map(capitalize).join(' ');
   if (isGamepad(source)) {
-    caption = caption.replace('Dpad', 'D-pad').replace(/ $/, '-');
+    label = label.replace('Dpad', 'D-pad').replace(/ $/, '-');
   }
-  return caption;
+  return label;
 }
 
 export function getInputIcon({source}) {

@@ -1,29 +1,50 @@
-import React, {PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
+import classNames from 'classnames';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 
-const ButtonSelect = ({items, value, onChange}) => (
-  <ButtonGroup>
-    {items.map(item => {
-      const active = item.value === value;
-      const onClick = () => onChange(item.value);
-      return <Button key={item.value} caption={item.caption} active={active} onClick={onClick}/>;
-    })}
-  </ButtonGroup>
-);
+export default class ButtonSelect extends PureComponent {
 
-ButtonSelect.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    caption: PropTypes.string.isRequired,
-  })).isRequired,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-};
+  static propTypes = {
+    className: PropTypes.string,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })).isRequired,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+  };
 
-ButtonSelect.defaultProps = {
-  value: null,
-  onChange: null,
-};
+  static defaultProps = {
+    className: null,
+    value: null,
+    onChange: null,
+  };
 
-export default ButtonSelect;
+  handleValueChange = event => {
+    const {onChange} = this.props;
+    if (onChange) {
+      onChange(event.target.getAttribute('data-value'));
+    }
+  }
+
+  renderOption = ({label, value}) => {
+    return (
+      <Button key={value} data-value={value}
+              active={value === this.props.value}
+              onClick={this.handleValueChange}>
+        {label}
+      </Button>
+    );
+  };
+
+  render() {
+    const {className, options, value, onChange, ...attrs} = this.props;
+    return (
+      <ButtonGroup className={classNames('button-select', className)} {...attrs}>
+        {options.map(this.renderOption)}
+      </ButtonGroup>
+    );
+  }
+
+}

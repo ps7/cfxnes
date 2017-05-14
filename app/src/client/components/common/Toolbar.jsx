@@ -1,18 +1,20 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
-const Toolbar = ({type, children}) => {
-  const className = classNames('toolbar', type && `toolbar-${type}`);
-  return <div className={className}>{children}</div>;
+const Toolbar = ({className, children, ...attrs}) => {
+  return <div className={classNames('toolbar', className)} {...attrs}>
+    {children}
+  </div>;
 };
 
 Toolbar.propTypes = {
-  type: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node,
 };
 
 Toolbar.defaultProps = {
-  type: null,
+  className: null,
+  children: null,
 };
 
 export default Toolbar;

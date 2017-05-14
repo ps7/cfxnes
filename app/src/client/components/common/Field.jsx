@@ -9,21 +9,23 @@ export default class Field extends PureComponent {
 
   static propTypes = {
     id: PropTypes.string,
+    className: PropTypes.string,
     type: PropTypes.oneOf(fieldTypes).isRequired,
-    caption: PropTypes.string,
+    label: PropTypes.string,
     value: PropTypes.any,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
     id: null,
-    caption: null,
+    className: null,
+    label: null,
     value: null,
     onChange: null,
   };
 
   renderInput() {
-    const {caption, type, ...attrs} = this.props;
+    const {label, type, ...attrs} = this.props;
     if (type === SELECT) {
       return <Select {...attrs}/>;
     }
@@ -31,13 +33,13 @@ export default class Field extends PureComponent {
   }
 
   render() {
-    const {id, caption, type} = this.props;
+    const {id, className, type, label} = this.props;
     return (
-      <div className={classNames('field', id && `field-${id}`)}>
+      <div className={classNames('field', id && `field-${id}`, className)}>
         {type === CHECKBOX && this.renderInput()}
-        {type === CHECKBOX && caption && ' '}
-        {caption && <label htmlFor={id}>{caption}</label>}
-        {type !== CHECKBOX && caption && ' '}
+        {type === CHECKBOX && label && ' '}
+        {label && <label htmlFor={id}>{label}</label>}
+        {type !== CHECKBOX && label && ' '}
         {type !== CHECKBOX && this.renderInput()}
       </div>
     );

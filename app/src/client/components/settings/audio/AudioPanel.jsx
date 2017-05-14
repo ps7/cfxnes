@@ -32,8 +32,8 @@ export default class AudioPanel extends Component {
     const panelProps = {
       ...defaultPanelProps,
       id: ID,
+      title: 'Audio',
       icon: 'music',
-      caption: 'Audio',
     };
 
     if (!audioSupported) {
@@ -46,7 +46,7 @@ export default class AudioPanel extends Component {
 
     return (
       <SettingsPanel {...panelProps}>
-        <Field id="audio-enabled" caption="Enable audio" type="checkbox"
+        <Field id="audio-enabled" label="Enable audio" type="checkbox"
                value={audioEnabled} onChange={onAudioEnabledChange}/>
         {AudioChannel.values.map(channel => (
           <AudioVolumeField key={channel} channel={channel} disabled={!audioEnabled}

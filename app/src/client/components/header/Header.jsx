@@ -12,13 +12,13 @@ const Header = ({toolbar}) => (
       <img src={logoSvg} alt="cfxnes logo"/> cfxnes
     </Link>
     <Nav type="main">
-      <Nav.Item path="/emulator" caption="Emulator" icon="gamepad"/>
-      <Nav.Item path="/library" caption="Library" icon="book"/>
-      <Nav.Item path="/settings" caption="Settings" icon="cog"/>
+      <Nav.Link to="/emulator" label="Emulator" icon="gamepad"/>
+      <Nav.Link to="/library" label="Library" icon="book"/>
+      <Nav.Link to="/settings" label="Settings" icon="cog"/>
     </Nav>
     {toolbar}
     <Nav type="help">
-      <Nav.Item path="/about" caption="About" icon="question-circle"/>
+      <Nav.Link to="/about" label="About" icon="question-circle"/>
     </Nav>
   </header>
 );

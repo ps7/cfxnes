@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Button, Icon} from '../../common';
+import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
 
 export default class SourceInput extends Component {
@@ -26,8 +26,13 @@ export default class SourceInput extends Component {
     return (
       <div className="source-input">
         <Icon name={Source.getInputIcon(input)}/>
-        <span>{Source.getInputCaption(input)}</span>
-        {onRemove && <Button icon="trash" tooltip="Remove" onClick={this.handleRemoveClick}/>}
+        <span>{Source.getInputLabel(input)}</span>
+        {onRemove && (
+          <Button onClick={this.handleRemoveClick}>
+            <Icon name="trash"/>
+            <Tooltip>Remove</Tooltip>
+          </Button>
+        )}
       </div>
     );
   }

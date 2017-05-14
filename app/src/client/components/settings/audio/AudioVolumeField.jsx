@@ -18,9 +18,9 @@ export default class AudioVolumeField extends Component {
 
   render() {
     const {channel, disabled, value} = this.props;
-    const caption = AudioChannel.getCaption(channel);
+    const label = AudioChannel.getLabel(channel);
 
-    return <Field key={value} id={`audio-volume-${value}`} caption={caption}
+    return <Field key={value} id={`audio-volume-${value}`} label={label}
                   type="range" min="0" max="1" step="0.01" value={value}
                   disabled={disabled} onChange={this.handleChange}/>;
   }

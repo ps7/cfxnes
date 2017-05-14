@@ -1,10 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import {Panel} from '../common';
+import {Icon, Panel} from '../common';
+import './SettingsPanel.css';
 
 export default class SettingsPanel extends Component {
 
   static propTypes = {
     id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
     onActivate: PropTypes.func.isRequired,
     children: PropTypes.node,
@@ -20,10 +23,15 @@ export default class SettingsPanel extends Component {
   };
 
   render() {
-    const {id, active, children, ...otherProps} = this.props;
+    const {id, title, icon, active, children} = this.props;
     return (
-      <Panel id={`${id}-panel`} collapsed={!active} onHeaderClick={this.handleHeaderClick} {...otherProps}>
-        {children}
+      <Panel id={`${id}-settings-panel`} className="settings-panel" collapsed={!active}>
+        <Panel.Header onClick={this.handleHeaderClick}>
+          <Icon name={icon}/> <span className="settings-panel-title">{title}</span>
+        </Panel.Header>
+        <Panel.Body>
+          {children}
+        </Panel.Body>
       </Panel>
     );
   }

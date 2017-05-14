@@ -7,9 +7,9 @@ export const PAL = 'pal';
 export const values = [AUTO, NTSC, PAL];
 
 export const params = {
-  [AUTO]: {caption: 'Autodetect'},
-  [NTSC]: {caption: 'NTSC'},
-  [PAL]: {caption: 'PAL'},
+  [AUTO]: {label: 'Autodetect'},
+  [NTSC]: {label: 'NTSC'},
+  [PAL]: {label: 'PAL'},
 };
 
 export const items = createItems(values, params);

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Button} from '../../common';
+import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
 import DeviceInput from './DeviceInput';
 import SourceInput from './SourceInput';
@@ -44,7 +44,10 @@ export default class ControlsInputsRow extends Component {
         </div>
         {onAdd && (
           <div className="add-input">
-            <Button icon="plus" tooltip="Bind new input" onClick={this.handleAdd}/>
+            <Button onClick={this.handleAdd}>
+              <Icon name="plus"/>
+              <Tooltip>Bind new input</Tooltip>
+            </Button>
           </div>
         )}
       </div>

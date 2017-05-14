@@ -11,4 +11,9 @@
     display: block;
     animation: fadeInFromNone 0.5s ease-out;
   }
+
+  &:focus {
+    outline: none;
+    border-color: blue;
+  }
 }

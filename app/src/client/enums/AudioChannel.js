@@ -8,14 +8,14 @@ export const DMC = 'dmc';
 export const values = [MASTER, PULSE_1, PULSE_2, TRIANGLE, NOISE, DMC];
 
 const params = {
-  [MASTER]: {caption: 'Master volume'},
-  [PULSE_1]: {caption: 'Pulse channel 1'},
-  [PULSE_2]: {caption: 'Pulse channel 2'},
-  [TRIANGLE]: {caption: 'Triangle channel'},
-  [NOISE]: {caption: 'Noise channel'},
-  [DMC]: {caption: 'DMC channel'},
+  [MASTER]: {label: 'Master volume'},
+  [PULSE_1]: {label: 'Pulse channel 1'},
+  [PULSE_2]: {label: 'Pulse channel 2'},
+  [TRIANGLE]: {label: 'Triangle channel'},
+  [NOISE]: {label: 'Noise channel'},
+  [DMC]: {label: 'DMC channel'},
 };
 
-export function getCaption(channel) {
-  return params[channel].caption;
+export function getLabel(channel) {
+  return params[channel].name;
 }

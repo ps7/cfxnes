@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react';
 import {Port, Device} from '../../../enums';
 
 const DeviceInput = ({input}) => {
-  const caption = Device.getInputCaption(input);
-  return <div className="device-input">{caption}</div>;
+  const name = Device.getInputLabel(input);
+  return <div className="device-input">{name}</div>;
 };
 
 DeviceInput.propTypes = {

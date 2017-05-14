@@ -6,10 +6,10 @@ import SettingsPanel from '../SettingsPanel';
 const ID = 'system';
 
 const SystemPanel = ({region, speed, onRegionChange, onSpeedChange, ...panelProps}) => (
-  <SettingsPanel id={ID} icon="server" caption="System" {...panelProps}>
-    <Field id="region" caption="Region" type="select" items={Region.items}
+  <SettingsPanel id={ID} title="System" icon="server" {...panelProps}>
+    <Field id="region" label="Region" type="select" options={Region.items}
            value={region} onChange={onRegionChange}/>
-    <Field id="speed" caption="Emulation speed" type="range" min="0.25" max="2" step="0.25"
+    <Field id="speed" label="Emulation speed" type="range" min="0.25" max="2" step="0.25"
            value={speed} onChange={onSpeedChange}/>
   </SettingsPanel>
 );

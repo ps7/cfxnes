@@ -17,15 +17,15 @@ Nav.defaultProps = {
   type: null,
 };
 
-Nav.Item = ({path, caption, icon}) => (
-  <Link to={path} className="navigation-item" activeClassName="active">
-    <Icon name={icon}/> {caption}
+Nav.Link = ({to, label, icon}) => (
+  <Link to={to} className="navigation-link" activeClassName="active">
+    <Icon name={icon}/> {label}
   </Link>
 );
 
-Nav.Item.propTypes = {
-  path: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
+Nav.Link.propTypes = {
+  to: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
 };
 

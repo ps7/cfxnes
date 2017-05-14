@@ -1,0 +1,7 @@
+.settings-panel .panel-header:hover {
+  cursor: pointer;
+
+  & .settings-panel-title {
+    text-decoration: underline;
+  }
+}

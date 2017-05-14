@@ -6,15 +6,15 @@ import ResetPanelItem from './ResetPanelItem';
 const ID = 'reset';
 
 const ResetPanel = ({settingsResetLocked, nvramsDeletionState, onSettingsReset, onNVRAMsDelete, ...panelProps}) => (
-  <SettingsPanel id={ID} icon="trash-o" caption="Reset" {...panelProps}>
-    <ResetPanelItem caption="Reset settings"
+  <SettingsPanel id={ID} title="Reset" icon="trash-o" {...panelProps}>
+    <ResetPanelItem action="Reset settings"
                     description="Restore all settings to their default value."
                     confirmTitle="Reset settings?"
                     confirmMessage="All settings will be restored to their default value."
                     state={settingsResetLocked}
                     onConfirm={onSettingsReset}/>
 
-    <ResetPanelItem caption="Delete data"
+    <ResetPanelItem action="Delete data"
                     description={`Delete stored data of all games. This will only affect games
                                   that support saving, like The Legend of Zelda or Final Fantasy.`}
                     confirmTitle="Delete game data?"

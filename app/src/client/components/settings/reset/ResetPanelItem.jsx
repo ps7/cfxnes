@@ -5,7 +5,7 @@ import {ActionState} from '../../../enums';
 export default class ResetPanelItem extends Component {
 
   static propTypes = {
-    caption: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     confirmTitle: PropTypes.string.isRequired,
     confirmMessage: PropTypes.string.isRequired,
@@ -42,29 +42,41 @@ export default class ResetPanelItem extends Component {
   }
 
   renderConfirm() {
-    const {caption, confirmTitle, confirmMessage} = this.props;
+    const {action, confirmTitle, confirmMessage} = this.props;
 
     return <ConfirmDialog title={confirmTitle}
                           message={confirmMessage}
-                          confirmCaption={caption}
-                          cancelCaption="Cancel"
+                          confirm={action}
+                          cancel="Cancel"
                           onConfirm={this.handleConfirm}
                           onCancel={this.handleCancel}/>;
   }
 
   renderButton() {
-    const {state, caption, progressMessage, failureMessage} = this.props;
+    const {state, action, progressMessage, failureMessage} = this.props;
 
     if (state === ActionState.STARTED) {
-      return <Button disabled><Icon name="circle-o-notch" spin/> {progressMessage}</Button>;
+      return (
+        <Button disabled>
+          <Icon name="circle-o-notch" spin/> {progressMessage}
+        </Button>
+      );
     }
     if (state === ActionState.FAILURE) {
-      return <Button icon="exclamation-triangle" caption={failureMessage} disabled/>;
+      return (
+        <Button disabled>
+          <Icon name="exclamation-triangle"/> {failureMessage}
+        </Button>
+      );
     }
     if (state === ActionState.SUCCESS || state === true) {
-      return <Button icon="check" caption="Done" disabled/>;
+      return (
+        <Button disabled>
+          <Icon name="check"/> Done
+        </Button>
+      );
     }
-    return <Button caption={caption} onClick={this.handleAction}/>;
+    return <Button onClick={this.handleAction}>{action}</Button>;
   }
 
   render() {

@@ -8,9 +8,9 @@ export const ZAPPER = 'zapper';
 export const values = [NONE, JOYPAD, ZAPPER];
 
 export const params = {
-  [NONE]: {caption: 'None', inputNames: []},
-  [JOYPAD]: {caption: 'Joypad', inputNames: ['a', 'b', 'start', 'select', 'left', 'right', 'up', 'down']},
-  [ZAPPER]: {caption: 'Zapper', inputNames: ['trigger']},
+  [NONE]: {label: 'None', inputNames: []},
+  [JOYPAD]: {label: 'Joypad', inputNames: ['a', 'b', 'start', 'select', 'left', 'right', 'up', 'down']},
+  [ZAPPER]: {label: 'Zapper', inputNames: ['trigger']},
 };
 
 export const items = createItems(values, params);
@@ -23,8 +23,8 @@ export function toOptional(device) {
   return device !== NONE ? device : null;
 }
 
-export function getCaption(device) {
-  return params[device].caption;
+export function getLabel(device) {
+  return params[device].name;
 }
 
 export function getInputNames(device) {
@@ -35,6 +35,6 @@ export function getInputId({port, device, name}) {
   return `${port}.${device}.${name}`;
 }
 
-export function getInputCaption({name}) {
+export function getInputLabel({name}) {
   return capitalize(name);
 }

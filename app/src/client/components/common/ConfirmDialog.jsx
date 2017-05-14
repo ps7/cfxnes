@@ -7,15 +7,15 @@ export default class ConfirmDialog extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-    confirmCaption: PropTypes.string,
-    cancelCaption: PropTypes.string,
+    confirm: PropTypes.string,
+    cancel: PropTypes.string,
     onConfirm: PropTypes.func,
     onCancel: PropTypes.func,
   };
 
   static defaultProps = {
-    confirmCaption: 'Yes',
-    cancelCaption: 'No',
+    confirm: 'Yes',
+    cancel: 'No',
     onConfirm: null,
     onCancel: null,
   };
@@ -38,14 +38,14 @@ export default class ConfirmDialog extends Component {
   }
 
   render() {
-    const {title, message, confirmCaption, cancelCaption, onConfirm, onCancel} = this.props;
+    const {title, message, confirm, cancel, onConfirm, onCancel} = this.props;
     return (
-      <Modal>
-        <Modal.Header title={title} onClose={onCancel}/>
+      <Modal className="confirm-dialog">
+        <Modal.Header onClose={onCancel}>{title}</Modal.Header>
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
-          <Button caption={cancelCaption} onClick={onCancel}/>
-          <Button caption={confirmCaption} onClick={onConfirm} autoFocus/>
+          <Button onClick={onCancel}>{cancel}</Button>
+          <Button onClick={onConfirm} autoFocus>{confirm}</Button>
         </Modal.Footer>
       </Modal>
     );

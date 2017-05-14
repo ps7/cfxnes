@@ -7,9 +7,9 @@ export const STRETCHED = 'stretched';
 export const values = [MAXIMIZED, NORMALIZED, STRETCHED];
 
 export const params = {
-  [MAXIMIZED]: {caption: 'Upscale to maximum resolution'},
-  [NORMALIZED]: {caption: 'Upscale without visual artifacts'},
-  [STRETCHED]: {caption: 'Stretch to fill the whole sceen'},
+  [MAXIMIZED]: {label: 'Upscale to maximum resolution'},
+  [NORMALIZED]: {label: 'Upscale without visual artifacts'},
+  [STRETCHED]: {label: 'Stretch to fill the whole sceen'},
 };
 
 export const items = createItems(values, params);

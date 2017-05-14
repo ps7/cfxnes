@@ -55,20 +55,20 @@ export default class VideoPanel extends Component {
     } = this.props;
 
     return (
-      <SettingsPanel id={ID} icon="desktop" caption="Video" {...panelProps}>
-        <Field id="video-scale" caption="Output scale" type="number"
+      <SettingsPanel id={ID} title="Video" icon="desktop" {...panelProps}>
+        <Field id="video-scale" label="Output scale" type="number"
                value={videoScale} onChange={this.handleVideoScaleChange}/>
-        <Field id="video-palette" caption="Color palette" type="select" items={VideoPalette.items}
+        <Field id="video-palette" label="Color palette" type="select" options={VideoPalette.items}
                value={videoPalette} onChange={onVideoPaletteChange}/>
-        <Field id="fullscreen-type" caption="Fullscreen mode" type="select" items={FullscreenType.items}
+        <Field id="fullscreen-type" label="Fullscreen mode" type="select" options={FullscreenType.items}
                value={fullscreenType} onChange={onFullscreenTypeChange}/>
-        <Field id="video-filter" caption="Filter" type="select" items={VideoFilter.items}
+        <Field id="video-filter" label="Filter" type="select" options={VideoFilter.items}
                value={videoFilter} onChange={onVideoFilterChange}/>
-        <Field id="video-debug" caption="Enable debug output" type="checkbox"
+        <Field id="video-debug" label="Enable debug output" type="checkbox"
                value={videoDebug} onChange={onVideoDebugChange}/>
-        <Field id="video-renderer" caption="Use WebGL for rendering" type="checkbox"
+        <Field id="video-renderer" label="Use WebGL for rendering" type="checkbox"
                value={videoRenderer === VideoRenderer.WEBGL} onChange={this.handleVideoRendererChange}/>
-        <Field id="fps-visible" caption="Show FPS" type="checkbox"
+        <Field id="fps-visible" label="Show FPS" type="checkbox"
                value={fpsVisible} onChange={onFpsVisibleChange}/>
       </SettingsPanel>
     );

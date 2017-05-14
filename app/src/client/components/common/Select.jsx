@@ -1,18 +1,18 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 
-const Option = ({caption, value}) => (
-  <option key={value} value={value}>{caption}</option>
+const Option = ({label, value}) => (
+  <option key={value} value={value}>{label}</option>
 );
 
 Option.propTypes = {
+  label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
 };
 
-export default class Select extends Component {
+export default class Select extends PureComponent {
 
   static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape(Option.propTypes)).isRequired,
+    options: PropTypes.arrayOf(PropTypes.shape(Option.propTypes)).isRequired,
     value: PropTypes.any,
     onChange: PropTypes.func,
   };
@@ -30,10 +30,10 @@ export default class Select extends Component {
   };
 
   render() {
-    const {items, ...attrs} = this.props;
+    const {options, value, onChange, ...attrs} = this.props;
     return (
-      <select {...attrs} onChange={this.handleChange}>
-        {items.map(Option)}
+      <select onChange={this.handleChange} {...attrs}>
+        {options.map(Option)}
       </select>
     );
   }

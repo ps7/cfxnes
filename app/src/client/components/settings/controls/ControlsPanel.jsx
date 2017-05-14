@@ -50,7 +50,7 @@ export default class ControlsPanel extends Component {
     } = this.props;
 
     return (
-      <SettingsPanel id={ID} icon="gamepad" caption="Controls" {...panelProps}>
+      <SettingsPanel id={ID} title="Controls" icon="gamepad" {...panelProps}>
         {this.state.inputRequestVisible && (
           <Modal>
             <Modal.Body>Press key or button (ESC to cancel).</Modal.Body>
@@ -65,7 +65,7 @@ export default class ControlsPanel extends Component {
           <a href="#" onClick={this.handleReset}>Restore default keyboard controls</a>
         </div>
         <GamepadList onMap={onControlsGamepadMap}/>
-        <Field id="controls-visible" caption="Show controls on emulator page" type="checkbox"
+        <Field id="controls-visible" label="Show controls on emulator page" type="checkbox"
                value={controlsVisible} onChange={onControlsVisibleChange}/>
       </SettingsPanel>
     );

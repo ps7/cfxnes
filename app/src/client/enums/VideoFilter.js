@@ -6,8 +6,8 @@ export const LINEAR = 'linear';
 export const values = [NEAREST, LINEAR];
 
 export const params = {
-  [NEAREST]: {caption: 'Pixelated'},
-  [LINEAR]: {caption: 'Linear'},
+  [NEAREST]: {label: 'Pixelated'},
+  [LINEAR]: {label: 'Linear'},
 };
 
 export const items = createItems(values, params);

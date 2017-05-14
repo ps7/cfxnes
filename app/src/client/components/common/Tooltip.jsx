@@ -2,17 +2,26 @@ import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import './Tooltip.css';
 
-const Tooltip = ({position, children}) => (
-  <div className={classNames('tooltip', position)}>{children}</div>
+const TOP = 'top';
+const RIGHT = 'right';
+const BOTTOM = 'bottom';
+const LEFT = 'left';
+
+const Tooltip = ({className, position, children, ...attrs}) => (
+  <span className={classNames('tooltip', className, position)} {...attrs}>
+    {children}
+  </span>
 );
 
 Tooltip.propTypes = {
-  position: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  className: PropTypes.string,
+  position: PropTypes.oneOf([TOP, RIGHT, BOTTOM, LEFT]),
   children: PropTypes.node,
 };
 
 Tooltip.defaultProps = {
-  position: 'top',
+  className: null,
+  position: TOP,
   children: null,
 };
 

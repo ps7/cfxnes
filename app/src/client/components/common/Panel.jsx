@@ -1,35 +1,55 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-import Icon from './Icon';
 import './Panel.css';
 
-const Panel = ({id, icon, caption, collapsed, children, onHeaderClick}) => (
-  <div id={id} className={classNames('panel', {collapsed})}>
-    <div className={classNames('panel-header', {clickable: onHeaderClick != null})} onClick={onHeaderClick}>
-      {icon && <Icon name={icon}/>} {caption}
-    </div>
-    <div className="panel-body">
-      {children}
-    </div>
+const Panel = ({className, collapsed, children, ...attrs}) => (
+  <div className={classNames('panel', className, {collapsed})} {...attrs}>
+    {children}
   </div>
 );
 
 Panel.propTypes = {
-  id: PropTypes.string,
-  icon: PropTypes.string,
-  caption: PropTypes.string.isRequired,
+  className: PropTypes.string,
   collapsed: PropTypes.bool,
   children: PropTypes.node,
-  onHeaderClick: PropTypes.func,
 };
 
 Panel.defaultProps = {
-  id: null,
-  type: null,
-  icon: null,
+  className: null,
   collapsed: false,
   children: null,
-  onHeaderClick: null,
+};
+
+Panel.Header = ({className, children, ...attrs}) => (
+  <div className={classNames('panel-header', className)} {...attrs}>
+    {children}
+  </div>
+);
+
+Panel.Header.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
+
+Panel.Header.defaultProps = {
+  className: null,
+  children: null,
+};
+
+Panel.Body = ({className, children, ...attrs}) => (
+  <div className={classNames('panel-body', className)} {...attrs}>
+    {children}
+  </div>
+);
+
+Panel.Body.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
+
+Panel.Body.defaultProps = {
+  className: null,
+  children: null,
 };
 
 export default Panel;

@@ -13,10 +13,6 @@
 .panel-header {
   padding: 1em;
   background: #ddd;
-
-  &.clickable:hover {
-    text-decoration: underline;
-  }
 }
 
 .panel-body {

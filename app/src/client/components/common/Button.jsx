@@ -1,15 +1,11 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import classNames from 'classnames';
-import Icon from './Icon';
-import Tooltip from './Tooltip';
 import './Button.css';
 
-export default class Button extends Component {
+export default class Button extends PureComponent {
 
   static propTypes = {
-    icon: PropTypes.string,
-    caption: PropTypes.string,
-    tooltip: PropTypes.string,
+    className: PropTypes.string,
     active: PropTypes.bool,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
@@ -18,9 +14,7 @@ export default class Button extends Component {
   };
 
   static defaultProps = {
-    icon: null,
-    caption: null,
-    tooltip: null,
+    className: null,
     active: false,
     disabled: false,
     onClick: null,
@@ -30,22 +24,21 @@ export default class Button extends Component {
 
   componentDidMount() {
     if (this.props.autoFocus) {
-      this.button.focus();
+      this.element.focus();
     }
   }
 
-  setButton = button => {
-    this.button = button;
+  setElement = element => {
+    this.element = element;
   }
 
   render() {
-    const {icon, caption, tooltip, active, disabled, onClick, children} = this.props;
+    const {className, active, children, ...attrs} = this.props;
     return (
-      <button type="button" className={classNames('button', {active})}
-              disabled={disabled} onClick={onClick} ref={this.setButton}>
+      <button type="button" ref={this.setElement}
+              className={classNames('button', {active}, className)}
+              {...attrs}>
         {children}
-        {!children && icon && <Icon name={icon}/>} {!children && caption}
-        {!children && tooltip && <Tooltip>{tooltip}</Tooltip>}
       </button>
     );
   }

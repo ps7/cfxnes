@@ -35,7 +35,7 @@ export default class Input extends PureComponent {
 
   render() {
     const {type, value, ...attrs} = this.props;
-    return <input {...attrs} type={type}
+    return <input type={type} {...attrs}
                   value={type !== CHECKBOX ? value : undefined}
                   checked={type === CHECKBOX && value}
                   onChange={this.handleChange}/>;

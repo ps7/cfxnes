@@ -23,15 +23,15 @@ export const values = [
 ];
 
 export const params = {
-  [ASQ_REAL_A]: {caption: 'ASQ (reality A)'},
-  [ASQ_REAL_B]: {caption: 'ASQ (reality B)'},
-  [BMF_FIN_R2]: {caption: 'BMF (final revision 2)'},
-  [BMF_FIN_R3]: {caption: 'BMF (final revision 3)'},
-  [FCEU_13]: {caption: 'FCEU .13'},
-  [FCEU_15]: {caption: 'FCEU .15'},
-  [FCEUX]: {caption: 'FCEUX'},
-  [NESTOPIA_RGB]: {caption: 'Nestopia (RGB)'},
-  [NESTOPIA_YUV]: {caption: 'Nestopia (YUV)'},
+  [ASQ_REAL_A]: {label: 'ASQ (reality A)'},
+  [ASQ_REAL_B]: {label: 'ASQ (reality B)'},
+  [BMF_FIN_R2]: {label: 'BMF (final revision 2)'},
+  [BMF_FIN_R3]: {label: 'BMF (final revision 3)'},
+  [FCEU_13]: {label: 'FCEU .13'},
+  [FCEU_15]: {label: 'FCEU .15'},
+  [FCEUX]: {label: 'FCEUX'},
+  [NESTOPIA_RGB]: {label: 'Nestopia (RGB)'},
+  [NESTOPIA_YUV]: {label: 'Nestopia (YUV)'},
 };
 
 export const items = createItems(values, params);
