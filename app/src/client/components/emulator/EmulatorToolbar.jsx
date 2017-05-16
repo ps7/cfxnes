@@ -138,7 +138,7 @@ class EmulatorToolbar extends PureComponent {
     const {volumePopupVisible} = this.state;
     return (
       <ButtonGroup id="emulator-toolbar-volume">
-        <Button onClick={this.handleVolumePopupToggle}>
+        <Button active={volumePopupVisible} onClick={this.handleVolumePopupToggle}>
           <IconStack className="volume-icon">
             {masterVolume > 0.5 && <Icon name="volume-up" stack="1x"/>}
             {masterVolume > 0 && masterVolume <= 0.5 && <Icon name="volume-down" stack="1x"/>}
