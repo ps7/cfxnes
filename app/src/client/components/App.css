@@ -3,7 +3,7 @@ body {
   font-size: 1rem;
 }
 
-.app {
+#app {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -16,5 +16,13 @@ main {
 
 main {
   flex-grow: 1;
-  margin: 1em;
+  padding: 1em;
+
+  @nest .light-theme & {
+    background: white;
+  }
+
+  @nest .dark-theme & {
+    background: #333;
+  }
 }

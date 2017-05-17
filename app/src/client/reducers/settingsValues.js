@@ -1,4 +1,5 @@
 import {
+  SET_THEME,
   SET_REGION,
   SET_SPEED,
   SET_VIDEO_RENDERER,
@@ -19,6 +20,7 @@ import {
 import {createReducer} from './common';
 
 const actionHandlers = {
+  [SET_THEME]: (state, theme) => ({...state, theme}),
   [SET_REGION]: (state, region) => ({...state, region}),
   [SET_SPEED]: (state, speed) => ({...state, speed}),
   [SET_VIDEO_RENDERER]: (state, videoRenderer) => ({...state, videoRenderer}),

@@ -8,6 +8,7 @@ import * as AudioChannel from './AudioChannel';
 import * as Port from './Port';
 import * as Device from './Device';
 import * as Source from './Source';
+import * as Theme from './Theme';
 
 export {
   ActionState,
@@ -20,4 +21,5 @@ export {
   Port,
   Device,
   Source,
+  Theme,
 };

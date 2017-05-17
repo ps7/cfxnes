@@ -1,8 +1,9 @@
 import {copyControlsFromNes, copyInputsFromNes} from '../settings';
 import {nes, nesDefaults, MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../common';
-import {Port, Device, Source} from '../enums';
+import {Port, Device, Source, Theme} from '../enums';
 import {createAction} from './common';
 
+export const SET_THEME = 'SET_THEME';
 export const SET_REGION = 'SET_REGION';
 export const SET_SPEED = 'SET_SPEED';
 export const SET_VIDEO_RENDERER = 'SET_VIDEO_RENDERER';
@@ -18,6 +19,13 @@ export const SET_CONTROLS = 'SET_CONTROLS';
 export const SET_CONTROLS_DEVICE = 'SET_CONTROLS_DEVICE';
 export const SET_CONTROLS_INPTUS = 'SET_CONTROLS_INPTUS';
 export const SET_CONTROLS_VISIBLE = 'SET_CONTROLS_VISIBLE';
+
+export function switchTheme() {
+  return (dispatch, getState) => {
+    const {theme} = getState().settings.values;
+    dispatch(createAction(SET_THEME, Theme.getNext(theme)));
+  };
+}
 
 export function setRegion(region) {
   nes.region = region;
