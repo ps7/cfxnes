@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Icon = ({className, name, size, fixedWidth, inverse, spin, stack, ...attrs}) => {

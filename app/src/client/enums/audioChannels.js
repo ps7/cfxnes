@@ -17,5 +17,5 @@ const params = {
 };
 
 export function getLabel(channel) {
-  return params[channel].name;
+  return params[channel].label;
 }

@@ -1,4 +1,5 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType} from '../../../enums';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../../common';
 import {Field} from '../../common';

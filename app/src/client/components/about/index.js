@@ -1,1 +1,1 @@
-export {default as main} from './About';
+export {default as About} from './About';

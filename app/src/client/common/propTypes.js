@@ -1,4 +1,4 @@
-import {PropTypes} from 'react';
+import PropTypes from 'prop-types';
 import {fromPairs} from 'lodash-es';
 
 export function keysValuePropType(keys, valuePropType) {

@@ -1,14 +1,14 @@
-import * as ActionState from './ActionState';
-import * as Region from './Region';
-import * as VideoRenderer from './VideoRenderer';
-import * as VideoPalette from './VideoPalette';
-import * as VideoFilter from './VideoFilter';
-import * as FullscreenType from './FullscreenType';
-import * as AudioChannel from './AudioChannel';
-import * as Port from './Port';
-import * as Device from './Device';
-import * as Source from './Source';
-import * as Theme from './Theme';
+import * as ActionState from './actionStates';
+import * as Region from './regions';
+import * as VideoRenderer from './videoRenderers';
+import * as VideoPalette from './videoPalettes';
+import * as VideoFilter from './videoFilters';
+import * as FullscreenType from './fullscreenTypes';
+import * as AudioChannel from './audioChannels';
+import * as Port from './ports';
+import * as Device from './devices';
+import * as Source from './sources';
+import * as Theme from './themes';
 
 export {
   ActionState,

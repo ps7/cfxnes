@@ -1,2 +1,2 @@
-export {default as main} from './Emulator';
-export {default as toolbar} from './EmulatorToolbar';
+export {default as Emulator} from './Emulator';
+export {default as EmulatorToolbar} from './EmulatorToolbar';

@@ -1,8 +1,8 @@
-/* eslint-disable react/forbid-component-props */
-
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {withRouter} from 'react-router';
+import {NavLink} from 'react-router-dom';
 import {logoSvg} from '../../images';
 import {Theme} from '../../enums';
 import {switchTheme} from '../../actions';
@@ -10,17 +10,17 @@ import {Button, Icon, Tooltip} from '../common';
 import Nav from './Nav';
 import './Header.css';
 
-const Header = ({toolbar, theme, onThemeSwitch}) => (
+const Header = ({theme, onThemeSwitch, children}) => (
   <header>
-    <Link className="header-logo" to="/">
+    <NavLink className="header-logo" to="/">
       <img src={logoSvg} alt="cfxnes logo"/> cfxnes
-    </Link>
+    </NavLink>
     <Nav type="main">
       <Nav.Link to="/emulator" label="Emulator" icon="gamepad"/>
       <Nav.Link to="/library" label="Library" icon="book"/>
       <Nav.Link to="/settings" label="Settings" icon="cog"/>
     </Nav>
-    {toolbar}
+    {children}
     <Button id="theme-switch" onClick={onThemeSwitch}>
       <Icon name={Theme.getIcon(theme)}/>
       <Tooltip position="bottom">{Theme.getLabel(theme) + ' theme'}</Tooltip>
@@ -32,13 +32,13 @@ const Header = ({toolbar, theme, onThemeSwitch}) => (
 );
 
 Header.propTypes = {
-  toolbar: PropTypes.element,
   theme: PropTypes.oneOf(Theme.values).isRequired,
   onThemeSwitch: PropTypes.func.isRequired,
+  children: PropTypes.node,
 };
 
 Header.defaultProps = {
-  toolbar: null,
+  children: null,
 };
 
 const mapStateToProps = state => ({
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
   onThemeSwitch: () => dispatch(switchTheme()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

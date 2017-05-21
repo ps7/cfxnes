@@ -1,28 +1,27 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {Theme} from '../enums';
-import {Header} from './header';
 import './App.css';
 
-const App = ({main, toolbar, theme}) => (
+const App = ({theme, children}) => (
   <div id="app" className={`${theme}-theme`}>
-    <Header toolbar={toolbar}/>
-    {main}
+    {children}
   </div>
 );
 
 App.propTypes = {
-  main: PropTypes.element.isRequired,
-  toolbar: PropTypes.element,
   theme: PropTypes.oneOf(Theme.values).isRequired,
+  children: PropTypes.node,
 };
 
 App.defaultProps = {
-  toolbar: null,
+  children: null,
 };
 
 const mapStateToProps = state => ({
   theme: state.settings.values.theme,
 });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

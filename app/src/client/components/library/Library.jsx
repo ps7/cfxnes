@@ -1,6 +1,7 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Icon, Field, Message} from '../common';
+import {Icon, Input, Message} from '../common';
 import {fetchROMs, setROMsFilter} from '../../actions';
 import {ActionState} from '../../enums';
 import LibraryItem from './LibraryItem';
@@ -67,7 +68,7 @@ class Library extends PureComponent {
           </Message>
         )}
         {fetchState === ActionState.SUCCESS && roms.length > 0 && (
-          <Field id="library-filter" type="search" value={filter} onChange={this.handleFilterChange}/>
+          <Input id="library-filter" type="search" autoFocus value={filter} onChange={this.handleFilterChange}/>
         )}
         {fetchState === ActionState.SUCCESS && roms.length > 0 && (
           this.getFilteredROMs().map(rom => <LibraryItem key={rom.id} {...rom}/>)

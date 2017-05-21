@@ -1,4 +1,5 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
 const Option = ({label, value}) => (
   <option key={value} value={value}>{label}</option>

@@ -1,4 +1,5 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
 import {panels, isValidPanelId, defaultPanelId} from './panels';
@@ -7,11 +8,9 @@ import './Settings.css';
 class Settings extends PureComponent {
 
   static propTypes = {
-    params: PropTypes.shape({ // eslint-disable-line react/no-unused-prop-types
-      activePanelId: PropTypes.string,
-    }).isRequired,
     activePanelId: PropTypes.string,
-    router: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,  // eslint-disable-line react/no-unused-prop-types
+    history: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   };
 
@@ -28,7 +27,7 @@ class Settings extends PureComponent {
   }
 
   handlePropsChange(props) {
-    const routePanelId = props.params.activePanelId;
+    const routePanelId = props.match.params.activePanelId;
     const statePanelId = props.activePanelId;
 
     if (isValidPanelId(routePanelId)) {
@@ -43,7 +42,7 @@ class Settings extends PureComponent {
   }
 
   setActivePanelInRoute(id) {
-    this.props.router.replace(`/settings/${id}`);
+    this.props.history.replace(`/settings/${id}`);
   }
 
   setActivePanelInState(id) {

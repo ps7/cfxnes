@@ -5,7 +5,6 @@
   position: absolute;
   padding: 0.5em;
   display: none;
-  opacity: 0.8;
   white-space: nowrap;
   z-index: 100;
   pointer-events: none;
@@ -37,61 +36,44 @@
   &.top {
     bottom: 100%;
     margin-bottom: 0.5em;
+  }
 
-    &::before {
-      bottom: -0.4em;
-      border-bottom-width: 0;
-      border-top-color: black;
-    }
+  &.top::before {
+    bottom: -0.4em;
+    border-bottom-width: 0;
+    border-top-color: black;
   }
 
   &.bottom {
     top: 100%;
     margin-top: 0.5em;
+  }
 
-    &::before {
-      top: -0.4em;
-      border-top-width: 0;
-      border-bottom-color: black;
-    }
+  &.bottom::before {
+    top: -0.4em;
+    border-top-width: 0;
+    border-bottom-color: black;
   }
 
   &.right {
     left: 100%;
     margin-left: 0.5em;
+  }
 
-    &::before {
-      left: -0.4em;
-      border-left-width: 0;
-      border-right-color: black;
-    }
+  &.right::before {
+    left: -0.4em;
+    border-left-width: 0;
+    border-right-color: black;
   }
 
   &.left {
     right: 100%;
     margin-right: 0.5em;
-
-    &::before {
-      right: -0.4em;
-      border-right-width: 0;
-      border-left-color: black;
-    }
-  }
-}
-
-@keyframes fadeInFromNone {
-  0% {
-    display: none;
-    opacity: 0;
   }
 
-  50% {
-    display: block;
-    opacity: 0;
-  }
-
-  100% {
-    display: block;
-    opacity: 0.8;
+  &.left::before {
+    right: -0.4em;
+    border-right-width: 0;
+    border-left-color: black;
   }
 }

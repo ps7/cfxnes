@@ -1,4 +1,5 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {
@@ -21,15 +22,13 @@ import './Emulator.css';
 class Emulator extends PureComponent {
 
   static propTypes = {
-    params: PropTypes.shape({ // eslint-disable-line react/no-unused-prop-types
-      romId: PropTypes.string,
-    }).isRequired,
     romId: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     loadState: PropTypes.oneOf(ActionState.values).isRequired,
     loadError: PropTypes.string.isRequired,
     controls: EmulatorControls.propTypes.controls, // eslint-disable-line react/require-default-props
     controlsVisible: PropTypes.bool.isRequired,
-    router: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
+    match: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
+    history: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
     dispatch: PropTypes.func.isRequired,
   };
 
@@ -56,7 +55,7 @@ class Emulator extends PureComponent {
   }
 
   handlePropsChange(props, initial) {
-    const routeRomId = props.params.romId || null;
+    const routeRomId = props.match.params.romId || null;
     const stateRomId = props.romId;
 
     if (routeRomId !== stateRomId) {
@@ -64,7 +63,7 @@ class Emulator extends PureComponent {
         props.dispatch(fetchAndloadROM(routeRomId)); // Will set romId in state
         return false;
       }
-      props.router.replace(stateRomId ? `/emulator/${stateRomId}` : '/emulator');
+      props.history.replace(stateRomId ? `/emulator/${stateRomId}` : '/emulator');
     }
 
     return true;

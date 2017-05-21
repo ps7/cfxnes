@@ -1,6 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {Link} from 'react-router';
+import {NavLink} from 'react-router-dom';
 import {Icon} from '../common';
 
 const Nav = ({type, children}) => {
@@ -18,9 +19,9 @@ Nav.defaultProps = {
 };
 
 Nav.Link = ({to, label, icon}) => (
-  <Link to={to} className="navigation-link" activeClassName="active">
+  <NavLink to={to} className="navigation-link" activeClassName="active">
     <Icon name={icon}/> {label}
-  </Link>
+  </NavLink>
 );
 
 Nav.Link.propTypes = {

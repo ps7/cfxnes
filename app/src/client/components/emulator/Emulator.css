@@ -14,8 +14,8 @@
 
 .emulator-controls {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1em;
+  left: 1em;
 }
 
 .emulator-output {

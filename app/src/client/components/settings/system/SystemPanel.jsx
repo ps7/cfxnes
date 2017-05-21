@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {Field} from '../../common';
 import {Region} from '../../../enums';
 import SettingsPanel from '../SettingsPanel';

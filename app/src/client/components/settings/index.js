@@ -1,1 +1,1 @@
-export {default as main} from './Settings';
+export {default as Settings} from './Settings';
