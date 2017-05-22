@@ -47,7 +47,7 @@
   }
 }
 
-.volume-popup {
+#volume-popup {
   top: 100%;
   left: 50%;
   margin-top: 0.5em;
