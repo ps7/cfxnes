@@ -2,21 +2,19 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
-import DeviceInput from './DeviceInput';
-import SourceInput from './SourceInput';
+import DeviceInput, {deviceInputPropType} from './DeviceInput';
+import SourceInput, {sourceInputPropType} from './SourceInput';
 
 export default class ControlsInputsRow extends PureComponent {
 
   static propTypes = {
-    deviceInput: DeviceInput.propTypes.input,
-    sourceInputs: PropTypes.arrayOf(SourceInput.propTypes.input),
+    deviceInput: deviceInputPropType.isRequired,
+    sourceInputs: PropTypes.arrayOf(sourceInputPropType).isRequired,
     onAdd: PropTypes.func,
     onRemove: PropTypes.func,
   };
 
   static defaultProps = {
-    deviceInput: {},
-    sourceInputs: [],
     onAdd: null,
     onRemove: null,
   };

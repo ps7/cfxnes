@@ -1,4 +1,4 @@
-import {createItems} from './common';
+import {createOptions} from './common';
 
 export const AUTO = 'auto';
 export const NTSC = 'ntsc';
@@ -12,4 +12,6 @@ export const params = {
   [PAL]: {label: 'PAL'},
 };
 
-export const items = createItems(values, params);
+export const options = createOptions(values, params);
+
+export default values;

@@ -1,4 +1,4 @@
-import {createItems} from './common';
+import {createOptions} from './common';
 
 export const ASQ_REAL_A = 'asq-real-a';
 export const ASQ_REAL_B = 'asq-real-b';
@@ -34,4 +34,6 @@ export const params = {
   [NESTOPIA_YUV]: {label: 'Nestopia (YUV)'},
 };
 
-export const items = createItems(values, params);
+export const options = createOptions(values, params);
+
+export default values;

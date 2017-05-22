@@ -59,11 +59,11 @@ export default class VideoPanel extends PureComponent {
       <SettingsPanel id={ID} title="Video" icon="desktop" {...panelProps}>
         <Field id="video-scale" label="Output scale" type="number"
                value={videoScale} onChange={this.handleVideoScaleChange}/>
-        <Field id="video-palette" label="Color palette" type="select" options={VideoPalette.items}
+        <Field id="video-palette" label="Color palette" type="select" options={VideoPalette.options}
                value={videoPalette} onChange={onVideoPaletteChange}/>
-        <Field id="fullscreen-type" label="Fullscreen mode" type="select" options={FullscreenType.items}
+        <Field id="fullscreen-type" label="Fullscreen mode" type="select" options={FullscreenType.options}
                value={fullscreenType} onChange={onFullscreenTypeChange}/>
-        <Field id="video-filter" label="Filter" type="select" options={VideoFilter.items}
+        <Field id="video-filter" label="Filter" type="select" options={VideoFilter.options}
                value={videoFilter} onChange={onVideoFilterChange}/>
         <Field id="video-debug" label="Enable debug output" type="checkbox"
                value={videoDebug} onChange={onVideoDebugChange}/>

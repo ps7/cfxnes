@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {keysValuePropType} from '../../../common';
-import {Icon, Field} from '../../common';
+import {Icon, Field, keysValuePropType} from '../../common';
 import {AudioChannel} from '../../../enums';
 import SettingsPanel from '../SettingsPanel';
 import AudioVolumeField from './AudioVolumeField';

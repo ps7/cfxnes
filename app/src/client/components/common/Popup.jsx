@@ -35,7 +35,7 @@ export default class Popup extends PureComponent {
       const {clientX, clientY} = event;
       const {top, left, right, bottom} = this.element.getBoundingClientRect();
       if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
-        onBlur();
+        onBlur(event);
       }
     }
   };

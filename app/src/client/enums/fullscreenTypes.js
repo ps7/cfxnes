@@ -1,4 +1,4 @@
-import {createItems} from './common';
+import {createOptions} from './common';
 
 export const MAXIMIZED = 'maximized';
 export const NORMALIZED = 'normalized';
@@ -12,4 +12,6 @@ export const params = {
   [STRETCHED]: {label: 'Stretch to fill the whole sceen'},
 };
 
-export const items = createItems(values, params);
+export const options = createOptions(values, params);
+
+export default values;

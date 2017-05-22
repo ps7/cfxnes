@@ -12,10 +12,10 @@ import './Header.css';
 
 const Header = ({theme, onThemeSwitch, children}) => (
   <header>
-    <NavLink className="header-logo" to="/">
+    <NavLink id="header-logo" to="/emulator">
       <img src={logoSvg} alt="cfxnes logo"/> cfxnes
     </NavLink>
-    <Nav type="main">
+    <Nav id="main-nav">
       <Nav.Link to="/emulator" label="Emulator" icon="gamepad"/>
       <Nav.Link to="/library" label="Library" icon="book"/>
       <Nav.Link to="/settings" label="Settings" icon="cog"/>
@@ -25,7 +25,7 @@ const Header = ({theme, onThemeSwitch, children}) => (
       <Icon name={Theme.getIcon(theme)}/>
       <Tooltip position="bottom">{Theme.getLabel(theme) + ' theme'}</Tooltip>
     </Button>
-    <Nav type="help">
+    <Nav id="help-nav">
       <Nav.Link to="/about" label="About" icon="question-circle"/>
     </Nav>
   </header>

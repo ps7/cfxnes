@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {Icon, Message} from '../common';
-import {ControlsList} from '../settings/controls';
+import {ControlsList, controlsPropType} from '../settings/controls';
+
+export {controlsPropType};
 
 const EmulatorControls = ({controls, onClose}) => (
   <Message className="emulator-controls" onClose={onClose}>
@@ -14,7 +16,7 @@ const EmulatorControls = ({controls, onClose}) => (
 );
 
 EmulatorControls.propTypes = {
-  controls: ControlsList.propTypes.controls, // eslint-disable-line react/require-default-props
+  controls: controlsPropType.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

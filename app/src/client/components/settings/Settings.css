@@ -1,4 +1,4 @@
-.field[class*="field-audio-volume-"] {
+.field[id*="-audio-volume-field"] {
   display: inline-block;
   text-align: center;
 

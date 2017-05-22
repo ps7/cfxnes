@@ -26,7 +26,7 @@ export default class ControlsDevice extends PureComponent {
       <div className="controls-device">
         <label>Port {port}:</label>
         {onChange != null
-          ? <ButtonSelect options={Device.items} value={device} onChange={this.handleChange}/>
+          ? <ButtonSelect options={Device.options} value={device} onChange={this.handleChange}/>
           : <span>{Device.getLabel(device)}</span>
         }
       </div>

@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import {NavLink} from 'react-router-dom';
 import {Icon} from '../common';
+import './Nav.css';
 
-const Nav = ({type, children}) => {
-  const className = classNames('navigation', type && `navigation-${type}`);
-  return <nav className={className}>{children}</nav>;
+const Nav = ({children, ...attrs}) => {
+  return <nav className="nav" {...attrs}>{children}</nav>;
 };
 
 Nav.propTypes = {
-  type: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 Nav.defaultProps = {
-  type: null,
+  children: null,
 };
 
 Nav.Link = ({to, label, icon}) => (
-  <NavLink to={to} className="navigation-link" activeClassName="active">
+  <NavLink to={to} className="nav-link">
     <Icon name={icon}/> {label}
   </NavLink>
 );

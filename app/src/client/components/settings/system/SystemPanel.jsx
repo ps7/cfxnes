@@ -8,7 +8,7 @@ const ID = 'system';
 
 const SystemPanel = ({region, speed, onRegionChange, onSpeedChange, ...panelProps}) => (
   <SettingsPanel id={ID} title="System" icon="server" {...panelProps}>
-    <Field id="region" label="Region" type="select" options={Region.items}
+    <Field id="region" label="Region" type="select" options={Region.options}
            value={region} onChange={onRegionChange}/>
     <Field id="speed" label="Emulation speed" type="range" min="0.25" max="2" step="0.25"
            value={speed} onChange={onSpeedChange}/>

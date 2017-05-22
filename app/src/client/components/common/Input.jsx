@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {CHECKBOX, NUMBER, RANGE, values as inputTypes} from './InputType';
+import inputTypes, {CHECKBOX, NUMBER, RANGE} from './inputTypes';
 
 function getInputValue(input) {
   const {type} = input;

@@ -17,23 +17,13 @@ header {
   }
 }
 
-.header-logo {
+#header-logo {
   text-decoration: none;
   padding: 0 1em 0 0.5em;
 
   & img {
     width: 2em;
     vertical-align: middle;
-  }
-}
-
-.navigation-link {
-  display: inline-block;
-  padding: 0.5em 1em;
-
-  &.active {
-    background: darkblue;
-    color: white;
   }
 }
 

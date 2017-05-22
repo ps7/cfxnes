@@ -15,7 +15,7 @@ import {
 
 import {ActionState} from '../../enums';
 import {Message} from '../common';
-import EmulatorControls from './EmulatorControls';
+import EmulatorControls, {controlsPropType} from './EmulatorControls';
 import EmulatorOutput from './EmulatorOutput';
 import './Emulator.css';
 
@@ -25,7 +25,7 @@ class Emulator extends PureComponent {
     romId: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     loadState: PropTypes.oneOf(ActionState.values).isRequired,
     loadError: PropTypes.string.isRequired,
-    controls: EmulatorControls.propTypes.controls, // eslint-disable-line react/require-default-props
+    controls: controlsPropType.isRequired,
     controlsVisible: PropTypes.bool.isRequired,
     match: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
     history: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types

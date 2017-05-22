@@ -19,7 +19,7 @@ Controls.propTypes = {
   port: PropTypes.oneOf(Port.values).isRequired,
   controls: PropTypes.shape({
     device: PropTypes.oneOf(Device.values).isRequired,
-    inputs: ControlsInputs.propTypes.inputs,
+    inputs: PropTypes.object.isRequired,
   }).isRequired,
   onDeviceChange: PropTypes.func,
   onInputAdd: PropTypes.func,

@@ -1,19 +1,17 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {optionPropTypes, optionsPropType} from './propTypes';
 
 const Option = ({label, value}) => (
   <option key={value} value={value}>{label}</option>
 );
 
-Option.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-};
+Option.propTypes = optionPropTypes;
 
 export default class Select extends PureComponent {
 
   static propTypes = {
-    options: PropTypes.arrayOf(PropTypes.shape(Option.propTypes)).isRequired,
+    options: optionsPropType.isRequired,
     value: PropTypes.any,
     onChange: PropTypes.func,
   };

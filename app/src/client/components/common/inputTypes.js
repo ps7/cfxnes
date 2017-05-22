@@ -4,4 +4,4 @@ export const SEARCH = 'search';
 export const NUMBER = 'number';
 export const RANGE = 'range';
 
-export const values = [CHECKBOX, TEXT, SEARCH, NUMBER, RANGE];
+export default [CHECKBOX, TEXT, SEARCH, NUMBER, RANGE];

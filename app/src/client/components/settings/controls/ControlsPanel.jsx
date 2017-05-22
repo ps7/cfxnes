@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Modal, Icon, Field} from '../../common';
 import SettingsPanel from '../SettingsPanel';
-import ControlsList from './ControlsList';
+import ControlsList, {controlsPropType} from './ControlsList';
 import GamepadList from './GamepadList';
 
 const ID = 'controls';
@@ -12,7 +12,7 @@ export default class ControlsPanel extends PureComponent {
   static id = ID;
 
   static propTypes = {
-    controls: ControlsList.propTypes.controls, // eslint-disable-line react/require-default-props
+    controls: controlsPropType.isRequired,
     controlsVisible: PropTypes.bool.isRequired,
     onControlsVisibleChange: PropTypes.func.isRequired,
     onControlsDeviceChange: PropTypes.func.isRequired,

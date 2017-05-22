@@ -19,3 +19,5 @@ export function getIcon(theme) {
 export function getNext(theme) {
   return values[(values.indexOf(theme) + 1) % values.length];
 }
+
+export default values;

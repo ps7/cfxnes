@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Input from './Input';
 import Select from './Select';
-import {CHECKBOX, SELECT, values as fieldTypes} from './FieldType';
+import fieldTypes, {CHECKBOX, SELECT} from './fieldTypes';
 import './Field.css';
 
 export default class Field extends PureComponent {
@@ -36,7 +36,7 @@ export default class Field extends PureComponent {
   render() {
     const {id, className, type, label} = this.props;
     return (
-      <div className={classNames('field', id && `field-${id}`, className)}>
+      <div id={id && `${id}-field`} className={classNames('field', className)}>
         {type === CHECKBOX && this.renderInput()}
         {type === CHECKBOX && label && ' '}
         {label && <label htmlFor={id}>{label}</label>}

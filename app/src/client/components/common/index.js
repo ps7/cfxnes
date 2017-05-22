@@ -15,3 +15,4 @@ export {default as Popup} from './Popup';
 export {default as Select} from './Select';
 export {default as Toolbar} from './Toolbar';
 export {default as Tooltip} from './Tooltip';
+export * from './propTypes';

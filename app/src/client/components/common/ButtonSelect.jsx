@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {optionsPropType} from './propTypes';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 
@@ -8,10 +9,7 @@ export default class ButtonSelect extends PureComponent {
 
   static propTypes = {
     className: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })).isRequired,
+    options: optionsPropType.isRequired,
     value: PropTypes.string,
     onChange: PropTypes.func,
   };

@@ -1,4 +1,4 @@
 import ControlsPanel from './ControlsPanel';
-import ControlsList from './ControlsList';
+import ControlsList, {controlsPropType} from './ControlsList';
 
-export {ControlsPanel, ControlsList};
+export {ControlsPanel, ControlsList, controlsPropType};

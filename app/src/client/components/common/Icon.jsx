@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Icon = ({className, name, size, fixedWidth, inverse, spin, stack, ...attrs}) => {
-  const classNamesValue = classNames(
+  const fullClassName = classNames(
     'fa',
     `fa-${name}`,
     size && `fa-${size}`,
@@ -15,7 +15,7 @@ const Icon = ({className, name, size, fixedWidth, inverse, spin, stack, ...attrs
     },
     className,
   );
-  return <i className={classNamesValue} {...attrs}/>;
+  return <i className={fullClassName} {...attrs}/>;
 };
 
 Icon.propTypes = {
@@ -36,4 +36,5 @@ Icon.defaultProps = {
   spin: false,
   stack: null,
 };
+
 export default Icon;

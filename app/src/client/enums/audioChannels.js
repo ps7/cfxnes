@@ -19,3 +19,5 @@ const params = {
 export function getLabel(channel) {
   return params[channel].label;
 }
+
+export default values;

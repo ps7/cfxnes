@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
 
+export const sourceInputPropType = PropTypes.shape({
+  source: Source.isSource,
+  inputName: PropTypes.string,
+});
+
 export default class SourceInput extends PureComponent {
 
   static propTypes = {
-    input: PropTypes.shape({
-      source: Source.isSource,
-      inputName: PropTypes.string,
-    }).isRequired,
+    input: sourceInputPropType.isRequired,
     onRemove: PropTypes.func,
   };
 

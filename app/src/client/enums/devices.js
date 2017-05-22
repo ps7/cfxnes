@@ -1,5 +1,5 @@
 import {capitalize} from 'lodash-es';
-import {createItems} from './common';
+import {createOptions} from './common';
 
 export const NONE = 'none';
 export const JOYPAD = 'joypad';
@@ -13,7 +13,7 @@ export const params = {
   [ZAPPER]: {label: 'Zapper', inputNames: ['trigger']},
 };
 
-export const items = createItems(values, params);
+export const options = createOptions(values, params);
 
 export function fromOptional(device) {
   return device != null ? device : NONE;
@@ -38,3 +38,5 @@ export function getInputId({port, device, name}) {
 export function getInputLabel({name}) {
   return capitalize(name);
 }
+
+export default values;

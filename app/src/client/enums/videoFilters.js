@@ -1,4 +1,4 @@
-import {createItems} from './common';
+import {createOptions} from './common';
 
 export const NEAREST = 'nearest';
 export const LINEAR = 'linear';
@@ -10,4 +10,6 @@ export const params = {
   [LINEAR]: {label: 'Linear'},
 };
 
-export const items = createItems(values, params);
+export const options = createOptions(values, params);
+
+export default values;
