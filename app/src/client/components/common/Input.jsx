@@ -20,11 +20,13 @@ export default class Input extends PureComponent {
     type: PropTypes.oneOf(inputTypes).isRequired,
     value: PropTypes.any,
     onChange: PropTypes.func,
+    refInput: PropTypes.func,
   };
 
   static defaultProps = {
     value: null,
     onChange: null,
+    refInput: null,
   };
 
   handleChange = event => {
@@ -35,11 +37,12 @@ export default class Input extends PureComponent {
   };
 
   render() {
-    const {type, value, ...attrs} = this.props;
+    const {type, value, refInput, ...attrs} = this.props;
     return <input type={type} {...attrs}
                   value={type !== CHECKBOX ? value : undefined}
                   checked={type === CHECKBOX && value}
-                  onChange={this.handleChange}/>;
+                  onChange={this.handleChange}
+                  ref={refInput}/>;
   }
 
 }

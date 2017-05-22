@@ -69,7 +69,7 @@ class Emulator extends PureComponent {
     return true;
   }
 
-  handleCanvasChange = canvas => {
+  setCanvas = canvas => {
     this.canvas = canvas;
   }
 
@@ -98,7 +98,7 @@ class Emulator extends PureComponent {
       <main className="emulator">
         {controlsVisible && <EmulatorControls controls={controls} onClose={this.handleControlsClose}/>}
         {loadError && <Message type="error" className="emulator-error" onClose={this.handleErrorClose}>{loadError}</Message>}
-        <EmulatorOutput loading={loadState === ActionState.STARTED} onCanvasChange={this.handleCanvasChange}/>
+        <EmulatorOutput loading={loadState === ActionState.STARTED} refCanvas={this.setCanvas}/>
         <input id="emulator-file" type="file" onChange={this.handleFileChange}/>
       </main>
     );

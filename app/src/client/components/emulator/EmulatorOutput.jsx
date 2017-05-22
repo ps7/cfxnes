@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const EmulatorOutput = ({loading, onCanvasChange}) => (
+const EmulatorOutput = ({loading, refCanvas}) => (
   <div className="emulator-output">
-    <canvas ref={onCanvasChange}/>
+    <canvas ref={refCanvas}/>
     {loading && <div>Loading...</div>}
   </div>
 );
 
 EmulatorOutput.propTypes = {
   loading: PropTypes.bool.isRequired,
-  onCanvasChange: PropTypes.func.isRequired,
+  refCanvas: PropTypes.func.isRequired,
 };
 
 export default EmulatorOutput;

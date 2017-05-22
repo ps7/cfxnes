@@ -27,6 +27,23 @@ class Library extends PureComponent {
     this.props.dispatch(fetchROMs());
   }
 
+  getFilteredROMs() {
+    return this.props.roms.filter(this.romPassesFilter);
+  }
+
+  romPassesFilter = rom => {
+    const romName = (rom.name || '').toLowerCase();
+    const expression = this.props.filter.toLowerCase();
+    return romName.indexOf(expression) >= 0;
+  }
+
+  initFilterInput = input => {
+    if (input) {
+      input.focus();
+      input.select();
+    }
+  }
+
   handleReloadItems = event => {
     event.preventDefault();
     this.fetchROMs();
@@ -35,16 +52,6 @@ class Library extends PureComponent {
   handleFilterChange = filter => {
     this.props.dispatch(setROMsFilter(filter));
   };
-
-  romPassesFilter = rom => {
-    const romName = (rom.name || '').toLowerCase();
-    const expression = this.props.filter.toLowerCase();
-    return romName.indexOf(expression) >= 0;
-  }
-
-  getFilteredROMs() {
-    return this.props.roms.filter(this.romPassesFilter);
-  }
 
   render() {
     const {fetchState, fetchError, filter, roms} = this.props;
@@ -68,7 +75,8 @@ class Library extends PureComponent {
           </Message>
         )}
         {fetchState === ActionState.SUCCESS && roms.length > 0 && (
-          <Input id="library-filter" type="search" autoFocus value={filter} onChange={this.handleFilterChange}/>
+          <Input id="library-filter" type="search" refInput={this.initFilterInput}
+                 value={filter} onChange={this.handleFilterChange}/>
         )}
         {fetchState === ActionState.SUCCESS && roms.length > 0 && (
           this.getFilteredROMs().map(rom => <LibraryItem key={rom.id} {...rom}/>)
