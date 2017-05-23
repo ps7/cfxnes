@@ -10,7 +10,7 @@ export default class Button extends PureComponent {
     active: PropTypes.bool,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
-    autoFocus: PropTypes.bool,
+    refButton: PropTypes.func,
     children: PropTypes.node,
   };
 
@@ -20,25 +20,20 @@ export default class Button extends PureComponent {
     disabled: false,
     onClick: null,
     autoFocus: false,
+    refButton: null,
     children: null,
   };
-
-  componentDidMount() {
-    if (this.props.autoFocus) {
-      this.element.focus();
-    }
-  }
 
   setElement = element => {
     this.element = element;
   }
 
   render() {
-    const {className, active, children, ...attrs} = this.props;
+    const {className, active, refButton, children, ...attrs} = this.props;
+    const fullClassName = classNames('button', {active}, className);
+
     return (
-      <button type="button" ref={this.setElement}
-              className={classNames('button', {active}, className)}
-              {...attrs}>
+      <button type="button" ref={refButton} className={fullClassName} {...attrs}>
         {children}
       </button>
     );

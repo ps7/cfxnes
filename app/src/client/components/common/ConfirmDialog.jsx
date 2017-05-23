@@ -29,6 +29,12 @@ export default class ConfirmDialog extends PureComponent {
     removeEventListener('keyup', this.handleKeyUp);
   }
 
+  initConfirmButton = button => {
+    if (button) {
+      button.focus();
+    }
+  }
+
   handleKeyUp = event => {
     if (event.keyCode === 27) {
       const {onCancel} = this.props;
@@ -46,7 +52,7 @@ export default class ConfirmDialog extends PureComponent {
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
           <Button onClick={onCancel}>{cancel}</Button>
-          <Button onClick={onConfirm} autoFocus>{confirm}</Button>
+          <Button onClick={onConfirm} refButton={this.initConfirmButton}>{confirm}</Button>
         </Modal.Footer>
       </Modal>
     );

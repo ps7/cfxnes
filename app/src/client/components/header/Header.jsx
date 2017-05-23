@@ -2,30 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import {NavLink} from 'react-router-dom';
-import {logoSvg} from '../../images';
 import {Theme} from '../../enums';
 import {switchTheme} from '../../actions';
-import {Button, Icon, Tooltip} from '../common';
+import Brand from './Brand';
 import Nav from './Nav';
+import ThemeSwitch from './ThemeSwitch';
 import './Header.css';
 
 const Header = ({theme, onThemeSwitch, children}) => (
   <header>
-    <NavLink id="header-logo" to="/emulator">
-      <img src={logoSvg} alt="cfxnes logo"/> cfxnes
-    </NavLink>
-    <Nav id="main-nav">
+    <Brand/>
+    <Nav>
       <Nav.Link to="/emulator" label="Emulator" icon="gamepad"/>
       <Nav.Link to="/library" label="Library" icon="book"/>
       <Nav.Link to="/settings" label="Settings" icon="cog"/>
     </Nav>
     {children}
-    <Button id="theme-switch" onClick={onThemeSwitch}>
-      <Icon name={Theme.getIcon(theme)}/>
-      <Tooltip position="bottom">{Theme.getLabel(theme) + ' theme'}</Tooltip>
-    </Button>
-    <Nav id="help-nav">
+    <ThemeSwitch value={theme} onSwitch={onThemeSwitch}/>
+    <Nav>
       <Nav.Link to="/about" label="About" icon="question-circle"/>
     </Nav>
   </header>

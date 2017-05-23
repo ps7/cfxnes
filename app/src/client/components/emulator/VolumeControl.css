@@ -1,0 +1,27 @@
+.volume-control {
+  position: relative;
+}
+
+.volume-control-icon {
+  &.fa-stack {
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+  }
+
+  & .fa-ban {
+    color: red;
+  }
+}
+
+.volume-control-popup {
+  top: 100%;
+  left: 50%;
+  margin-top: 0.5em;
+  transform: translate(-50%, 0);
+
+  & input[type="range"] {
+    transform: rotate(-90deg);
+    margin: 50% 0%;
+  }
+}

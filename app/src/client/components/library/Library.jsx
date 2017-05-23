@@ -75,7 +75,7 @@ class Library extends PureComponent {
           </Message>
         )}
         {fetchState === ActionState.SUCCESS && roms.length > 0 && (
-          <Input id="library-filter" type="search" refInput={this.initFilterInput}
+          <Input className="library-filter" type="search" refInput={this.initFilterInput}
                  value={filter} onChange={this.handleFilterChange}/>
         )}
         {fetchState === ActionState.SUCCESS && roms.length > 0 && (

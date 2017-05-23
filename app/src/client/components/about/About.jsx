@@ -16,10 +16,10 @@ export default class About extends PureComponent {
   render() {
     return (
       <main className="about">
-        <div className="about-logo">
-          <img src={logoSvg} alt="cfxnes logo"/>
+        <div className="about-section">
+          <img className="about-logo" src={logoSvg} alt="cfxnes logo"/>
         </div>
-        <div className="about-text">
+        <div className="about-section">
           <h1>cfxnes ({cfxnes.version})</h1>
           <p>JavaScript NES emulator and emulation library.</p>
           <p>The source code is available at <a href="https://github.com/jpikl/cfxnes">github</a> and licensed under the MIT License.</p>

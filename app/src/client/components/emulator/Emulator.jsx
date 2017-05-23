@@ -97,7 +97,7 @@ class Emulator extends PureComponent {
     return (
       <main className="emulator">
         {controlsVisible && <EmulatorControls controls={controls} onClose={this.handleControlsClose}/>}
-        {loadError && <Message type="error" className="emulator-error" onClose={this.handleErrorClose}>{loadError}</Message>}
+        {loadError && <Message className="emulator-error" type="error" onClose={this.handleErrorClose}>{loadError}</Message>}
         <EmulatorOutput loading={loadState === ActionState.STARTED} refCanvas={this.setCanvas}/>
         <input id="emulator-file" type="file" onChange={this.handleFileChange}/>
       </main>

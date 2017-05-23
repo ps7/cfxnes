@@ -16,18 +16,3 @@ header {
     margin: 0 1em;
   }
 }
-
-#header-logo {
-  text-decoration: none;
-  padding: 0 1em 0 0.5em;
-
-  & img {
-    width: 2em;
-    vertical-align: middle;
-  }
-}
-
-#theme-switch {
-  margin-left: auto;
-  margin-right: 1em;
-}

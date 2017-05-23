@@ -1,8 +1,9 @@
-export function findAncestorWithId(node, id) {
+export function isAncestorOrSelf(node, target) {
+  console.log(node, target)
   for (; node != null; node = node.parentNode) {
-    if (node.id === id) {
-      return node;
+    if (node === target) {
+      return true;
     }
   }
-  return null;
+  return false;
 }

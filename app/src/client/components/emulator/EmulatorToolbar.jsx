@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {findAncestorWithId, MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../common';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../common';
 import {AudioChannel} from '../../enums';
 
 import {
@@ -12,7 +12,8 @@ import {
   setAudioVolume, setAudioEnabled,
 } from '../../actions';
 
-import {Button, ButtonGroup, Icon, IconStack, Input, Popup, Toolbar, Tooltip} from '../common';
+import {Button, ButtonGroup, Icon, Toolbar, Tooltip} from '../common';
+import VolumeControl from './VolumeControl';
 import FpsCounter from './FpsCounter';
 
 class EmulatorToolbar extends PureComponent {
@@ -67,16 +68,6 @@ class EmulatorToolbar extends PureComponent {
   handleAudioEnabledChange = enabled => {
     this.props.dispatch(setAudioEnabled(enabled));
   };
-
-  handleVolumePopupToggle = () => {
-    this.setState({volumePopupVisible: !this.state.volumePopupVisible});
-  }
-
-  handleVolumePopupClose = event => {
-    if (findAncestorWithId(event.target, 'volume-button') == null) {
-      this.setState({volumePopupVisible: false});
-    }
-  }
 
   renderInputButtons() {
     return (
@@ -138,33 +129,14 @@ class EmulatorToolbar extends PureComponent {
 
   renderAudioButtons() {
     const {masterVolume, audioEnabled} = this.props;
-    const {volumePopupVisible} = this.state;
-    return (
-      <ButtonGroup id="emulator-toolbar-volume">
-        <Button id="volume-button" active={volumePopupVisible} onClick={this.handleVolumePopupToggle}>
-          <IconStack className="volume-icon">
-            {masterVolume > 0.5 && <Icon name="volume-up" stack="1x"/>}
-            {masterVolume > 0 && masterVolume <= 0.5 && <Icon name="volume-down" stack="1x"/>}
-            {masterVolume === 0 && <Icon name="volume-off" stack="1x"/>}
-            {!audioEnabled && <Icon name="ban" stack="1x"/>}
-          </IconStack>
-          <Tooltip position="bottom">Volume</Tooltip>
-        </Button>
-        {volumePopupVisible && (
-          <Popup id="volume-popup" onBlur={this.handleVolumePopupClose}>
-            <Input type="checkbox" value={audioEnabled} onChange={this.handleAudioEnabledChange}/>
-            <Input type="range" min="0" max="1" step="0.01" disabled={!audioEnabled}
-                    value={masterVolume} onChange={this.handleMasterVolumeChange}/>
-          </Popup>
-        )}
-      </ButtonGroup>
-    );
+    return <VolumeControl value={masterVolume} onValueChange={this.handleMasterVolumeChange}
+                          enabled={audioEnabled} onEnabledChange={this.handleAudioEnabledChange}/>;
   }
 
   render() {
     const {running, fpsVisible} = this.props;
     return (
-      <Toolbar id="emulator-toolbar">
+      <Toolbar className="emulator-toolbar">
         {this.renderInputButtons()}
         {this.renderSystemButtons()}
         {this.renderVideoButtons()}

@@ -1,0 +1,17 @@
+.brand {
+  padding: 0 0.25rem;
+
+  & > * {
+    display: inline-block;
+    margin: 0 0.25rem;
+    vertical-align: middle;
+  }
+}
+
+.brand-logo {
+  width: 2rem;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+}
