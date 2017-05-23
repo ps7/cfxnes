@@ -1,5 +1,5 @@
-export {default as App} from './App';
-export {Header} from './header';
+export {AppContainer} from './app';
+export {HeaderContainer} from './header';
 export {Emulator, EmulatorToolbar} from './emulator';
 export {Library} from './library';
 export {Settings} from './settings';

@@ -1,3 +1,5 @@
+@custom-selector :--tooltip-parent a, button;
+
 .tooltip {
   background: black;
   color: white;
@@ -8,6 +10,7 @@
   white-space: nowrap;
   z-index: 100;
   pointer-events: none;
+  font-size: 0.85rem;
 
   &::before {
     content: "";
@@ -75,5 +78,9 @@
     right: -0.4rem;
     border-right-width: 0;
     border-left-color: black;
+  }
+
+  @nest :--tooltip-parent:hover > & {
+    display: block;
   }
 }

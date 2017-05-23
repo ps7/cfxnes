@@ -7,10 +7,6 @@
     color: white;
   }
 
-  &:hover .tooltip {
-    display: block;
-  }
-
   &:focus {
     outline: none;
     border-color: blue;

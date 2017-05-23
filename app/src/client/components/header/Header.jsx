@@ -1,27 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
 import {Theme} from '../../enums';
-import {switchTheme} from '../../actions';
-import Brand from './Brand';
-import Nav from './Nav';
 import ThemeSwitch from './ThemeSwitch';
+import Brand from './Brand';
+import NavLink from './NavLink';
 import './Header.css';
 
 const Header = ({theme, onThemeSwitch, children}) => (
   <header>
     <Brand/>
-    <Nav>
-      <Nav.Link to="/emulator" label="Emulator" icon="gamepad"/>
-      <Nav.Link to="/library" label="Library" icon="book"/>
-      <Nav.Link to="/settings" label="Settings" icon="cog"/>
-    </Nav>
+    <nav>
+      <NavLink to="/emulator" label="Emulator" icon="gamepad"/>
+      <NavLink to="/library" label="Library" icon="book"/>
+      <NavLink to="/settings" label="Settings" icon="cog"/>
+    </nav>
     {children}
     <ThemeSwitch value={theme} onSwitch={onThemeSwitch}/>
-    <Nav>
-      <Nav.Link to="/about" label="About" icon="question-circle"/>
-    </Nav>
+    <nav>
+      <NavLink to="/about" label="About" icon="question-circle"/>
+    </nav>
   </header>
 );
 
@@ -35,12 +32,4 @@ Header.defaultProps = {
   children: null,
 };
 
-const mapStateToProps = state => ({
-  theme: state.settings.values.theme,
-});
-
-const mapDispatchToProps = dispatch => ({
-  onThemeSwitch: () => dispatch(switchTheme()),
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default Header;

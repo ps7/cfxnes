@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {Theme} from '../enums';
 import './App.css';
 
 const App = ({theme, children}) => (
-  <div id="app" className={`${theme}-theme`}>
+  <div className={classNames('app', `${theme}-theme`)}>
     {children}
   </div>
 );

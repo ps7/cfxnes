@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
-import {App, Header, Emulator, EmulatorToolbar, Library, Settings, About} from './components';
+import {AppContainer, HeaderContainer, Emulator, EmulatorToolbar, Library, Settings, About} from './components';
 import store from './store';
 
 const EmulatorRedirect = () => <Redirect to="/emulator"/>;
@@ -9,10 +9,10 @@ const EmulatorRedirect = () => <Redirect to="/emulator"/>;
 export default () => (
   <Provider store={store}>
     <BrowserRouter>
-      <App>
-        <Header>
+      <AppContainer>
+        <HeaderContainer>
           <Route path="/emulator" component={EmulatorToolbar}/>
-        </Header>
+        </HeaderContainer>
         <Switch>
           <Route path="/emulator/:romId?" component={Emulator}/>
           <Route path="/library" component={Library}/>
@@ -20,7 +20,7 @@ export default () => (
           <Route path="/about" component={About}/>
           <Route component={EmulatorRedirect}/>
         </Switch>
-      </App>
+      </AppContainer>
     </BrowserRouter>
   </Provider>
 );
