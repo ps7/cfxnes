@@ -1,12 +1,12 @@
 .library-item {
   display: inline-block;
   vertical-align: top;
-  width: 6em;
-  margin: 0.5em;
+  width: 6rem;
+  margin: 0.5rem;
 }
 
 .library-item-thumbnail {
-  width: 6em;
+  width: 6rem;
 }
 
 .library-item-name {

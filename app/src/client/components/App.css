@@ -16,7 +16,7 @@ main {
 
 main {
   flex-grow: 1;
-  padding: 1em;
+  padding: 1rem;
 
   @nest .light-theme & {
     background: white;

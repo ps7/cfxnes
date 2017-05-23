@@ -10,14 +10,14 @@
 
 .reset-button {
   display: inline-block;
-  min-width: 8em;
-  padding: 0.5em 0;
+  min-width: 8rem;
+  padding: 0.5rem 0;
 }
 
 .reset-description {
   display: inline-block;
-  max-width: 30em;
-  padding: 0.5em 0;
+  max-width: 30rem;
+  padding: 0.5rem 0;
   vertical-align: middle;
 }
 
@@ -28,12 +28,12 @@
 }
 
 .controls label {
-  padding-right: 1em;
+  padding-right: 1rem;
 }
 
 .controls-inputs {
   display: table;
-  padding: 0.5em;
+  padding: 0.5rem;
 }
 
 .controls-inputs-row {
@@ -41,7 +41,7 @@
 
   & > * {
     display: table-cell;
-    padding: 0.25em 0.5em;
+    padding: 0.25rem 0.5rem;
   }
 }
 
@@ -53,22 +53,22 @@
 .source-input {
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   white-space: nowrap;
-  margin-right: 0.25em;
+  margin-right: 0.25rem;
 
   & > .fa {
-    padding-left: 0.25em;
+    padding-left: 0.25rem;
   }
 
   & > span {
-    padding: 0 0.25em;
+    padding: 0 0.25rem;
   }
 
   & > button {
     background: none;
     border: 1px solid transparent;
-    border-radius: 0.25em;
+    border-radius: 0.25rem;
     opacity: 0.5;
   }
 
@@ -82,12 +82,12 @@
 #controls-visible,
 .controls-defaults,
 .gamepad-list {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 .gamepad-map-button + .gamepad-map-button::before {
   content: "/";
   display: inline-block;
   text-decoration: none !important;
-  margin: 0 0.25em;
+  margin: 0 0.25rem;
 }

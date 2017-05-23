@@ -4,8 +4,8 @@
 
 .volume-control-icon {
   &.fa-stack {
-    width: 1em;
-    height: 1em;
+    width: 1rem;
+    height: 1rem;
     line-height: 1;
   }
 
@@ -17,7 +17,7 @@
 .volume-control-popup {
   top: 100%;
   left: 50%;
-  margin-top: 0.5em;
+  margin-top: 0.5rem;
   transform: translate(-50%, 0);
 
   & input[type="range"] {

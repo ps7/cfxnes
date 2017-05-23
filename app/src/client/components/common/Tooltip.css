@@ -1,9 +1,9 @@
 .tooltip {
   background: black;
   color: white;
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   position: absolute;
-  padding: 0.5em;
+  padding: 0.5rem;
   display: none;
   white-space: nowrap;
   z-index: 100;
@@ -14,7 +14,7 @@
     position: absolute;
     width: 0;
     height: 0;
-    border: 0.5em solid transparent;
+    border: 0.5rem solid transparent;
   }
 
   &.top,
@@ -35,44 +35,44 @@
 
   &.top {
     bottom: 100%;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
   }
 
   &.top::before {
-    bottom: -0.4em;
+    bottom: -0.4rem;
     border-bottom-width: 0;
     border-top-color: black;
   }
 
   &.bottom {
     top: 100%;
-    margin-top: 0.5em;
+    margin-top: 0.5rem;
   }
 
   &.bottom::before {
-    top: -0.4em;
+    top: -0.4rem;
     border-top-width: 0;
     border-bottom-color: black;
   }
 
   &.right {
     left: 100%;
-    margin-left: 0.5em;
+    margin-left: 0.5rem;
   }
 
   &.right::before {
-    left: -0.4em;
+    left: -0.4rem;
     border-left-width: 0;
     border-right-color: black;
   }
 
   &.left {
     right: 100%;
-    margin-right: 0.5em;
+    margin-right: 0.5rem;
   }
 
   &.left::before {
-    right: -0.4em;
+    right: -0.4rem;
     border-right-width: 0;
     border-left-color: black;
   }

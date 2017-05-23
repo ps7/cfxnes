@@ -1,6 +1,6 @@
 .nav-link {
   display: inline-block;
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
 
   &.active {
     background: darkblue;
