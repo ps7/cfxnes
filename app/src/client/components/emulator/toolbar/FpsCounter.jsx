@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {nes} from '../../common';
+import {nes} from '../../../common';
 import './FpsCounter.css';
 
 export default class FpsCounter extends PureComponent {

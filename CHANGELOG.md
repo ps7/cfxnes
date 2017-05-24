@@ -8,10 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - API to access state of device inputs.
+- Option to bind multiple keys/button to one input.
+- Light/dark theme switch.
 
 ### Changed
 - Switched to JSZip 3.
 - *Smothing* configuration option renamed to *Filter*.
+- *Joypad* device renamed to *Controller*.
 - `video.smoothing` property replaced by `video.filter`.
 - `config.set` method renamed to `config.use`.
 - `input.*` mapping methods moved to `input.map` submodule. They have now different semantics.

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {isAncestorOrSelf} from '../../common';
-import {Button, ButtonGroup, Icon, IconStack, Input, Popup, Tooltip} from '../common';
+import {isAncestorOrSelf} from '../../../common';
+import {Button, ButtonGroup, Icon, IconStack, Input, Popup, Tooltip} from '../../common';
 import './VolumeControl.css';
 
 export default class VolumeControl extends PureComponent {

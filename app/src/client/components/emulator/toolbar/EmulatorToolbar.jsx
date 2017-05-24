@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../common';
-import {AudioChannel} from '../../enums';
+import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../../common';
+import {AudioChannel} from '../../../enums';
 
 import {
   resetEmulator, powerEmulator,
@@ -10,10 +10,10 @@ import {
   increaseVideoScale, decreaseVideoScale,
   enterFullscreen,
   setAudioVolume, setAudioEnabled,
-} from '../../actions';
+} from '../../../actions';
 
-import {selectEmulator, selectSettingsValues} from '../../reducers';
-import {Button, ButtonGroup, Icon, Toolbar, Tooltip} from '../common';
+import {selectEmulator, selectSettingsValues} from '../../../reducers';
+import {Button, ButtonGroup, Icon, Toolbar, Tooltip} from '../../common';
 import VolumeControl from './VolumeControl';
 import FpsCounter from './FpsCounter';
 

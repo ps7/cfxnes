@@ -9,7 +9,7 @@ export const values = [NONE, JOYPAD, ZAPPER];
 
 export const params = {
   [NONE]: {label: 'None', inputNames: []},
-  [JOYPAD]: {label: 'Joypad', inputNames: ['a', 'b', 'start', 'select', 'left', 'right', 'up', 'down']},
+  [JOYPAD]: {label: 'Controller', inputNames: ['a', 'b', 'start', 'select', 'left', 'right', 'up', 'down']},
   [ZAPPER]: {label: 'Zapper', inputNames: ['trigger']},
 };
 
@@ -24,7 +24,7 @@ export function toOptional(device) {
 }
 
 export function getLabel(device) {
-  return params[device].name;
+  return params[device].label;
 }
 
 export function getInputNames(device) {
