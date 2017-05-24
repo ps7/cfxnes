@@ -7,7 +7,7 @@ import {
   AppContainer,
   HeaderContainer,
   Emulator,
-  EmulatorToolbar,
+  EmulatorToolbarContainer,
   LibraryContainer,
   Settings,
   About,
@@ -20,7 +20,7 @@ export default () => (
     <BrowserRouter>
       <AppContainer>
         <HeaderContainer>
-          <Route path="/emulator" component={EmulatorToolbar}/>
+          <Route path="/emulator" component={EmulatorToolbarContainer}/>
         </HeaderContainer>
         <Switch>
           <Route path="/emulator/:romId?" component={Emulator}/>

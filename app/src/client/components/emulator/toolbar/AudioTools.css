@@ -1,0 +1,25 @@
+.audio-tools {
+  position: relative;
+}
+
+.audio-volume-disable-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #a94442;
+  opacity: 0.8;
+}
+
+.audio-volume-popup {
+  top: 100%;
+  left: 50%;
+  text-align: center;
+  margin-top: 0.5rem;
+  transform: translate(-50%, 0);
+
+  & input[type="range"] {
+    transform: rotate(-90deg);
+    margin: 50% 0;
+  }
+}
