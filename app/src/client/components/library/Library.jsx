@@ -1,40 +1,36 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Icon, Input, Message} from '../common';
-import {fetchROMs, setROMsFilter} from '../../actions';
+import {Icon, Input, LinkButton, Message} from '../common';
 import {ActionState} from '../../enums';
 import LibraryItem from './LibraryItem';
 import './Library.css';
 
-class Library extends PureComponent {
+export default class Library extends PureComponent {
 
   static propTypes = {
     fetchState: PropTypes.oneOf(ActionState.values).isRequired,
     fetchError: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
-    roms: PropTypes.arrayOf(PropTypes.shape(LibraryItem.propTypes)).isRequired,
-    dispatch: PropTypes.func.isRequired,
+    items: PropTypes.arrayOf(PropTypes.shape(LibraryItem.propTypes)).isRequired,
+    onFilterChange: PropTypes.func.isRequired,
+    onItemsReload: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    if (this.props.fetchState === ActionState.NONE) {
-      this.fetchROMs();
+    const {fetchState, onItemsReload} = this.props;
+    if (fetchState === ActionState.NONE) {
+      onItemsReload();
     }
   }
 
-  fetchROMs() {
-    this.props.dispatch(fetchROMs());
+  getFilteredItems() {
+    return this.props.items.filter(this.itemPassesFilter);
   }
 
-  getFilteredROMs() {
-    return this.props.roms.filter(this.romPassesFilter);
-  }
-
-  romPassesFilter = rom => {
-    const romName = (rom.name || '').toLowerCase();
+  itemPassesFilter = item => {
+    const name = (item.name || '').toLowerCase();
     const expression = this.props.filter.toLowerCase();
-    return romName.indexOf(expression) >= 0;
+    return name.indexOf(expression) >= 0;
   }
 
   initFilterInput = input => {
@@ -44,51 +40,54 @@ class Library extends PureComponent {
     }
   }
 
-  handleReloadItems = event => {
-    event.preventDefault();
-    this.fetchROMs();
-  };
+  renderLoader() {
+    return <p><Icon name="circle-o-notch" spin/> Loading items...</p>;
+  }
 
-  handleFilterChange = filter => {
-    this.props.dispatch(setROMsFilter(filter));
-  };
+  renderErrorMessage() {
+    const {fetchError, onItemsReload} = this.props;
+    return (
+      <Message className="library-message" type="error">
+        <p>{fetchError}</p>
+        <p><LinkButton onClick={onItemsReload}>Try reload items</LinkButton></p>
+      </Message>
+    );
+  }
+
+  renderNoDataMessage() {
+    const {onItemsReload} = this.props;
+    return (
+      <Message className="library-message" type="info">
+        <p>The library does not contain any item.</p>
+        <p><LinkButton onClick={onItemsReload}>Try reload items</LinkButton></p>
+      </Message>
+    );
+  }
+
+  renderFilter() {
+    const {filter, onFilterChange} = this.props;
+    return <Input className="library-filter" type="search"
+                  refInput={this.initFilterInput}
+                  value={filter}
+                  onChange={onFilterChange}/>;
+  }
+
+  renderItems() {
+    return this.getFilteredItems().map(item => <LibraryItem key={item.id} {...item}/>);
+  }
 
   render() {
-    const {fetchState, fetchError, filter, roms} = this.props;
-
+    const {fetchState, items} = this.props;
     return (
       <main className="library">
         <h1>Library</h1>
-        {fetchState === ActionState.STARTED && (
-          <p><Icon name="circle-o-notch" spin/> Loading items...</p>
-        )}
-        {fetchState === ActionState.FAILURE && (
-          <Message type="error">
-            <p>{fetchError}</p>
-            <p><a href="#" onClick={this.handleReloadItems}>Try reload items</a></p>
-          </Message>
-        )}
-        {fetchState === ActionState.SUCCESS && !roms.length && (
-          <Message type="info">
-            <p>The library does not contain any item.</p>
-            <p><a href="#" onClick={this.handleReloadItems}>Try reload items</a></p>
-          </Message>
-        )}
-        {fetchState === ActionState.SUCCESS && roms.length > 0 && (
-          <Input className="library-filter" type="search" refInput={this.initFilterInput}
-                 value={filter} onChange={this.handleFilterChange}/>
-        )}
-        {fetchState === ActionState.SUCCESS && roms.length > 0 && (
-          this.getFilteredROMs().map(rom => <LibraryItem key={rom.id} {...rom}/>)
-        )}
+        {fetchState === ActionState.STARTED && this.renderLoader()}
+        {fetchState === ActionState.FAILURE && this.renderErrorMessage()}
+        {fetchState === ActionState.SUCCESS && !items.length && this.renderNoDataMessage()}
+        {fetchState === ActionState.SUCCESS && items.length && this.renderFilter()}
+        {fetchState === ActionState.SUCCESS && items.length && this.renderItems()}
       </main>
     );
   }
 
 }
-
-const mapStateToProps = state => ({
-  ...state.library,
-});
-
-export default connect(mapStateToProps)(Library);

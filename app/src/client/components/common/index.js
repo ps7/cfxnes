@@ -8,6 +8,7 @@ export {default as Field} from './Field';
 export {default as Icon} from './Icon';
 export {default as IconStack} from './IconStack';
 export {default as Input} from './Input';
+export {default as LinkButton} from './LinkButton';
 export {default as Modal} from './Modal';
 export {default as Message} from './Message';
 export {default as Panel} from './Panel';

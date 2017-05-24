@@ -1,7 +1,7 @@
 import {
-  START_ROMS_FETCH,
-  FINISH_ROMS_FETCH,
-  SET_ROMS_FILTER,
+  SET_LIBRARY_FILTER,
+  START_LIBRARY_FETCH,
+  FINISH_LIBRARY_FETCH,
 } from '../actions';
 
 import {ActionState} from '../enums';
@@ -11,16 +11,16 @@ const initialState = {
   fetchState: ActionState.NONE,
   fetchError: '',
   filter: '',
-  roms: [],
+  items: [],
 };
 
 const actionHandlers = {
-  [START_ROMS_FETCH]: state => ({...state, fetchState: ActionState.STARTED}),
-  [FINISH_ROMS_FETCH]: {
-    success: (state, roms) => ({...state, roms, fetchState: ActionState.SUCCESS}),
+  [SET_LIBRARY_FILTER]: (state, filter) => ({...state, filter}),
+  [START_LIBRARY_FETCH]: state => ({...state, fetchState: ActionState.STARTED}),
+  [FINISH_LIBRARY_FETCH]: {
+    success: (state, items) => ({...state, items, fetchState: ActionState.SUCCESS}),
     failure: (state, {message}) => ({...state, fetchError: message, fetchState: ActionState.FAILURE}),
   },
-  [SET_ROMS_FILTER]: (state, filter) => ({...state, filter}),
 };
 
 export default createReducer(actionHandlers, initialState);

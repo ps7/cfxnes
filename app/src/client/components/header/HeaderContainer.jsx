@@ -11,4 +11,5 @@ const mapDispatchToProps = dispatch => ({
   onThemeSwitch: () => dispatch(switchTheme()),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+const connectHeader = connect(mapStateToProps, mapDispatchToProps);
+export default withRouter(connectHeader(Header));

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {LinkButton} from '../../common';
 
 export default class GamepadMapButton extends PureComponent {
 
@@ -9,15 +10,18 @@ export default class GamepadMapButton extends PureComponent {
     onMap: PropTypes.func.isRequired,
   };
 
-  handleClick = event => {
-    event.preventDefault();
+  handleClick = () => {
     const {index, port, onMap} = this.props;
     onMap(index, port);
   };
 
   render() {
     const {port} = this.props;
-    return <a className="gamepad-map-button" href="#" onClick={this.handleClick}>Port {port}</a>;
+    return (
+      <LinkButton className="gamepad-map-button" onClick={this.handleClick}>
+        Port {port}
+      </LinkButton>
+    );
   }
 
 }

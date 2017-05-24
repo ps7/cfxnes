@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {logoSvg} from '../../images';
+import {LinkButton} from '../common';
 import Changelog from './Changelog';
 import cfxnes from 'cfxnes';
 import './About.css';
@@ -8,8 +9,7 @@ export default class About extends PureComponent {
 
   state = {changelogVisible: false};
 
-  handleShowChangelog = event => {
-    event.preventDefault();
+  handleShowChangelog = () => {
     this.setState({changelogVisible: true});
   };
 
@@ -26,7 +26,7 @@ export default class About extends PureComponent {
           <p>Copyright © 2014-2017 Jan Pikl</p>
           {this.state.changelogVisible
             ? <Changelog/>
-            : <a href="#" onClick={this.handleShowChangelog}>Show change log</a>
+            : <LinkButton onClick={this.handleShowChangelog}>Show change log</LinkButton>
           }
         </div>
       </main>

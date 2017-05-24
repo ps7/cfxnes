@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Modal, Icon, Field} from '../../common';
+import {Modal, Icon, Field, LinkButton} from '../../common';
 import SettingsPanel from '../SettingsPanel';
 import ControlsList, {controlsPropType} from './ControlsList';
 import GamepadList from './GamepadList';
@@ -34,11 +34,6 @@ export default class ControlsPanel extends PureComponent {
     });
   };
 
-  handleReset = event => {
-    event.preventDefault();
-    this.props.onControlsReset();
-  };
-
   render() {
     const {
       controls,
@@ -47,6 +42,7 @@ export default class ControlsPanel extends PureComponent {
       onControlsDeviceChange,
       onControlsInputRemove,
       onControlsGamepadMap,
+      onControlsReset,
       ...panelProps
     } = this.props;
 
@@ -63,7 +59,7 @@ export default class ControlsPanel extends PureComponent {
                       onInputRemove={onControlsInputRemove}/>
         <div className="controls-defaults">
           <Icon name="keyboard-o"/>{' '}
-          <a href="#" onClick={this.handleReset}>Restore default keyboard controls</a>
+          <LinkButton onClick={onControlsReset}>Restore default keyboard controls</LinkButton>
         </div>
         <GamepadList onMap={onControlsGamepadMap}/>
         <Field id="controls-visible" label="Show controls on emulator page" type="checkbox"

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import {Theme} from '../enums';
+import {Theme} from '../../enums';
 import './App.css';
 
 const App = ({theme, children}) => (

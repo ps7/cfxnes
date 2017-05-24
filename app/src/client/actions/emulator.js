@@ -79,7 +79,7 @@ function executeROMLoad(romId, loader) {
 function fetchROM(romId, getState) {
   return new Promise((resolve, reject) => {
     const state = getState();
-    const rom = state.library.roms.find(({id}) => id === romId);
+    const rom = state.library.items.find(({id}) => id === romId);
     if (rom) {
       resolve(rom); // In case roms were already fetched in store
     } else {

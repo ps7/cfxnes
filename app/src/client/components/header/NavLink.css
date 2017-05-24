@@ -10,7 +10,7 @@
 
   @media (min-width: 600px) {
     &:hover .nav-link-tooltip {
-        display: none;
+      display: none;
     }
   }
 }
@@ -20,6 +20,5 @@
 
   @media (min-width: 600px) {
     display: initial;
-
   }
 }
