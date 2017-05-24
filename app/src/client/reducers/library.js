@@ -2,7 +2,7 @@ import {
   SET_LIBRARY_FILTER,
   START_LIBRARY_FETCH,
   FINISH_LIBRARY_FETCH,
-} from '../actions';
+} from '../actionTypes';
 
 import {ActionState} from '../enums';
 import {createReducer} from './common';

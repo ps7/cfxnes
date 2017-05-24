@@ -15,7 +15,7 @@ import {
   SET_CONTROLS_DEVICE,
   SET_CONTROLS_INPTUS,
   SET_CONTROLS_VISIBLE,
-} from '../actions';
+} from '../actionTypes';
 
 import {createReducer} from './common';
 

@@ -1,11 +1,14 @@
 import {defaultSettings, loadSettings, applySettingsToNes, copySettingsFromNes} from '../settings';
 import {nes, log} from '../common';
-import {createAction, UNLOCK_TIMEOUT} from './common';
 
-export const SET_ACTIVE_SETTINGS_PANEL = 'SET_ACTIVE_SETTINGS_PANEL';
-export const SET_SETTINGS_VALUES = 'SET_SETTINGS_VALUES';
-export const LOCK_SETTINGS_RESET = 'LOCK_SETTINGS_RESET';
-export const UNLOCK_SETTINGS_RESET = 'UNLOCK_SETTINGS_RESET';
+import {
+  SET_ACTIVE_SETTINGS_PANEL,
+  SET_SETTINGS_VALUES,
+  LOCK_SETTINGS_RESET,
+  UNLOCK_SETTINGS_RESET,
+} from '../actionTypes';
+
+import {createAction, UNLOCK_TIMEOUT} from './common';
 
 export function setActiveSettingsPanel(id) {
   return createAction(SET_ACTIVE_SETTINGS_PANEL, id);

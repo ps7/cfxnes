@@ -26,8 +26,12 @@ export default class LinkButton extends PureComponent {
 
   render() {
     const {className, children, ...attrs} = this.props;
-    const fullClassName = classNames('link-button', className);
-    return <a {...attrs} className={fullClassName} href="#">{children}</a>;
+    return (
+      <a {...attrs} href="#" onClick={this.handleClick}
+         className={classNames('link-button', className)}>
+        {children}
+      </a>
+    );
   }
 
 }

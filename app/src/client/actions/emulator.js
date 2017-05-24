@@ -1,12 +1,16 @@
 import {nes} from '../common';
 import {romsApi} from '../api';
-import {createAction} from './common';
 
-export const START_ROM_LOAD = 'START_ROM_LOAD';
-export const FINISH_ROM_LOAD = 'FINISH_ROM_LOAD';
-export const CLEAR_ROM_LOAD_ERROR = 'CLEAR_ROM_LOAD_ERROR';
-export const SET_EMULATOR_RUNNING = 'SET_EMULATOR_RUNNING';
-export const SET_EMULATOR_SUSPENDED = 'SET_EMULATOR_SUSPENDED';
+import {
+  START_ROM_LOAD,
+  FINISH_ROM_LOAD,
+  CLEAR_ROM_LOAD_ERROR,
+  SET_EMULATOR_RUNNING,
+  SET_EMULATOR_SUSPENDED,
+} from '../actionTypes';
+
+import {selectEmulator, selectLibrary} from '../reducers';
+import {createAction} from './common';
 
 export function connectEmulator(canvas) {
   return () => { nes.video.output = canvas; };
@@ -44,8 +48,8 @@ export function suspendEmulator() {
 
 export function resumeEmulator() {
   return (dispatch, getState) => {
-    const state = getState();
-    if (state.emulator.suspended) {
+    const {suspended} = selectEmulator(getState());
+    if (suspended) {
       dispatch(startEmulator());
       dispatch(createAction(SET_EMULATOR_SUSPENDED, false));
     } else if (nes.rom.loaded) {
@@ -78,8 +82,8 @@ function executeROMLoad(romId, loader) {
 
 function fetchROM(romId, getState) {
   return new Promise((resolve, reject) => {
-    const state = getState();
-    const rom = state.library.items.find(({id}) => id === romId);
+    const {items} = selectLibrary(getState());
+    const rom = items.find(({id}) => id === romId);
     if (rom) {
       resolve(rom); // In case roms were already fetched in store
     } else {

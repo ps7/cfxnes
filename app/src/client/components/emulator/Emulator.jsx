@@ -13,6 +13,7 @@ import {
   setControlsVisible,
 } from '../../actions';
 
+import {selectEmulator, selectSettingsValues} from '../../reducers';
 import {ActionState} from '../../enums';
 import {Message} from '../common';
 import EmulatorControls, {controlsPropType} from './EmulatorControls';
@@ -107,8 +108,8 @@ class Emulator extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {romId, loadState, loadError} = state.emulator;
-  const {controls, controlsVisible} = state.settings.values;
+  const {romId, loadState, loadError} = selectEmulator(state);
+  const {controls, controlsVisible} = selectSettingsValues(state);
   return {romId, loadState, loadError, controls, controlsVisible};
 };
 

@@ -5,7 +5,7 @@ import {
   SET_SETTINGS_VALUES,
   LOCK_SETTINGS_RESET,
   UNLOCK_SETTINGS_RESET,
-} from '../actions';
+} from '../actionTypes';
 
 import {createReducer} from './common';
 import valuesReducer from './settingsValues';
@@ -23,9 +23,11 @@ const actionHandlers = {
   [UNLOCK_SETTINGS_RESET]: state => ({...state, resetLocked: false}),
 };
 
+export const selectValues = state => state.values;
+
 function fallbackHandler(state = initialState, action) {
-  const values = valuesReducer(state.values, action);
-  if (values !== state.values) {
+  const values = valuesReducer(selectValues(state), action);
+  if (values !== selectValues(state)) {
     return {...state, values};
   }
   return state;

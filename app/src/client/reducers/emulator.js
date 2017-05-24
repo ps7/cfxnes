@@ -4,7 +4,7 @@ import {
   CLEAR_ROM_LOAD_ERROR,
   SET_EMULATOR_RUNNING,
   SET_EMULATOR_SUSPENDED,
-} from '../actions';
+} from '../actionTypes';
 
 import {ActionState} from '../enums';
 import {createReducer} from './common';

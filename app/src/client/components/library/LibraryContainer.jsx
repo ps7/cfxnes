@@ -1,9 +1,10 @@
 import {connect} from 'react-redux';
 import {setLibraryFilter, fetchLibraryItems} from '../../actions';
+import {selectLibrary} from '../../reducers';
 import Library from './Library';
 
 const mapStateToProps = state => ({
-  ...state.library,
+  ...selectLibrary(state),
 });
 
 const mapDispatchToProps = dispatch => ({

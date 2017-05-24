@@ -1,10 +1,13 @@
 import {log} from '../common';
 import {nvramStore} from '../database';
-import {createAction, UNLOCK_TIMEOUT} from './common';
 
-export const UNLOCK_NVRAMS_DELETION = 'UNLOCK_NVRAMS_DELETION';
-export const START_NVRAMS_DELETION = 'START_NVRAMS_DELETION';
-export const FINISH_NVRAMS_DELETION = 'FINISH_NVRAMS_DELETION';
+import {
+  UNLOCK_NVRAMS_DELETION,
+  START_NVRAMS_DELETION,
+  FINISH_NVRAMS_DELETION,
+} from '../actionTypes';
+
+import {createAction, UNLOCK_TIMEOUT} from './common';
 
 export function deleteNVRAMs() {
   return dispatch => {

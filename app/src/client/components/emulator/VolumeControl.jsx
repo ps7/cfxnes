@@ -7,10 +7,10 @@ import './VolumeControl.css';
 export default class VolumeControl extends PureComponent {
 
   static propTypes = {
-    value: PropTypes.number.isRequired,
     enabled: PropTypes.bool.isRequired,
-    onValueChange: PropTypes.func.isRequired,
+    value: PropTypes.number.isRequired,
     onEnabledChange: PropTypes.func.isRequired,
+    onValueChange: PropTypes.func.isRequired,
   };
 
   state = {popupVisible: false};
@@ -30,7 +30,7 @@ export default class VolumeControl extends PureComponent {
   };
 
   render() {
-    const {value, enabled, onValueChange, onEnabledChange} = this.props;
+    const {enabled, value, onEnabledChange, onValueChange} = this.props;
     const {popupVisible} = this.state;
 
     return (

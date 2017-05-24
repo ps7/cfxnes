@@ -1,10 +1,11 @@
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {switchTheme} from '../../actions';
+import {selectSettingsValues} from '../../reducers';
 import Header from './Header';
 
 const mapStateToProps = state => ({
-  theme: state.settings.values.theme,
+  theme: selectSettingsValues(state).theme,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
+import {selectSettings} from '../../reducers';
 import {panels, isValidPanelId, defaultPanelId} from './panels';
 import './Settings.css';
 
@@ -77,7 +78,7 @@ class Settings extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  activePanelId: state.settings.activePanelId,
+  activePanelId: selectSettings(state).activePanelId,
 });
 
 export default connect(mapStateToProps)(Settings);

@@ -12,6 +12,7 @@ import {
   setAudioVolume, setAudioEnabled,
 } from '../../actions';
 
+import {selectEmulator, selectSettingsValues} from '../../reducers';
 import {Button, ButtonGroup, Icon, Toolbar, Tooltip} from '../common';
 import VolumeControl from './VolumeControl';
 import FpsCounter from './FpsCounter';
@@ -22,8 +23,8 @@ class EmulatorToolbar extends PureComponent {
     running: PropTypes.bool.isRequired,
     videoScale: PropTypes.number.isRequired,
     fpsVisible: PropTypes.bool.isRequired,
-    masterVolume: PropTypes.number.isRequired,
     audioEnabled: PropTypes.bool.isRequired,
+    audioVolume: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired,
   };
 
@@ -61,7 +62,7 @@ class EmulatorToolbar extends PureComponent {
     this.props.dispatch(enterFullscreen());
   };
 
-  handleMasterVolumeChange = value => {
+  handleAudioVolumeChange = value => {
     this.props.dispatch(setAudioVolume(AudioChannel.MASTER, value));
   };
 
@@ -128,9 +129,9 @@ class EmulatorToolbar extends PureComponent {
   }
 
   renderAudioButtons() {
-    const {masterVolume, audioEnabled} = this.props;
-    return <VolumeControl value={masterVolume} onValueChange={this.handleMasterVolumeChange}
-                          enabled={audioEnabled} onEnabledChange={this.handleAudioEnabledChange}/>;
+    const {audioEnabled, audioVolume} = this.props;
+    return <VolumeControl enabled={audioEnabled} onEnabledChange={this.handleAudioEnabledChange}
+                          value={audioVolume} onValueChange={this.handleAudioVolumeChange}/>;
   }
 
   render() {
@@ -149,10 +150,12 @@ class EmulatorToolbar extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {running} = state.emulator;
-  const {videoScale, fpsVisible, audioEnabled, audioVolume} = state.settings.values;
-  const masterVolume = audioVolume.master;
-  return {running, videoScale, fpsVisible, masterVolume, audioEnabled};
+  const {running} = selectEmulator(state);
+  const {videoScale, fpsVisible, audioEnabled, audioVolume} = selectSettingsValues(state);
+  return {
+    running, videoScale, fpsVisible,
+    audioEnabled, audioVolume: audioVolume.master,
+  };
 };
 
 export default connect(mapStateToProps)(EmulatorToolbar);

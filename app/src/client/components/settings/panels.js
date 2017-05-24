@@ -22,6 +22,7 @@ import {
   deleteNVRAMs,
 } from '../../actions';
 
+import {selectDatabase, selectSettings, selectSettingsValues} from '../../reducers';
 import {audioSupported} from '../../settings';
 import {Device} from '../../enums';
 import {SystemPanel} from './system';
@@ -31,12 +32,13 @@ import {ControlsPanel} from './controls';
 import {ResetPanel} from './reset';
 
 const mapStateToProps = state => {
-  const {database, settings} = state;
+  const {nvramsDeletionState} = selectDatabase(state);
+  const settings = selectSettings(state);
+  const settingsValues = selectSettingsValues(state);
   return {
-    audioSupported,
+    audioSupported, nvramsDeletionState,
     settingsResetLocked: settings.resetLocked,
-    nvramsDeletionState: database.nvramsDeletionState,
-    ...settings.values,
+    ...settingsValues,
   };
 };
 

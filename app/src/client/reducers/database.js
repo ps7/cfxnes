@@ -2,7 +2,7 @@ import {
   UNLOCK_NVRAMS_DELETION,
   START_NVRAMS_DELETION,
   FINISH_NVRAMS_DELETION,
-} from '../actions';
+} from '../actionTypes';
 
 import {ActionState} from '../enums';
 import {createReducer} from './common';
