@@ -31,7 +31,7 @@ export default class Select extends PureComponent {
   render() {
     const {options, value, onChange, ...attrs} = this.props;
     return (
-      <select onChange={this.handleChange} {...attrs}>
+      <select defaultValue={value} onChange={this.handleChange} {...attrs}>
         {options.map(Option)}
       </select>
     );
