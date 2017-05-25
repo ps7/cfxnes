@@ -3,6 +3,7 @@ import {AudioChannel} from '../../../enums';
 import {selectEmulator, selectSettingsValues} from '../../../reducers';
 
 import {
+  loadROM,
   resetEmulator, powerEmulator,
   startEmulator, stopEmulator,
   increaseVideoScale, decreaseVideoScale,
@@ -10,19 +11,16 @@ import {
   setAudioVolume, setAudioEnabled,
 } from '../../../actions';
 
-import EmulatorToolbar from './EmulatorToolbar';
-
 const mapStateToProps = state => {
   const {running} = selectEmulator(state);
-  const {videoScale, fpsVisible, audioEnabled, audioVolume} = selectSettingsValues(state);
-  return {
-    running, videoScale, fpsVisible, audioEnabled,
-    audioVolume: audioVolume.master,
-  };
+  const settings = selectSettingsValues(state);
+  const {videoScale, fpsVisible, audioEnabled} = settings;
+  const audioVolume = settings.audioVolume.master;
+  return {running, videoScale, fpsVisible, audioEnabled, audioVolume};
 };
 
 const mapDispatchToProps = dispatch => ({
-  onFileOpen: () => document.getElementById('emulator-file').click(),
+  onFileOpen: file => dispatch(loadROM(file)),
   onPower: () => dispatch(powerEmulator()),
   onReset: () => dispatch(resetEmulator()),
   onStart: () => dispatch(startEmulator()),
@@ -34,5 +32,4 @@ const mapDispatchToProps = dispatch => ({
   onAudioVolumeChange: volume => dispatch(setAudioVolume(AudioChannel.MASTER, volume)),
 });
 
-const connectEmulatorToolbar = connect(mapStateToProps, mapDispatchToProps);
-export default connectEmulatorToolbar(EmulatorToolbar);
+export default connect(mapStateToProps, mapDispatchToProps);

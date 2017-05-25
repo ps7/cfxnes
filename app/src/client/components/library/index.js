@@ -1,1 +1,1 @@
-export {default as LibraryContainer} from './LibraryContainer';
+export {default as Library} from './Library';

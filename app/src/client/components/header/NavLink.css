@@ -2,10 +2,11 @@
   display: inline-block;
   position: relative;
   padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: black;
 
   &.active {
-    background: darkblue;
-    color: white;
+    background: #ddd;
   }
 
   @media (min-width: 600px) {

@@ -1,5 +1,6 @@
 .brand {
   padding: 0 0.25rem;
+  color: black;
 
   & > * {
     display: inline-block;

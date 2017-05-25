@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {Theme} from '../../enums';
+import connect from './connect';
 import './App.css';
 
 const App = ({theme, children}) => (
@@ -19,4 +20,4 @@ App.defaultProps = {
   children: null,
 };
 
-export default App;
+export default connect(App);

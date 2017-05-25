@@ -43,7 +43,7 @@ export default class AudioTools extends PureComponent {
       <Button active={popupVisible} refButton={this.setButton} onClick={this.handlePopupToggle}>
         <Icon name={this.getVolumeIconName()} fixedWidth/>
         {!enabled && <Icon name="ban" size="2x" className="audio-volume-disable-icon"/>}
-        <Tooltip position="bottom">Volume</Tooltip>
+        {!popupVisible && <Tooltip position="bottom">Volume</Tooltip>}
       </Button>
     );
   }

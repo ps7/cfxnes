@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {Icon, Input, LinkButton, Message} from '../common';
 import {ActionState} from '../../enums';
 import LibraryItem from './LibraryItem';
+import connect from './connect';
 import './Library.css';
 
-export default class Library extends PureComponent {
+class Library extends PureComponent {
 
   static propTypes = {
     fetchState: PropTypes.oneOf(ActionState.values).isRequired,
@@ -21,16 +22,6 @@ export default class Library extends PureComponent {
     if (fetchState === ActionState.NONE) {
       onItemsReload();
     }
-  }
-
-  getFilteredItems() {
-    return this.props.items.filter(this.itemPassesFilter);
-  }
-
-  itemPassesFilter = item => {
-    const name = (item.name || '').toLowerCase();
-    const expression = this.props.filter.toLowerCase();
-    return name.indexOf(expression) >= 0;
   }
 
   initFilterInput = input => {
@@ -73,7 +64,8 @@ export default class Library extends PureComponent {
   }
 
   renderItems() {
-    return this.getFilteredItems().map(item => <LibraryItem key={item.id} {...item}/>);
+    const {items} = this.props;
+    return items.map(item => <LibraryItem key={item.id} {...item}/>);
   }
 
   render() {
@@ -91,3 +83,5 @@ export default class Library extends PureComponent {
   }
 
 }
+
+export default connect(Library);

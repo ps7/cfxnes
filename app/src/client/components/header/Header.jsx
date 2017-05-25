@@ -4,6 +4,7 @@ import {Theme} from '../../enums';
 import ThemeSwitch from './ThemeSwitch';
 import Brand from './Brand';
 import NavLink from './NavLink';
+import connect from './connect';
 import './Header.css';
 
 const Header = ({theme, onThemeSwitch, children}) => (
@@ -32,4 +33,4 @@ Header.defaultProps = {
   children: null,
 };
 
-export default Header;
+export default connect(Header);

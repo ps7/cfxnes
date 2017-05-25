@@ -1,1 +1,1 @@
-export {default as EmulatorToolbarContainer} from './EmulatorToolbarContainer';
+export {default as EmulatorToolbar} from './EmulatorToolbar';

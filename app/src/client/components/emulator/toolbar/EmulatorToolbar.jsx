@@ -6,6 +6,7 @@ import SystemTools from './SystemTools';
 import VideoTools from './VideoTools';
 import AudioTools from './AudioTools';
 import FpsCounter from './FpsCounter';
+import connect from './connect';
 
 const EmulatorToolbar = ({
   running, fpsVisible, videoScale, audioEnabled, audioVolume,
@@ -43,4 +44,4 @@ EmulatorToolbar.propTypes = {
   onAudioVolumeChange: PropTypes.func.isRequired,
 };
 
-export default EmulatorToolbar;
+export default connect(EmulatorToolbar);

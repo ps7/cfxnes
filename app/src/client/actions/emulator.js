@@ -13,19 +13,37 @@ import {selectEmulator, selectLibrary} from '../reducers';
 import {createAction} from './common';
 
 export function connectEmulator(canvas) {
-  return () => { nes.video.output = canvas; };
+  return (dispatch, getState) => {
+    nes.video.output = canvas;
+    const {suspended} = selectEmulator(getState());
+    if (suspended) {
+      dispatch(resumeEmulator());
+    } else if (nes.rom.loaded) {
+      nes.step(); // To refresh canvas
+    }
+  };
 }
 
 export function disconnectEmulator() {
-  return () => { nes.video.output = null; };
+  return dispatch => {
+    dispatch(suspendEmulator());
+    nes.video.output = null;
+  };
 }
 
-export function powerEmulator() {
-  return () => nes.power();
+export function resumeEmulator() {
+  return dispatch => {
+    dispatch(startEmulator());
+    dispatch(createAction(SET_EMULATOR_SUSPENDED, false));
+  };
 }
 
-export function resetEmulator() {
-  return () => nes.reset();
+export function suspendEmulator() {
+  return dispatch => {
+    const {running} = nes;
+    dispatch(stopEmulator());
+    dispatch(createAction(SET_EMULATOR_SUSPENDED, running));
+  };
 }
 
 export function startEmulator() {
@@ -38,24 +56,12 @@ export function stopEmulator() {
   return createAction(SET_EMULATOR_RUNNING, false);
 }
 
-export function suspendEmulator() {
-  return dispatch => {
-    const {running} = nes;
-    dispatch(stopEmulator());
-    dispatch(createAction(SET_EMULATOR_SUSPENDED, running));
-  };
+export function powerEmulator() {
+  return () => nes.power();
 }
 
-export function resumeEmulator() {
-  return (dispatch, getState) => {
-    const {suspended} = selectEmulator(getState());
-    if (suspended) {
-      dispatch(startEmulator());
-      dispatch(createAction(SET_EMULATOR_SUSPENDED, false));
-    } else if (nes.rom.loaded) {
-      nes.step(); // To refresh canvas
-    }
-  };
+export function resetEmulator() {
+  return () => nes.reset();
 }
 
 export function fetchAndloadROM(romId) {

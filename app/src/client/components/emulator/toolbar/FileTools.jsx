@@ -1,18 +1,44 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Button, ButtonGroup, Icon, Tooltip} from '../../common';
+import './FileTools.css';
 
-const FileTools = ({onFileOpen}) => (
-  <ButtonGroup className="file-tools">
-    <Button onClick={onFileOpen}>
-      <Icon name="folder-open"/>
-      <Tooltip position="bottom">Open ROM</Tooltip>
-    </Button>
-  </ButtonGroup>
-);
+export default class FileTools extends PureComponent {
 
-FileTools.propTypes = {
-  onFileOpen: PropTypes.func.isRequired,
-};
+  static propTypes = {
+    onFileOpen: PropTypes.func.isRequired,
+  };
 
-export default FileTools;
+  setFileInput = input => {
+    this.fileInput = input;
+  }
+
+  handleButtonClick = () => {
+    this.fileInput.click();
+  }
+
+  handleFileChange = event => {
+    event.target.blur();
+    event.preventDefault();
+    event.stopPropagation();
+
+    const file = event.target.files[0];
+    if (file) {
+      this.props.onFileOpen(file);
+    }
+  }
+
+  render() {
+    return (
+      <ButtonGroup className="file-tools">
+        <Button onClick={this.handleButtonClick}>
+          <Icon name="folder-open"/>
+          <Tooltip position="bottom">Open ROM</Tooltip>
+        </Button>
+        <input className="file-tools-input" type="file"
+               ref={this.setFileInput} onChange={this.handleFileChange}/>
+      </ButtonGroup>
+    );
+  }
+
+}
