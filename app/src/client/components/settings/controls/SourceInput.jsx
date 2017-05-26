@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
+import './SourceInput.css';
 
 export const sourceInputPropType = PropTypes.shape({
   source: Source.isSource,

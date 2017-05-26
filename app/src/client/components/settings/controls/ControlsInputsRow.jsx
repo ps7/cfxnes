@@ -4,6 +4,7 @@ import {Button, Icon, Tooltip} from '../../common';
 import {Source} from '../../../enums';
 import DeviceInput, {deviceInputPropType} from './DeviceInput';
 import SourceInput, {sourceInputPropType} from './SourceInput';
+import './ControlsInputsRow.css';
 
 export default class ControlsInputsRow extends PureComponent {
 

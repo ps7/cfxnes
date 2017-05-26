@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import {Field} from '../../common';
 import {Region} from '../../../enums';
 import SettingsPanel from '../SettingsPanel';
+import connect from './connect';
 
-const ID = 'system';
+export const SYSTEM = 'system';
 
-const SystemPanel = ({region, speed, onRegionChange, onSpeedChange, ...panelProps}) => (
-  <SettingsPanel id={ID} title="System" icon="server" {...panelProps}>
+const SystemSettings = ({active, region, speed, onActivate, onRegionChange, onSpeedChange}) => (
+  <SettingsPanel id={SYSTEM} title="System" icon="server" active={active} onActivate={onActivate}>
     <Field id="region" label="Region" type="select" options={Region.options}
            value={region} onChange={onRegionChange}/>
     <Field id="speed" label="Emulation speed" type="range" min="0.25" max="2" step="0.25"
@@ -15,13 +16,13 @@ const SystemPanel = ({region, speed, onRegionChange, onSpeedChange, ...panelProp
   </SettingsPanel>
 );
 
-SystemPanel.id = ID;
-
-SystemPanel.propTypes = {
+SystemSettings.propTypes = {
+  active: PropTypes.bool.isRequired,
   region: PropTypes.oneOf(Region.values).isRequired,
   speed: PropTypes.number.isRequired,
+  onActivate: PropTypes.func.isRequired,
   onRegionChange: PropTypes.func.isRequired,
   onSpeedChange: PropTypes.func.isRequired,
 };
 
-export default SystemPanel;
+export default connect(SystemSettings);

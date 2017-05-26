@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Port, Device} from '../../../enums';
+import './DeviceInput.css';
 
 const DeviceInput = ({input}) => {
   const name = Device.getInputLabel(input);

@@ -1,0 +1,6 @@
+.gamepad-map-button + .gamepad-map-button::before {
+  content: "/";
+  display: inline-block;
+  text-decoration: none !important;
+  margin: 0 0.25rem;
+}

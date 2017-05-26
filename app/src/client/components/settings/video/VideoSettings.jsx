@@ -1,17 +1,17 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType} from '../../../enums';
 import {MIN_VIDEO_SCALE, MAX_VIDEO_SCALE} from '../../../common';
+import {VideoRenderer, VideoPalette, VideoFilter, FullscreenType} from '../../../enums';
 import {Field} from '../../common';
 import SettingsPanel from '../SettingsPanel';
+import connect from './connect';
 
-const ID = 'video';
+export const VIDEO = 'video';
 
-export default class VideoPanel extends PureComponent {
-
-  static id = ID;
+class VideoSettings extends PureComponent {
 
   static propTypes = {
+    active: PropTypes.bool.isRequired,
     videoRenderer: PropTypes.oneOf(VideoRenderer.values).isRequired,
     videoScale: PropTypes.number.isRequired,
     videoPalette: PropTypes.oneOf(VideoPalette.values).isRequired,
@@ -19,6 +19,7 @@ export default class VideoPanel extends PureComponent {
     videoDebug: PropTypes.bool.isRequired,
     fullscreenType: PropTypes.oneOf(FullscreenType.values).isRequired,
     fpsVisible: PropTypes.bool.isRequired,
+    onActivate: PropTypes.func.isRequired,
     onVideoRendererChange: PropTypes.func.isRequired,
     onVideoScaleChange: PropTypes.func.isRequired,
     onVideoPaletteChange: PropTypes.func.isRequired,
@@ -40,23 +41,13 @@ export default class VideoPanel extends PureComponent {
 
   render() {
     const {
-      videoRenderer,
-      videoScale,
-      videoPalette,
-      videoFilter,
-      videoDebug,
-      fullscreenType,
-      fpsVisible,
-      onVideoPaletteChange,
-      onVideoFilterChange,
-      onVideoDebugChange,
-      onFullscreenTypeChange,
-      onFpsVisibleChange,
-      ...panelProps
+      active, videoRenderer, videoScale, videoPalette, videoFilter, videoDebug,
+      fullscreenType, fpsVisible, onActivate, onVideoPaletteChange, onVideoFilterChange,
+      onVideoDebugChange, onFullscreenTypeChange, onFpsVisibleChange,
     } = this.props;
 
     return (
-      <SettingsPanel id={ID} title="Video" icon="desktop" {...panelProps}>
+      <SettingsPanel id={VIDEO} title="Video" icon="desktop" active={active} onActivate={onActivate}>
         <Field id="video-scale" label="Output scale" type="number"
                value={videoScale} onChange={this.handleVideoScaleChange}/>
         <Field id="video-palette" label="Color palette" type="select" options={VideoPalette.options}
@@ -76,3 +67,5 @@ export default class VideoPanel extends PureComponent {
   }
 
 }
+
+export default connect(VideoSettings);

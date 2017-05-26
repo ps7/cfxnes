@@ -1,3 +1,1 @@
-import VideoPanel from './VideoPanel';
-
-export {VideoPanel};
+export {default as VideoSettings, VIDEO} from './VideoSettings';

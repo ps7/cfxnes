@@ -1,0 +1,12 @@
+.reset-button {
+  display: inline-block;
+  min-width: 8rem;
+  padding: 0.5rem 0;
+}
+
+.reset-description {
+  display: inline-block;
+  max-width: 30rem;
+  padding: 0.5rem 0;
+  vertical-align: middle;
+}

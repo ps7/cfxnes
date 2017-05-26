@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {setActiveSettingsPanel} from '../../actions';
 import {selectSettings} from '../../reducers';
-import {panels, isValidPanelId, defaultPanelId} from './panels';
-import './Settings.css';
+import {panelIds, panels, isValidPanelId, defaultPanelId} from './panels';
 
 class Settings extends PureComponent {
 
@@ -17,7 +16,7 @@ class Settings extends PureComponent {
 
   static defaultProps = {
     activePanelId: null,
-  }
+  };
 
   componentWillMount() {
     this.handlePropsChange(this.props);
@@ -59,10 +58,10 @@ class Settings extends PureComponent {
     this.setActivePanel(id);
   };
 
-  renderPanel = Panel => {
-    const {id} = Panel;
+  renderPanel = id => {
     const {activePanelId} = this.props;
     const active = id === activePanelId;
+    const Panel = panels[id];
     return <Panel key={id} active={active} onActivate={this.handlePanelActivation}/>;
   }
 
@@ -70,7 +69,7 @@ class Settings extends PureComponent {
     return (
       <main className="settings">
         <h1>Settings</h1>
-        {panels.map(this.renderPanel)}
+        {panelIds.map(this.renderPanel)}
       </main>
     );
   }

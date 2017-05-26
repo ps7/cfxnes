@@ -8,7 +8,7 @@ export const ZAPPER = 'zapper';
 export const values = [NONE, JOYPAD, ZAPPER];
 
 export const params = {
-  [NONE]: {label: 'None', inputNames: []},
+  [NONE]: {label: 'No device', inputNames: []},
   [JOYPAD]: {label: 'Controller', inputNames: ['a', 'b', 'start', 'select', 'left', 'right', 'up', 'down']},
   [ZAPPER]: {label: 'Zapper', inputNames: ['trigger']},
 };

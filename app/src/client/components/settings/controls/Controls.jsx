@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Port, Device} from '../../../enums';
 import ControlsDevice from './ControlsDevice';
 import ControlsInputs from './ControlsInputs';
+import './Controls.css';
 
 const Controls = ({port, controls, onDeviceChange, onInputAdd, onInputRemove}) => {
   const {device, inputs} = controls;

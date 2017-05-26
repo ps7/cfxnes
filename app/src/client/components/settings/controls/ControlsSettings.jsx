@@ -4,16 +4,18 @@ import {Modal, Icon, Field, LinkButton} from '../../common';
 import SettingsPanel from '../SettingsPanel';
 import ControlsList, {controlsPropType} from './ControlsList';
 import GamepadList from './GamepadList';
+import connect from './connect';
+import './ControlsSettings.css';
 
-const ID = 'controls';
+export const CONTROLS = 'controls';
 
-export default class ControlsPanel extends PureComponent {
-
-  static id = ID;
+class ControlsSettings extends PureComponent {
 
   static propTypes = {
+    active: PropTypes.bool.isRequired,
     controls: controlsPropType.isRequired,
     controlsVisible: PropTypes.bool.isRequired,
+    onActivate: PropTypes.func.isRequired,
     onControlsVisibleChange: PropTypes.func.isRequired,
     onControlsDeviceChange: PropTypes.func.isRequired,
     onControlsInputAdd: PropTypes.func.isRequired,
@@ -22,10 +24,7 @@ export default class ControlsPanel extends PureComponent {
     onControlsReset: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {inputRequestVisible: false};
-  }
+  state = {inputRequestVisible: false};
 
   handleInputAdd = deviceInput => {
     this.setState({inputRequestVisible: true});
@@ -35,20 +34,16 @@ export default class ControlsPanel extends PureComponent {
   };
 
   render() {
+    const {inputRequestVisible} = this.state;
     const {
-      controls,
-      controlsVisible,
-      onControlsVisibleChange,
-      onControlsDeviceChange,
-      onControlsInputRemove,
-      onControlsGamepadMap,
-      onControlsReset,
-      ...panelProps
+      active, controls, controlsVisible, onActivate,
+      onControlsVisibleChange, onControlsDeviceChange,
+      onControlsInputRemove, onControlsGamepadMap, onControlsReset,
     } = this.props;
 
     return (
-      <SettingsPanel id={ID} title="Controls" icon="gamepad" {...panelProps}>
-        {this.state.inputRequestVisible && (
+      <SettingsPanel id={CONTROLS} title="Controls" icon="gamepad" active={active} onActivate={onActivate}>
+        {inputRequestVisible && (
           <Modal>
             <Modal.Body>Press key or button (ESC to cancel).</Modal.Body>
           </Modal>
@@ -69,3 +64,5 @@ export default class ControlsPanel extends PureComponent {
   }
 
 }
+
+export default connect(ControlsSettings);

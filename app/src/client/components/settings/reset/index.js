@@ -1,3 +1,1 @@
-import ResetPanel from './ResetPanel';
-
-export {ResetPanel};
+export {default as ResetSettings, RESET} from './ResetSettings';

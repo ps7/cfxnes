@@ -1,3 +1,1 @@
-import SystemPanel from './SystemPanel';
-
-export {SystemPanel};
+export {default as SystemSettings, SYSTEM} from './SystemSettings';

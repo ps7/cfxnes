@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {Icon, Panel} from '../common';
 import './SettingsPanel.css';
 
@@ -26,7 +27,7 @@ export default class SettingsPanel extends PureComponent {
   render() {
     const {id, title, icon, active, children} = this.props;
     return (
-      <Panel id={`${id}-settings-panel`} className="settings-panel" collapsed={!active}>
+      <Panel className={classNames(`${id}-settings`, 'settings-panel')} collapsed={!active}>
         <Panel.Header onClick={this.handleHeaderClick}>
           <Icon name={icon}/> <span className="settings-panel-title">{title}</span>
         </Panel.Header>

@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {ButtonSelect} from '../../common';
 import {Port, Device} from '../../../enums';
+import './ControlsDevice.css';
 
 export default class ControlsDevice extends PureComponent {
 

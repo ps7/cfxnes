@@ -1,0 +1,8 @@
+.controls-inputs-row {
+  display: table-row;
+
+  & > * {
+    display: table-cell;
+    padding: 0.25rem 0.5rem;
+  }
+}

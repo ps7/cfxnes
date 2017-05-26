@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Port, Device} from '../../../enums';
 import ControlsInputsRow from './ControlsInputsRow';
+import './ControlsInputs.css';
 
 const ControlsInputs = ({port, device, inputs, onAdd, onRemove}) => (
   <div className="controls-inputs">

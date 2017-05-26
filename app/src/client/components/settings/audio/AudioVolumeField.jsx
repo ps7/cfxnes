@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Field} from '../../common';
 import {AudioChannel} from '../../../enums';
+import './AudioVolumeField.css';
 
 export default class AudioVolumeField extends PureComponent {
 
@@ -21,8 +22,9 @@ export default class AudioVolumeField extends PureComponent {
     const {channel, disabled, value} = this.props;
     const label = AudioChannel.getLabel(channel);
 
-    return <Field key={value} id={`${value}-audio-volume`} label={label}
-                  type="range" min="0" max="1" step="0.01" value={value}
+    return <Field id={`${channel}-audio-volume`} type="range"
+                  className="audio-volume-field" label={label}
+                  min="0" max="1" step="0.01" value={value}
                   disabled={disabled} onChange={this.handleChange}/>;
   }
 

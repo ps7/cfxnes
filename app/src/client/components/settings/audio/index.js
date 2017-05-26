@@ -1,3 +1,1 @@
-import AudioPanel from './AudioPanel';
-
-export {AudioPanel};
+export {default as AudioSettings, AUDIO} from './AudioSettings';

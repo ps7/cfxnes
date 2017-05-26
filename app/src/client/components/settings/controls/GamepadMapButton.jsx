@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {LinkButton} from '../../common';
+import './GamepadMapButton.css';
 
 export default class GamepadMapButton extends PureComponent {
 

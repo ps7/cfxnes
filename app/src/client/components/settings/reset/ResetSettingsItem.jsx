@@ -2,8 +2,9 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, ConfirmDialog} from '../../common';
 import {ActionState} from '../../../enums';
+import './ResetSettingsItem.css';
 
-export default class ResetPanelItem extends PureComponent {
+export default class ResetSettingsItem extends PureComponent {
 
   static propTypes = {
     action: PropTypes.string.isRequired,
@@ -85,7 +86,7 @@ export default class ResetPanelItem extends PureComponent {
     const {description} = this.props;
 
     return (
-      <div className="reset-panel-item">
+      <div className="reset-settings-item">
         {confirmVisible && this.renderConfirm()}
         <div className="reset-button">{this.renderButton()}</div>
         <div className="reset-description">{description}</div>
