@@ -1,21 +1,20 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {setActiveSettingsPanel} from '../../actions';
-import {selectSettings} from '../../reducers';
 import {panelIds, panels, isValidPanelId, defaultPanelId} from './panels';
+import connect from './connect';
 
 class Settings extends PureComponent {
 
   static propTypes = {
     activePanelId: PropTypes.string,
-    match: PropTypes.object.isRequired,  // eslint-disable-line react/no-unused-prop-types
-    history: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    routePanelId: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    onActivePanelChange: PropTypes.func.isRequired,
+    onRoutePanelChange: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     activePanelId: null,
+    routePanelId: null,
   };
 
   componentWillMount() {
@@ -27,35 +26,24 @@ class Settings extends PureComponent {
   }
 
   handlePropsChange(props) {
-    const routePanelId = props.match.params.activePanelId;
-    const statePanelId = props.activePanelId;
+    const {activePanelId, routePanelId, onActivePanelChange, onRoutePanelChange} = props;
 
     if (isValidPanelId(routePanelId)) {
-      if (routePanelId !== statePanelId) {
-        this.setActivePanelInState(routePanelId);
+      if (routePanelId !== activePanelId) {
+        onActivePanelChange(routePanelId);
       }
-    } else if (isValidPanelId(statePanelId)) {
-      this.setActivePanelInRoute(statePanelId);
+    } else if (isValidPanelId(activePanelId)) {
+      onRoutePanelChange(activePanelId);
     } else {
-      this.setActivePanel(defaultPanelId);
+      onActivePanelChange(defaultPanelId);
+      onRoutePanelChange(defaultPanelId);
     }
   }
 
-  setActivePanelInRoute(id) {
-    this.props.history.replace(`/settings/${id}`);
-  }
-
-  setActivePanelInState(id) {
-    this.props.dispatch(setActiveSettingsPanel(id));
-  }
-
-  setActivePanel(id) {
-    this.setActivePanelInRoute(id);
-    this.setActivePanelInState(id);
-  }
-
   handlePanelActivation = id => {
-    this.setActivePanel(id);
+    const {onActivePanelChange, onRoutePanelChange} = this.props;
+    onActivePanelChange(id);
+    onRoutePanelChange(id);
   };
 
   renderPanel = id => {
@@ -76,8 +64,4 @@ class Settings extends PureComponent {
 
 }
 
-const mapStateToProps = state => ({
-  activePanelId: selectSettings(state).activePanelId,
-});
-
-export default connect(mapStateToProps)(Settings);
+export default connect(Settings);
