@@ -1,5 +1,6 @@
 import {nes} from '../common';
 import {romsApi} from '../api';
+import {loadNVRAM, saveNVRAM} from '../nvram';
 
 import {
   START_ROM_LOAD,
@@ -79,10 +80,14 @@ function executeROMLoad(romId, loader) {
   return (dispatch, getState) => {
     dispatch(clearROMLoadError());
     dispatch(stopEmulator());
-    nes.rom.unload();
-    nes.video.clear();
-    dispatch(createAction(START_ROM_LOAD, romId));
-    dispatch(createAction(FINISH_ROM_LOAD, loader(getState))).then(() => {
+    return saveNVRAM().then(() => {
+      nes.rom.unload();
+      nes.video.clear();
+      dispatch(createAction(START_ROM_LOAD, romId));
+      return dispatch(createAction(FINISH_ROM_LOAD, loader(getState)));
+    }).then(() => {
+      return loadNVRAM();
+    }).then(() => {
       if (nes.video.output) {
         dispatch(startEmulator());
       } else {

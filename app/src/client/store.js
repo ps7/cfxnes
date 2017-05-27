@@ -2,7 +2,7 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import {identity} from 'lodash-es';
-import rootReducer from './reducers';
+import rootReducer, {selectSettingsValues} from './reducers';
 import {initSettings} from './actions';
 import {saveSettings} from './settings';
 
@@ -22,7 +22,7 @@ if (__DEVELOPMENT__ && module.hot) {
 }
 
 store.dispatch(initSettings()).then(() => {
-  store.subscribe(() => saveSettings(store.getState().settings.values));
+  store.subscribe(() => saveSettings(selectSettingsValues(store.getState())));
 });
 
 export default store;

@@ -25,19 +25,17 @@ export function resetSettings() {
 
 export function initSettings() {
   return dispatch => {
-    return loadSettings()
-      .then(settings => {
-        if (settings) {
-          applySettingsToNes(nes, settings);
-          dispatch(createAction(SET_SETTINGS_VALUES, {
-            ...defaultSettings,          // In case some app settings are mising
-            ...settings,                 // Copy app settings
-            ...copySettingsFromNes(nes), // Copy NES settings
-          }));
-        }
-      })
-      .catch(error => {
-        log.error('Failed to load settings', error);
-      });
+    return loadSettings().then(settings => {
+      if (settings) {
+        applySettingsToNes(nes, settings);
+        dispatch(createAction(SET_SETTINGS_VALUES, {
+          ...defaultSettings,          // In case some app settings are mising
+          ...settings,                 // Copy app settings
+          ...copySettingsFromNes(nes), // Copy NES settings
+        }));
+      }
+    }).catch(error => {
+      log.error('Failed to load settings', error);
+    });
   };
 }
