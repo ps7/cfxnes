@@ -80,6 +80,7 @@ function executeROMLoad(romId, loader) {
     dispatch(clearROMLoadError());
     dispatch(stopEmulator());
     nes.rom.unload();
+    nes.video.clear();
     dispatch(createAction(START_ROM_LOAD, romId));
     dispatch(createAction(FINISH_ROM_LOAD, loader(getState)))
       .then(() => dispatch(startEmulator()));
