@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Loader} from '../common';
+import './EmulatorOutput.css';
 
 const EmulatorOutput = ({loading, refCanvas}) => (
   <div className="emulator-output">
     <canvas ref={refCanvas}/>
-    {loading && <div>Loading...</div>}
+    {loading && (
+      <Loader className="emulator-loader" inverse>Loading...</Loader>
+    )}
   </div>
 );
 

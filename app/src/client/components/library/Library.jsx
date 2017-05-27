@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Icon, Input, LinkButton, Message} from '../common';
+import {Input, LinkButton, Loader, Message} from '../common';
 import {ActionState} from '../../enums';
 import LibraryItem from './LibraryItem';
 import connect from './connect';
@@ -29,10 +29,6 @@ class Library extends PureComponent {
       input.focus();
       input.select();
     }
-  }
-
-  renderLoader() {
-    return <p><Icon name="circle-o-notch" spin/> Loading items...</p>;
   }
 
   renderErrorMessage() {
@@ -73,7 +69,7 @@ class Library extends PureComponent {
     return (
       <main className="library">
         <h1>Library</h1>
-        {fetchState === ActionState.STARTED && this.renderLoader()}
+        {fetchState === ActionState.STARTED && <Loader>Loading items...</Loader>}
         {fetchState === ActionState.FAILURE && this.renderErrorMessage()}
         {fetchState === ActionState.SUCCESS && !items.length && this.renderNoDataMessage()}
         {fetchState === ActionState.SUCCESS && items.length && this.renderFilter()}

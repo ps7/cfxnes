@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Icon = ({className, name, size, fixedWidth, inverse, spin, stack, ...attrs}) => {
+const Icon = ({className, name, size, fixedWidth, pulse, inverse, spin, ...attrs}) => {
   const fullClassName = classNames(
     'fa',
     `fa-${name}`,
     size && `fa-${size}`,
-    stack && `fa-stack-${stack}`,
     {
       'fa-fw': fixedWidth,
       'fa-inverse': inverse,
+      'fa-pulse': pulse,
       'fa-spin': spin,
     },
     className,
@@ -24,8 +24,8 @@ Icon.propTypes = {
   size: PropTypes.oneOf(['lg', '1x', '2x', '3x', '4x', '5x']),
   fixedWidth: PropTypes.bool,
   inverse: PropTypes.bool,
+  pulse: PropTypes.bool,
   spin: PropTypes.bool,
-  stack: PropTypes.oneOf(['1x', '2x']),
 };
 
 Icon.defaultProps = {
@@ -33,8 +33,8 @@ Icon.defaultProps = {
   size: null,
   fixedWidth: false,
   inverse: false,
+  pulse: false,
   spin: false,
-  stack: null,
 };
 
 export default Icon;

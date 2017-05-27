@@ -7,11 +7,11 @@ const VideoTools = ({scale, onScaleDecrease, onScaleIncrease, onFullscreen}) => 
   <ButtonGroup className="video-tools">
     <Button disabled={scale <= MIN_VIDEO_SCALE} onClick={onScaleDecrease}>
       <Icon name="search-minus"/>
-      <Tooltip position="bottom">Increase scale</Tooltip>
+      <Tooltip position="bottom">Decrease scale</Tooltip>
     </Button>
     <Button disabled={scale >= MAX_VIDEO_SCALE} onClick={onScaleIncrease}>
       <Icon name="search-plus"/>
-      <Tooltip position="bottom">Decrease scale</Tooltip>
+      <Tooltip position="bottom">Increase scale</Tooltip>
     </Button>
     <Button onClick={onFullscreen}>
       <Icon name="arrows-alt"/>

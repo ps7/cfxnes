@@ -12,8 +12,11 @@
   color: black;
 
   &:disabled {
-    pointer-events: none;
     color: gray;
+
+    & .fa {
+      pointer-events: none; /* Inner elements ignore :disabled state */
+    }
   }
 
   &.active,
@@ -32,4 +35,3 @@
     z-index: 1;
   }
 }
-

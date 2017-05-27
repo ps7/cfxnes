@@ -82,8 +82,13 @@ function executeROMLoad(romId, loader) {
     nes.rom.unload();
     nes.video.clear();
     dispatch(createAction(START_ROM_LOAD, romId));
-    dispatch(createAction(FINISH_ROM_LOAD, loader(getState)))
-      .then(() => dispatch(startEmulator()));
+    dispatch(createAction(FINISH_ROM_LOAD, loader(getState))).then(() => {
+      if (nes.video.output) {
+        dispatch(startEmulator());
+      } else {
+        dispatch(createAction(SET_EMULATOR_SUSPENDED, true)); // User switched to a different view
+      }
+    });
   };
 }
 
