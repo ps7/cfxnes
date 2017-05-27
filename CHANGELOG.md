@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - API to access state of device inputs.
+- API to clear canvas.
 - Option to bind multiple keys/button to one input.
 - Light/dark theme switch.
 
