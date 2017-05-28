@@ -25,10 +25,9 @@ export default class ResetSettingsItem extends PureComponent {
     failureMessage: null,
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {confirmVisible: false};
-  }
+  state = {
+    confirmVisible: false,
+  };
 
   handleAction = () => {
     this.setState({confirmVisible: true});

@@ -8,7 +8,9 @@ export default class GamepadList extends PureComponent {
     onMap: PropTypes.func.isRequired,
   };
 
-  state = {gamepads: []};
+  state = {
+    gamepads: [],
+  };
 
   componentDidMount() {
     if (navigator.getGamepads) {

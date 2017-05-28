@@ -24,7 +24,9 @@ class ControlsSettings extends PureComponent {
     onControlsReset: PropTypes.func.isRequired,
   };
 
-  state = {inputRequestVisible: false};
+  state = {
+    inputRequestVisible: false,
+  };
 
   handleInputAdd = deviceInput => {
     this.setState({inputRequestVisible: true});

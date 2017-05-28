@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {ActionState} from '../../enums';
 import {Message} from '../common';
 import EmulatorControls, {controlsPropType} from './EmulatorControls';
@@ -18,6 +19,7 @@ class Emulator extends PureComponent {
     controlsVisible: PropTypes.bool.isRequired,
     onConnect: PropTypes.func.isRequired,
     onDisconnect: PropTypes.func.isRequired,
+    onLoad: PropTypes.func.isRequired,
     onFetchAndLoad: PropTypes.func.isRequired,
     onRouteRedirect: PropTypes.func.isRequired,
     onErrorClose: PropTypes.func.isRequired,
@@ -27,6 +29,10 @@ class Emulator extends PureComponent {
   static defaultProps = {
     romId: null,
     routeRomId: null,
+  };
+
+  state = {
+    dragOver: false,
   };
 
   componentDidMount() {
@@ -40,6 +46,12 @@ class Emulator extends PureComponent {
         onRouteRedirect(romId);
       }
     }
+
+    const {element} = this;
+    element.addEventListener('dragover', this.handleDragEnter);
+    element.addEventListener('dragleave', this.handleDragLeave);
+    element.addEventListener('dragover', this.handleDragOver);
+    element.addEventListener('drop', this.handleDrop);
   }
 
   componentWillReceiveProps(props) {
@@ -51,11 +63,45 @@ class Emulator extends PureComponent {
 
   componentWillUnmount() {
     this.props.onDisconnect();
+
+    const {element} = this;
+    element.removeEventListener('dragover', this.handleDragEnter);
+    element.removeEventListener('dragleave', this.handleDragLeave);
+    element.removeEventListener('dragover', this.handleDragOver);
+    element.removeEventListener('drop', this.handleDrop);
+  }
+
+  setElement = element => {
+    this.element = element;
   }
 
   setCanvas = canvas => {
     this.canvas = canvas;
   }
+
+  handleDragEnter = () => {
+    this.setState({dragOver: true});
+  };
+
+  handleDragLeave = () => {
+    this.setState({dragOver: false});
+  };
+
+  handleDragOver = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+  };
+
+  handleDrop = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      this.props.onLoad(file);
+    }
+    this.setState({dragOver: false});
+  };
 
   renderControls() {
     const {controls, onControlsClose} = this.props;
@@ -76,8 +122,9 @@ class Emulator extends PureComponent {
 
   render() {
     const {loadError, controlsVisible} = this.props;
+    const {dragOver} = this.state;
     return (
-      <main className="emulator">
+      <main className={classNames('emulator', {'drag-over': dragOver})} ref={this.setElement}>
         {controlsVisible && this.renderControls()}
         {loadError && this.renderErrorMessage()}
         {this.renderOutput()}

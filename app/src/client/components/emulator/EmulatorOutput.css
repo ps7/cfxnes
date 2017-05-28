@@ -2,9 +2,21 @@
   position: relative;
 }
 
+.emulator-cartridge,
 .emulator-loader {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.emulator-cartridge {
+  width: 8rem;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+
+  @nest .drag-over & {
+    opacity: 1;
+  }
 }

@@ -7,7 +7,9 @@ import './About.css';
 
 export default class About extends PureComponent {
 
-  state = {changelogVisible: false};
+  state = {
+    changelogVisible: false,
+  };
 
   handleShowChangelog = () => {
     this.setState({changelogVisible: true});

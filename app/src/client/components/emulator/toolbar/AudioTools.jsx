@@ -13,7 +13,9 @@ export default class AudioTools extends PureComponent {
     onValueChange: PropTypes.func.isRequired,
   };
 
-  state = {popupVisible: false};
+  state = {
+    popupVisible: false,
+  };
 
   setButton = button => {
     this.button = button;

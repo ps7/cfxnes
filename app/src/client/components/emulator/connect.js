@@ -5,6 +5,7 @@ import {selectEmulator, selectSettingsValues} from '../../reducers';
 import {
   connectEmulator,
   disconnectEmulator,
+  loadROM,
   fetchAndloadROM,
   clearROMLoadError,
   setControlsVisible,
@@ -20,6 +21,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
   onConnect: canvas => dispatch(connectEmulator(canvas)),
   onDisconnect: () => dispatch(disconnectEmulator()),
+  onLoad: file => dispatch(loadROM(file)),
   onFetchAndLoad: romId => dispatch(fetchAndloadROM(romId)),
   onRouteRedirect: romId => props.history.replace(geEmulatorPath(romId)),
   onErrorClose: () => dispatch(clearROMLoadError()),

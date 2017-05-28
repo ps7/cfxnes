@@ -4,9 +4,8 @@ import './FpsCounter.css';
 
 export default class FpsCounter extends PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.state = {value: 0};
+  state = {
+    value: 0,
   }
 
   componentDidMount() {
