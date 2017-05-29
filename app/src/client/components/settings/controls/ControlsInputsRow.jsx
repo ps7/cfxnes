@@ -40,13 +40,13 @@ export default class ControlsInputsRow extends PureComponent {
           {sourceInputs.map(input => (
             <SourceInput key={Source.getInputId(input)} input={input} onRemove={handleRemove}/>
           ))}
-          {sourceInputs.length === 0 && <i>Unset</i>}
+          {sourceInputs.length === 0 && <i className="source-input-unset">Unset</i>}
         </div>
         {onAdd && (
           <div className="add-input">
             <Button onClick={this.handleAdd}>
               <Icon name="plus"/>
-              <Tooltip>Bind new input</Tooltip>
+              <Tooltip position="right">Bind new input</Tooltip>
             </Button>
           </div>
         )}

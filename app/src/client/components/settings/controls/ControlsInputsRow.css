@@ -1,8 +1,10 @@
 .controls-inputs-row {
   display: table-row;
 
-  & > * {
+  & > *:not(.source-inputs) {
     display: table-cell;
     padding: 0.25rem 0.5rem;
   }
 }
+
+

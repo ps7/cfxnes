@@ -45,11 +45,6 @@ class ControlsSettings extends PureComponent {
 
     return (
       <SettingsPanel id={CONTROLS} title="Controls" icon="gamepad" active={active} onActivate={onActivate}>
-        {inputRequestVisible && (
-          <Modal>
-            <Modal.Body>Press key or button (ESC to cancel).</Modal.Body>
-          </Modal>
-        )}
         <ControlsList controls={controls}
                       onDeviceChange={onControlsDeviceChange}
                       onInputAdd={this.handleInputAdd}
@@ -61,6 +56,11 @@ class ControlsSettings extends PureComponent {
         <GamepadList onMap={onControlsGamepadMap}/>
         <Field id="controls-visible" label="Show controls on emulator page" type="checkbox"
                value={controlsVisible} onChange={onControlsVisibleChange}/>
+        {inputRequestVisible && (
+          <Modal>
+            <Modal.Body>Press key or button (ESC to cancel).</Modal.Body>
+          </Modal>
+        )}
       </SettingsPanel>
     );
   }

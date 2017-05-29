@@ -1,5 +1,5 @@
 .controls-settings {
-  & .panel-body > *:not(:first-child) {
+  & .panel-body > *:not(:first-child, .modal-overlay) {
     margin-top: 1rem;
   }
 }

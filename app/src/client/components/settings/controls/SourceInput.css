@@ -3,14 +3,14 @@
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   white-space: nowrap;
-  margin-right: 0.25rem;
+  margin: 0.15rem;
 
   & > .fa {
-    padding-left: 0.25rem;
+    margin: 0 0.25rem 0 0.5rem;
   }
 
   & > span {
-    padding: 0 0.25rem;
+    margin: 0 0.5rem 0 0.25rem;
   }
 
   & > button {
@@ -25,4 +25,12 @@
     border: 1px solid #888;
     opacity: 1;
   }
+
+  @nest .info & {
+    border-color: cornflowerblue;
+  }
+}
+
+.source-input-unset {
+  margin: 0.15rem;
 }
