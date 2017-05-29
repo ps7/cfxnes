@@ -7,6 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-x: hidden; /* Some tooltips overflow and cause horizontal srollbars to appear */
 }
 
 header,
