@@ -110,14 +110,16 @@ class Emulator extends PureComponent {
 
   renderErrorMessage() {
     const {loadError, onErrorClose} = this.props;
-    return <Message type="error" className="emulator-error"
-                    onClose={onErrorClose}>{loadError}</Message>;
+    return (
+      <Message type="error" className="emulator-error" onClose={onErrorClose}>
+        {loadError}
+      </Message>
+    );
   }
 
   renderOutput() {
     const {loadState} = this.props;
-    return <EmulatorOutput loading={loadState === ActionState.STARTED}
-                           refCanvas={this.setCanvas}/>;
+    return <EmulatorOutput loading={loadState === ActionState.STARTED} refCanvas={this.setCanvas}/>;
   }
 
   render() {

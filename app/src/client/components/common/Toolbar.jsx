@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Toolbar = ({className, children, ...attrs}) => {
-  return <div className={classNames('toolbar', className)} {...attrs}>
+const Toolbar = ({className, children, ...attrs}) => (
+  <div className={classNames('toolbar', className)} {...attrs}>
     {children}
-  </div>;
-};
+  </div>
+);
 
 Toolbar.propTypes = {
   className: PropTypes.string,

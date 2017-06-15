@@ -8,9 +8,11 @@ export {controlsPropType};
 
 const EmulatorControls = ({controls, onClose}) => (
   <Message className="emulator-controls" onClose={onClose}>
-    <h2>Controls <small>
-      (<NavLink to="/settings/controls"><Icon name="wrench"/> Configure</NavLink>)
-    </small></h2>
+    <h2>Controls{' '}
+      <small>
+        (<NavLink to="/settings/controls"><Icon name="wrench"/> Configure</NavLink>)
+      </small>
+    </h2>
     <ControlsList controls={controls}/>
   </Message>
 );

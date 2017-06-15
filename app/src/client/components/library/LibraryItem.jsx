@@ -14,7 +14,7 @@ const LibraryItem = ({id, name, thumbnail}) => (
 LibraryItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
 };
 
 LibraryItem.defaultProps = {

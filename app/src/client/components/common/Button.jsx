@@ -19,7 +19,6 @@ export default class Button extends PureComponent {
     active: false,
     disabled: false,
     onClick: null,
-    autoFocus: false,
     refButton: null,
     children: null,
   };
