@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Input from './Input';
 import Select from './Select';
-import fieldTypes, {CHECKBOX, SELECT} from './fieldTypes';
+import Slider from './Slider';
+import fieldTypes, {CHECKBOX, SELECT, SLIDER} from './fieldTypes';
 import './Field.css';
 
 export default class Field extends PureComponent {
@@ -26,9 +27,12 @@ export default class Field extends PureComponent {
   };
 
   renderInput() {
-    const {label, type, ...attrs} = this.props;
+    const {label, type, className, ...attrs} = this.props;
     if (type === SELECT) {
       return <Select {...attrs}/>;
+    }
+    if (type === SLIDER) {
+      return <Slider {...attrs}/>;
     }
     return <Input {...attrs} type={type}/>;
   }

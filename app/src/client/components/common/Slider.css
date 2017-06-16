@@ -1,0 +1,7 @@
+.rangeslider.disabled {
+  pointer-events: none;
+
+  & .rangeslider__fill {
+    background-color: lightgray;
+  }
+}

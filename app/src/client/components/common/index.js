@@ -14,6 +14,7 @@ export {default as Message} from './Message';
 export {default as Panel} from './Panel';
 export {default as Popup} from './Popup';
 export {default as Select} from './Select';
+export {default as Slider} from './Slider';
 export {default as Toolbar} from './Toolbar';
 export {default as Tooltip} from './Tooltip';
 export * from './propTypes';

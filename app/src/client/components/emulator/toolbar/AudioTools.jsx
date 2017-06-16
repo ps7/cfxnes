@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {isAncestorOrSelf} from '../../../common';
-import {Button, ButtonGroup, Icon, Input, Popup, Tooltip} from '../../common';
+import {isAncestorOrSelf, formatPercentage} from '../../../common';
+import {Button, ButtonGroup, Icon, Input, Popup, Slider, Tooltip} from '../../common';
 import './AudioTools.css';
 
 export default class AudioTools extends PureComponent {
@@ -55,8 +55,8 @@ export default class AudioTools extends PureComponent {
     return (
       <Popup className="audio-volume-popup" onBlur={this.handlePopupClose}>
         <Input type="checkbox" value={enabled} onChange={onEnabledChange}/>
-        <Input type="range" min="0" max="1" step="0.01" disabled={!enabled}
-                value={value} onChange={onValueChange}/>
+        <Slider min={0} max={1} step={0.01} orientation="vertical" format={formatPercentage}
+                disabled={!enabled} value={value} onChange={onValueChange}/>
       </Popup>
     );
   }

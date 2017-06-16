@@ -17,9 +17,4 @@
   text-align: center;
   margin-top: 0.5rem;
   transform: translate(-50%, 0);
-
-  & input[type="range"] {
-    transform: rotate(-90deg);
-    margin: 50% 0;
-  }
 }
